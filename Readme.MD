@@ -2,7 +2,7 @@
 
 # Data Science Glossary: Machine Learning and Advanced Modeling
 
-Key terms, functions and methods from the machine learning unit, running from probability to recommender systems. This glossary picks up where the [Unit 2 glossary](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD) (sections 1–11: Python, pandas and EDA) left off, so numbering starts at section 12, and terms already defined there are linked rather than repeated. Each of the 478 entries says what the term means, where it appears in the course, and (where relevant) shows working code.
+Key terms, functions and methods from the machine learning unit, running from probability to recommender systems. This glossary picks up where the [Unit 2 glossary](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD) (sections 1–11: Python, pandas and EDA) left off, so numbering starts at section 12, and terms already defined there are linked rather than repeated. Each of the 548 entries says what the term means, where it appears in the course, and (where relevant) shows working code.
 
 **How to read the examples.** Examples follow the course notebooks and assume the standard imports below. Extra libraries are imported inside the entries that need them; `statsmodels`, `imbalanced-learn`, `xgboost`, `arch` and `shap` may need installing with `pip install`.
 
@@ -24,7 +24,19 @@ from sklearn.metrics import accuracy_score
 
 Most notebooks read a CSV from the course `data/` folder, and the entries use the same variable names: `elec` (`elecdemand.csv`), `bike` (`bikeshare.csv`), `admissions` (`grad_admissions.csv`), `wine` (`winequality_merged.csv`), `titanic` (`titanic_clean.csv`), `aapl` (`AAPL.csv`) and so on. Scaled data is named `X_train_sc` or `Z_train`. To try an example without the course files, swap in a built-in dataset such as `load_breast_cancer()`, `load_iris()`, `load_digits()`, `make_classification()` or `make_blobs()` from `sklearn.datasets`, or `sm.datasets.macrodata` for time series.
 
-**Library versions.** Code is written to run on current releases (scikit-learn 1.8, pandas 3). Where a course notebook uses syntax that has since changed or been removed, the entry carries a **Watch out** note with the up-to-date version.
+**Library versions.** Code is written to run on current releases (scikit-learn 1.8, pandas 3, statsmodels 0.15). Libraries change between versions: parameters are renamed, defaults change and old functions are removed, so tutorials and older notebooks sometimes use syntax that no longer works. Where that affects something you'll use, the entry says what changed, and [Library version changes to know](#library-version-changes-to-know) collects them in one table. When code fails or warns, check the documentation for the version you have installed.
+
+**For your capstone.** Every section opens with an **In your capstone** line saying when to reach for it, and section 38, the [Capstone playbook](#s38-capstone-playbook), walks the data science lifecycle stage by stage with tested code templates and a checklist of common mistakes.
+
+<a id="audio-summary"></a>
+
+**AI audio summary.** An AI-generated audio overview of the glossary's contents and key learnings, useful for revision on the go. It's a summary, not a substitute: where anything differs, the written entries are the reference.
+
+<audio controls preload="none" style="width:100%;max-width:560px">
+  <source src="assets/AIAudioSummary.m4a" type="audio/mp4">
+</audio>
+
+[Listen to or download the audio summary (AIAudioSummary.m4a)](assets/AIAudioSummary.m4a). GitHub doesn't play audio inside a README, so on github.com this link opens the file's page (use **View raw** or the download button); it plays directly in the [HTML glossary](https://charleyhananiaga.github.io/DSB-Unit-03/).
 
 ## Contents
 
@@ -40,28 +52,33 @@ Most notebooks read a CSV from the course `data/` folder, and the entries use th
 21. [Hyperparameter tuning: grid search and pipelines](#s21-hyperparameter-tuning-grid-search-and-pipelines)
 22. [Model explainability](#s22-model-explainability)
 23. [Framing a data science problem and ROI](#s23-framing-a-data-science-problem-and-roi)
-24. [Time series: data handling and stationarity](#s24-time-series-data-handling-and-stationarity)
-25. [Time series: forecasting models](#s25-time-series-forecasting-models)
-26. [Simulation](#s26-simulation)
-27. [Decision trees](#s27-decision-trees)
-28. [Ensembles: bagging and random forests](#s28-ensembles-bagging-and-random-forests)
-29. [Ensembles: boosting](#s29-ensembles-boosting)
-30. [Support vector machines](#s30-support-vector-machines)
-31. [Gradient descent and optimization](#s31-gradient-descent-and-optimization)
-32. [Unsupervised learning and k-means clustering](#s32-unsupervised-learning-and-k-means-clustering)
-33. [DBSCAN and hierarchical clustering](#s33-dbscan-and-hierarchical-clustering)
-34. [Principal component analysis (PCA)](#s34-principal-component-analysis-pca)
-35. [Recommender systems](#s35-recommender-systems)
+24. [Leveraging GenAI as a data scientist](#s24-leveraging-genai-as-a-data-scientist)
+25. [Time series: data handling and stationarity](#s25-time-series-data-handling-and-stationarity)
+26. [Time series: forecasting models](#s26-time-series-forecasting-models)
+27. [Simulation](#s27-simulation)
+28. [Decision trees](#s28-decision-trees)
+29. [Ensembles: bagging and random forests](#s29-ensembles-bagging-and-random-forests)
+30. [Ensembles: boosting](#s30-ensembles-boosting)
+31. [Support vector machines](#s31-support-vector-machines)
+32. [Gradient descent and optimization](#s32-gradient-descent-and-optimization)
+33. [Unsupervised learning and k-means clustering](#s33-unsupervised-learning-and-k-means-clustering)
+34. [DBSCAN and hierarchical clustering](#s34-dbscan-and-hierarchical-clustering)
+35. [Principal component analysis (PCA)](#s35-principal-component-analysis-pca)
+36. [Recommender systems](#s36-recommender-systems)
+37. [Bayesian statistics](#s37-bayesian-statistics)
+38. [Capstone playbook](#s38-capstone-playbook)
 
-[Concept map](#concept-map) · [A–Z index](#a-z-index)
+[Audio summary](#audio-summary) · [Concept map](#concept-map) · [A–Z index](#a-z-index)
 
 <a id="concept-map"></a>
 
 ## Concept map
 
-The whole unit on one page: 24 modules, grouped into themes, with the key concepts of each. Open the [clickable SVG version](assets/ds-ml-glossary-mindmap.svg) to jump straight to entries in the [HTML glossary](assets/ds-ml-glossary.html).
+The whole unit on one page: 27 modules, grouped into themes, with the key concepts of each (294 in all). Every concept is a link.
 
-[![Concept map of the machine learning unit](assets/ds-ml-glossary-mindmap.png)](assets/ds-ml-glossary-mindmap.svg)
+**Using the clickable map.** GitHub displays SVG files as plain pictures, so the links inside the map only work when it's opened in a browser. On GitHub, use the **linked outline below**, which works right here. For the interactive map, use the GitHub Pages site: the [clickable mind map](https://charleyhananiaga.github.io/DSB-Unit-03/assets/ds-ml-glossary-mindmap.svg) and the [HTML glossary](https://charleyhananiaga.github.io/DSB-Unit-03/), which adds search, the audio summary and the clickable map embedded in the page. (To switch the site on: repository **Settings → Pages → Deploy from a branch → main / (root)**.) Offline, download the repository and open `assets/ds-ml-glossary-mindmap.svg` or `assets/ds-ml-glossary.html` in a browser.
+
+[![Concept map of the machine learning unit](assets/ds-ml-glossary-mindmap.png)](https://charleyhananiaga.github.io/DSB-Unit-03/assets/ds-ml-glossary-mindmap.svg)
 
 The same map as a linked outline:
 
@@ -116,52 +133,67 @@ The same map as a linked outline:
   - _Success:_ [Metrics & hypotheses](#success-metrics-and-hypotheses), [Base rate & false alarms](#base-rate-and-false-alarms), [Problem type](#framing-the-problem-type-early)
   - _Value:_ [ROI](#return-on-investment-roi), [Risk-adjusted ROI](#risk-adjusted-roi), [Payback & NPV](#payback-period-and-npv)
   - _Ethics:_ [Ethics, legal, strategy](#ethical-legal-and-strategic-implications), [Data minimization](#data-minimization-and-anonymization), [Build, buy or partner](#build-buy-or-partner)
-- **[24. Time series data](#s24-time-series-data-handling-and-stationarity)**
-  - _pandas:_ [Datetime index](#datetime-index), [.resample()](#resample-for-time-series), [Rolling statistics](#rolling-statistics), [.shift() lags](#lag-backshift-and-shift), [.diff()](#differencing-and-diff)
+- **[24. GenAI](#s24-leveraging-genai-as-a-data-scientist)**
+  - _How LLMs work:_ [LLM](#large-language-model-llm), [Token](#token), [Embedding](#embedding), [Transformer & attention](#transformer-and-attention), [Temperature](#temperature-and-sampling)
+  - _Training & limits:_ [How LLMs are trained](#how-llms-are-trained), [Context window](#context-window), [Hallucination](#hallucination)
+  - _Using GenAI:_ [Where GenAI helps](#where-genai-helps-in-the-data-science-lifecycle), [Generation vs analysis](#generation-mode-vs-analysis-mode), [Calling an LLM from Python](#calling-an-llm-from-python), [Data privacy](#data-privacy-with-genai-tools)
+  - _Checking:_ [How output goes wrong](#how-genai-output-goes-wrong), [Testing AI code](#testing-ai-generated-code), [Validating classifications](#validating-genai-classifications)
+- **[25. Time series data](#s25-time-series-data-handling-and-stationarity)**
+  - _pandas:_ [Datetime index](#datetime-index), [.resample()](#resample-for-time-series), [Rolling statistics](#rolling-statistics), [.shift() lags](#lag-backshift-and-shift), [.diff()](#differencing-and-diff), [Seasonal differencing](#seasonal-differencing)
   - _Diagnostics:_ [Stationarity](#stationarity), [Autocorrelation](#autocorrelation), [ACF plot](#acf-plot), [PACF plot](#pacf-plot)
-- **[25. Forecasting](#s25-time-series-forecasting-models)**
-  - _Decomposition:_ [Classical decomposition](#classical-decomposition), [Trend](#trend), [Seasonality](#seasonality)
-  - _ARIMA:_ [AR](#autoregression-ar), [MA](#moving-average-model-ma), [ARIMA](#arima-p-d-q), [ADF test](#augmented-dickey-fuller-adf-test), [AIC](#aic-akaike-information-criterion)
+- **[26. Forecasting](#s26-time-series-forecasting-models)**
+  - _Decomposition:_ [Classical decomposition](#classical-decomposition), [Trend](#trend), [Seasonality](#seasonality), [Naive forecasts](#naive-and-seasonal-naive-forecasts)
+  - _ARIMA:_ [AR](#autoregression-ar), [MA](#moving-average-model-ma), [ARIMA](#arima-p-d-q), [SARIMA](#sarima), [ADF test](#augmented-dickey-fuller-adf-test), [Ljung–Box test](#ljung-box-test), [AIC](#aic-akaike-information-criterion)
   - _Extensions:_ [GLS](#generalized-least-squares-gls), [GARCH](#garch-p-q), [VAR](#vector-autoregression-var)
-- **[26. Simulation](#s26-simulation)**
+- **[27. Simulation](#s27-simulation)**
   - _Concepts:_ [Simulation](#simulation), [Key components](#key-components-of-a-simulation), [Four pillars](#four-pillars-of-simulation), [Utilization](#utilization)
   - _Approaches:_ [Discrete event (DES)](#discrete-event-simulation-des), [Agent-based (ABM)](#agent-based-modelling-abm), [Monte Carlo simulation](#monte-carlo-simulation), [System dynamics](#system-dynamics-sd)
   - _Python:_ [Queue simulation](#coffee-shop-queue-simulation), [np.random.default_rng()](#np-random-default-rng), [SimPy](#simpy)
   - _Trust:_ [Verification & validation](#verification-and-validation), [Sensitivity analysis](#sensitivity-analysis)
-- **[27. Decision trees](#s27-decision-trees)**
+- **[28. Decision trees](#s28-decision-trees)**
   - _Structure:_ [Nodes & leaves](#root-node-internal-node-leaf-and-branch), [CART algorithm](#cart-algorithm), [Gini impurity](#gini-impurity)
   - _Control:_ [Stopping criteria](#stopping-criteria), [ccp_alpha pruning](#ccp-alpha-cost-complexity-pruning), [DecisionTreeClassifier](#decisiontreeclassifier-and-decisiontreeregressor)
-- **[28. Bagging & random forests](#s28-ensembles-bagging-and-random-forests)**
+- **[29. Bagging & random forests](#s29-ensembles-bagging-and-random-forests)**
   - _Bootstrap:_ [Bootstrap sample](#bootstrap-sample), [Bagging](#bagging-bootstrap-aggregating), [BaggingClassifier](#baggingclassifier)
   - _Evaluate:_ [Out-of-bag error](#out-of-bag-oob-observations-and-error), [Feature importance in ensembles](#feature-importance-in-ensembles)
   - _Forests:_ [Random forest](#random-forest), [max_features](#max-features), [Stacking](#stacking)
-- **[29. Boosting](#s29-ensembles-boosting)**
+- **[30. Boosting](#s30-ensembles-boosting)**
   - _Idea:_ [Boosting](#boosting), [Decision stump](#decision-stump), [Bagging vs boosting](#bagging-vs-boosting)
   - _Algorithms:_ [AdaBoost](#adaboost), [Gradient boosting](#gradient-boosting), [XGBoost](#xgboost)
   - _scikit-learn:_ [AdaBoostClassifier](#adaboostclassifier), [learning_rate](#learning-rate-and-n-estimators)
-- **[30. Support vector machines](#s30-support-vector-machines)**
+- **[31. Support vector machines](#s31-support-vector-machines)**
   - _Margins:_ [Separating hyperplane](#separating-hyperplane), [Maximal margin](#maximal-margin-classifier), [Support vectors](#support-vectors), [Soft margin](#soft-margin-classifier)
   - _Kernels:_ [Kernel trick](#kernel-trick), [Linear / poly / RBF](#linear-polynomial-and-rbf-kernels), [C](#c-svm)
   - _scikit-learn:_ [SVC and LinearSVC](#svc-and-linearsvc)
-- **[31. Gradient descent](#s31-gradient-descent-and-optimization)**
+- **[32. Gradient descent](#s32-gradient-descent-and-optimization)**
   - _Basics:_ [Loss function](#loss-function), [Derivative](#derivative), [Gradient descent](#gradient-descent)
   - _Step size:_ [Learning rate α](#learning-rate-step-size), [Convergence](#convergence-and-tolerance)
-  - _Pitfalls:_ [Local vs global minimum](#local-vs-global-minimum), [Convex function](#convex-function), [Newton's method](#newton-s-method)
-- **[32. k-means clustering](#s32-unsupervised-learning-and-k-means-clustering)**
-  - _Clustering:_ [Clustering](#clustering), [Uses of clustering](#uses-of-clustering), [k-means algorithm](#k-means), [Centroid](#centroid)
-  - _scikit-learn:_ [KMeans](#kmeans), [labels* and cluster_centers*](#labels-and-cluster-centers)
+  - _Pitfalls:_ [Local vs global minimum](#local-vs-global-minimum), [Convex function](#convex-function), [Feature scaling](#feature-scaling-and-gradient-descent), [Newton's method](#newton-s-method), [L-BFGS](#quasi-newton-methods-bfgs-l-bfgs)
+- **[33. k-means clustering](#s33-unsupervised-learning-and-k-means-clustering)**
+  - _Clustering:_ [Clustering](#clustering), [Uses of clustering](#uses-of-clustering), [k-means algorithm](#k-means), [Centroid](#centroid), [Birch & Affinity Prop.](#birch-and-affinity-propagation)
+  - _scikit-learn:_ [KMeans](#kmeans), [labels* and cluster_centers*](#labels-and-cluster-centers), [Labels are arbitrary](#cluster-labels-are-arbitrary)
   - _Evaluation:_ [Inertia](#inertia-within-cluster-sum-of-squares), [Elbow method](#elbow-method), [Silhouette score](#silhouette-score)
-- **[33. DBSCAN & hierarchical](#s33-dbscan-and-hierarchical-clustering)**
-  - _DBSCAN:_ [DBSCAN](#dbscan), [eps & min_samples](#eps-and-min-samples), [Core / border / noise](#core-border-and-noise-points)
+- **[34. DBSCAN & hierarchical](#s34-dbscan-and-hierarchical-clustering)**
+  - _DBSCAN:_ [DBSCAN](#dbscan), [eps & min_samples](#eps-and-min-samples), [Core / border / noise](#core-border-and-noise-points), [k-distance plot](#k-distance-plot), [HDBSCAN](#hdbscan)
   - _Hierarchical:_ [Agglomerative clustering](#agglomerative-clustering), [Linkage](#linkage), [Dendrogram](#dendrogram)
-  - _Metrics:_ [External cluster metrics](#external-cluster-metrics)
-- **[34. PCA](#s34-principal-component-analysis-pca)**
+  - _Metrics:_ [External cluster metrics](#external-cluster-metrics), [ARI](#adjusted-rand-index-ari)
+- **[35. PCA](#s35-principal-component-analysis-pca)**
   - _Idea:_ [Dimensionality reduction](#dimensionality-reduction), [Principal component](#principal-component)
   - _scikit-learn:_ [PCA()](#pca-in-scikit-learn), [Explained variance](#explained-variance-and-explained-variance-ratio), [Scree plot](#scree-plot), [Loadings](#loadings-components)
   - _Maths:_ [SVD](#singular-value-decomposition-svd), [Reconstruction](#dimensionality-reduced-reconstruction)
-- **[35. Recommenders](#s35-recommender-systems)**
+- **[36. Recommenders](#s36-recommender-systems)**
   - _Types:_ [Collaborative filtering](#collaborative-filtering), [Content-based & hybrid](#content-based-knowledge-based-and-hybrid-recommenders)
   - _Build:_ [Ratings matrix](#utility-ratings-matrix), [Sparse matrix](#sparse-matrix), [Cosine similarity](#cosine-similarity), [pairwise_distances()](#pairwise-distances)
+- **[37. Bayesian statistics](#s37-bayesian-statistics)**
+  - _Ideas:_ [Bayesian statistics](#bayesian-statistics), [Frequentist vs Bayesian](#frequentist-vs-bayesian), [Bayes' theorem](#bayes-theorem), [Base rate fallacy](#base-rate-fallacy)
+  - _Distributions:_ [Prior, likelihood, posterior](#prior-likelihood-and-posterior), [PMF & PDF](#probability-mass-and-density-functions), [Conjugate prior](#conjugate-prior-beta-binomial), [Credible interval](#credible-interval)
+  - _Computing:_ [Grid approximation](#grid-approximation), [MCMC](#markov-chain-monte-carlo-mcmc), [PyMC](#pymc), [A/B testing](#bayesian-a-b-testing)
+- **[38. Capstone playbook](#s38-capstone-playbook)**
+  - _Lifecycle:_ [Using the glossary](#using-this-glossary-for-your-capstone), [1 Frame](#stage-1-frame-the-question), [2 Data](#stage-2-get-and-understand-the-data), [3 Validate](#stage-3-choose-the-split-and-validation-strategy), [4 Baselines](#stage-4-build-baselines)
+  - _Build:_ [5 Candidate models](#stage-5-choose-candidate-models), [Approach by question](#choosing-an-approach-by-question-type), [Model cheat sheet](#model-selection-cheat-sheet), [6 Pipeline & tune](#stage-6-build-a-pipeline-and-tune)
+  - _Deliver:_ [7 Evaluate](#stage-7-evaluate-honestly), [8 Explain](#stage-8-interpret-and-explain), [9 Communicate](#stage-9-communicate-the-value), [10 Deploy](#stage-10-deploy-monitor-and-next-steps)
+  - _Templates:_ [Classification](#capstone-template-classification), [Regression](#capstone-template-regression), [Time series](#capstone-template-time-series-forecasting), [Clustering](#capstone-template-clustering)
+  - _Habits:_ [Mistakes checklist](#common-capstone-mistakes-checklist), [Library changes](#library-version-changes-to-know), [Reproducibility](#reproducibility-habits)
 
 ---
 
@@ -170,6 +202,8 @@ The same map as a linked outline:
 ## 12. Probability
 
 _The language of uncertainty that every model in this unit is built on: experiments, events, set operations, the three probability rules, and estimating probabilities by simulation when the maths gets hard. Examples come from the dice, coin and urn problems in the probability notebook._
+
+**In your capstone:** Use simulation to sanity-check any probability your analysis relies on, and think about base rates before trusting a classifier's alarms.
 
 <a id="probability"></a>
 
@@ -181,7 +215,7 @@ If you repeated an experiment infinitely many times, the **probability** of an e
 
 Two interpretations are worth knowing. The definition above is the **frequentist** view (long-run frequency), which underpins sampling, A/B testing and Monte Carlo simulation. The **Bayesian** view treats probability as a degree of belief that is updated as evidence arrives. Probability theory itself began in the 16th century with the analysis of dice and card games.
 
-See also: [Simulation (Monte Carlo)](#simulation-monte-carlo), [Law of Large Numbers (LLN)](#law-of-large-numbers-lln)
+See also: [Simulation (Monte Carlo)](#simulation-monte-carlo), [Law of Large Numbers (LLN)](#law-of-large-numbers-lln), [Frequentist vs Bayesian](#frequentist-vs-bayesian)
 
 <a id="probability-notation-p-a"></a>
 
@@ -323,6 +357,8 @@ _Concept_
 The probability of A **given** that B has already happened, written P(A | B). Drawing marbles without replacement is the classic case: once a blue marble is out, the chance the next one is blue drops from 12/24 to 11/23.
 
 Read the vertical bar **|** as "given that".
+
+See also: [Bayes' theorem](#bayes-theorem)
 
 <a id="statistical-independence"></a>
 
@@ -492,6 +528,8 @@ See also: [for loop (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/bl
 
 _What machine learning is, the two big families of models, and the first model in the toolkit: ordinary least squares linear regression. Covers fitting, interpreting and checking a model in scikit-learn and statsmodels, using the electricity demand (`elecdemand.csv`) and bikeshare (`bikeshare.csv`) notebooks._
 
+**In your capstone:** A linear regression is often your first and most interpretable model for a numeric target. Check the LINEM assumptions before interpreting coefficients, and always state effects with their units.
+
 <a id="machine-learning"></a>
 
 ### Machine learning
@@ -585,7 +623,7 @@ See also: [Clustering](#clustering), [Principal component analysis (PCA)](#princ
 
 _Concept_
 
-A third family where an **agent** takes actions, receives rewards or penalties, and learns by trial and error to do better next time (game-playing AIs such as AlphaGo, robotics). The slides call it "a field still in the process of being invented"; that's dated, as it's now well established and is also used in training today's large language models. It's outside the scope of this course.
+A third family where an **agent** takes actions, receives rewards or penalties, and learns by trial and error to do better next time (game-playing AIs such as AlphaGo, robotics). It's a well-established field, also used in training today's large language models, but it's outside the scope of this course.
 
 See also: [Semi-supervised learning](#semi-supervised-learning)
 
@@ -744,7 +782,7 @@ _Concept_
 
 A worked dummy-variable example: if price = 50 + 10·Spring + 20·Summer + 5·Fall (in $k) with Winter as the baseline, predictions are Winter 50, Spring 60, Summer 70, Fall 55: "summer houses sell for $20k more than winter ones, on average, all else equal". The negative Summer coefficient in the bikeshare model surprises students: summer is hot, and once temperature is accounted for, "being summer" adds nothing extra.
 
-> **Watch out:** Always check the units. In the Advertising data, budgets are in thousands of dollars and sales in thousands of units, so a radio coefficient of 0.1885 means each extra $1,000 of radio spend is associated with about **189 more units sold** (not "$0.19M more sales", as the notebook says).
+> **Watch out:** Always check the units. In the Advertising data, budgets are in thousands of dollars and sales in thousands of units, so a radio coefficient of 0.1885 means each extra $1,000 of radio spend is associated with about **189 more units sold** . It's easy to misread this as "$0.19M more sales"; write the units out in full whenever you interpret a coefficient.
 
 See also: [Dummy variables in regression](#dummy-variables-in-regression), [Coefficients are not importance](#coefficients-are-not-importance)
 
@@ -832,7 +870,7 @@ Fitted attributes (note the trailing underscore: scikit-learn's convention for "
 pd.Series(model.coef_, index=X.columns).sort_values()
 ```
 
-> **Watch out:** The notebook pairs names and coefficients with `set(zip(X.columns, model.coef_))`. Sets have no order, so the output can come back shuffled; `dict(zip(...))` or a `pd.Series` keeps the pairing readable.
+> **Watch out:** It's tempting to pair names and coefficients with `set(zip(X.columns, model.coef_))`, but sets have no order, so the output can come back shuffled; `dict(zip(...))` or a `pd.Series` keeps the pairing readable.
 
 <a id="score"></a>
 
@@ -842,7 +880,7 @@ _scikit-learn_
 
 A built-in evaluation shortcut on every model. For **regressors** it returns **R²**; for **classifiers** it returns **accuracy**. `lr.score(X_test, y_test)` is the same as `metrics.r2_score(y_test, lr.predict(X_test))`.
 
-> **Watch out:** One notebook labels `model.score()` output "Adj R Sq". It's ordinary R², not adjusted R².
+> **Watch out:** `model.score()` returns ordinary R², not adjusted R², and it's easy to label it wrongly. Compute adjusted R² yourself or read it from a statsmodels summary.
 
 See also: [R² (coefficient of determination)](#r2-coefficient-of-determination), [Accuracy](#accuracy)
 
@@ -897,7 +935,7 @@ Checked with a scatter plot of each x against y (or `sns.pairplot`). A gentle cu
 plt.scatter(elec["temp"], elec["demand"], s=1)
 ```
 
-An apparent non-linearity often means a **missing variable**. The deck's insurance-costs plot shows separate bands (plausibly smokers vs non-smokers): one straight line through all of them fits nobody, but adding a smoker indicator would fix much of it. For genuine curves, transform y or x, or add polynomial terms.
+An apparent non-linearity often means a **missing variable**. The course's insurance-costs plot shows separate bands (plausibly smokers vs non-smokers): one straight line through all of them fits nobody, but adding a smoker indicator would fix much of it. For genuine curves, transform y or x, or add polynomial terms.
 
 <a id="independence-i"></a>
 
@@ -907,7 +945,7 @@ _Concept_
 
 Usually checked by thinking about how the data were collected rather than with a plot. The most common violation is **time series data**, where each observation depends on the previous ones. (The bikeshare data are hourly, so this assumption is "probably violated".)
 
-Both walkthrough datasets are time series (half-hourly electricity demand, hourly bike rentals), so independence is very likely violated, even though notebook 02 says it holds "by assumption". The consequence: coefficients are usually still reasonable, but the model is **overconfident** (standard errors too small, p-values too optimistic). Other violations: repeated measurements on the same person, students in the same school, neighbouring houses.
+Both walkthrough datasets are time series (half-hourly electricity demand, hourly bike rentals), so independence is very likely violated. It's easy to wave this assumption through: think about how the data were collected. The consequence: coefficients are usually still reasonable, but the model is **overconfident** (standard errors too small, p-values too optimistic). Other violations: repeated measurements on the same person, students in the same school, neighbouring houses.
 
 See also: [Durbin–Watson statistic](#durbin-watson-statistic)
 
@@ -1041,7 +1079,7 @@ preds = np.exp(lr_log.predict(X_test))   # back to the original units
 
 Interpretation changes too: with log(y), a coefficient β roughly means "a one-unit increase in x is associated with about **100 × β % change** in y" (accurate for small β).
 
-> **Watch out:** The slides call this "log regression". It is **not logistic regression** (a classification model). Forgetting to exponentiate means your "predictions" are in log units, and `np.log` fails on zeros: use `np.log1p` / `np.expm1` if y can be 0. Back-transforming gives roughly the median rather than the mean prediction, a small known bias.
+> **Watch out:** Don't confuse "log regression" (modelling log(y)) with **logistic regression** (a classification model). Forgetting to exponentiate means your "predictions" are in log units, and `np.log` fails on zeros: use `np.log1p` / `np.expm1` if y can be 0. Back-transforming gives roughly the median rather than the mean prediction, a small known bias.
 
 See also: [Log transformation (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#log-transformation), [Comparing models on the same scale](#comparing-models-on-the-same-scale)
 
@@ -1215,6 +1253,8 @@ In the generalization slides' model notation, `y ~ x1 + x2 + x1x2 + x3²`, "~" m
 
 _How to put a number on "how good is this regression model?": distance-based error measures, R², and comparison with the null model. Examples use the advertising data (`Advertising.csv`), where `sales` is predicted from TV, radio and newspaper spend. "All models are wrong, but some are useful."_
 
+**In your capstone:** Report one error metric in real units (RMSE or MAE) and R², always next to the null-model baseline and on test or cross-validated data.
+
 <a id="euclidean-distance"></a>
 
 ### Euclidean distance
@@ -1299,7 +1339,7 @@ Think of it like standard deviation: MSE is an average squared distance; its squ
 
 _Concept, scikit-learn_
 
-The average absolute residual: (1/n)Σ|yᵢ − ŷᵢ|. Also in the target's units, and less sensitive to a few huge errors than RMSE. The notebook calls it the mean absolute deviation.
+The average absolute residual: (1/n)Σ|yᵢ − ŷᵢ|. Also in the target's units, and less sensitive to a few huge errors than RMSE.
 
 ```python
 metrics.mean_absolute_error(y, y_hat)
@@ -1307,7 +1347,7 @@ metrics.mean_absolute_error(y, y_hat)
 
 An error of 10 counts 10 in MAE but 100 in MSE, which is why MAE is less sensitive to outliers. Advertising data: MAE ≈ 1.25 vs RMSE ≈ 1.67. Its absolute value has a sharp corner at zero, which historically made it harder to optimize.
 
-> **Watch out:** The regression metrics notebook labels this "Mean Absolute **Deviation**". That name usually means the average distance of values from their own mean, a different quantity; the code computes the mean absolute **error**.
+> **Watch out:** Don't confuse MAE with the **mean absolute deviation**, the average distance of values from their own mean. The names are easy to mix up, but MAE measures prediction errors.
 
 <a id="r2-coefficient-of-determination"></a>
 
@@ -1335,7 +1375,7 @@ See also: [Adjusted R²](#adjusted-r2), [Evaluation metrics (Unit 2)](https://gi
 
 _Concept_
 
-Σ(yᵢ − ȳ)²: the SSE of the null model that always predicts the mean. R² compares your model's SSE with this. (The notebook calls it `ssto`.)
+Σ(yᵢ − ȳ)²: the SSE of the null model that always predicts the mean. R² compares your model's SSE with this. (Also written SSTO; `ssto` in code.)
 
 <a id="adjusted-r2"></a>
 
@@ -1367,7 +1407,7 @@ Metrics that balance goodness of fit against model complexity, like adjusted R²
 
 statsmodels prints AIC and BIC in every regression summary (`results.aic`, `results.bic`).
 
-> **Watch out:** The slides say these are "only valid for OLS". Mallows's Cₚ is OLS-specific, but AIC and BIC apply to any model fitted by maximum likelihood, including logistic regression and ARIMA (where AIC is the go-to metric).
+> **Watch out:** Mallows's Cₚ is specific to OLS, but AIC and BIC apply to any model fitted by maximum likelihood, including logistic regression and ARIMA (where AIC is the go-to metric).
 
 See also: [AIC (Akaike Information Criterion)](#aic-akaike-information-criterion)
 
@@ -1398,6 +1438,8 @@ A good habit is to report **one error metric** (how big the errors are in real t
 ## 15. Generalization, bias–variance and cross-validation
 
 _Why a model that's perfect on its training data can be useless, how to measure that, and how to choose a model that will work on data it has never seen. Includes the Bias–Variance Tradeoff deck's "fitting sine" exercise and the College applications model workflow._
+
+**In your capstone:** Decide your split and validation strategy before you model, and keep the test set untouched until the final check.
 
 <a id="generalization"></a>
 
@@ -1469,7 +1511,7 @@ _Concept_
 
 Error from a model being **too sensitive to the particular training data** it saw: how much its prediction for the **same point** changes when it's trained on a different sample. If you split your data in half and fit the same kind of model to each half, variance is why you get different models. High variance = overfit. Loosely, bias is visible within one model ("points within a model"), while variance only shows up when you compare many models ("a point between many models").
 
-> **Watch out:** One slide defines variance as "the spread of your data". In the bias–variance sense it isn't: it's the spread of the model's **predictions** across training samples, even though it uses the same maths as the variance of a column.
+> **Watch out:** It's easy to confuse model variance with the variance of the data (its spread). In the bias–variance sense, variance is the spread of the model's **predictions** across training samples, even though it uses the same maths as the variance of a column.
 
 <a id="irreducible-error"></a>
 
@@ -1493,7 +1535,7 @@ where Bias² = (E[f̂(x)] − f(x))², Variance = E[(f̂(x) − E[f̂(x)])²], a
 
 Read E[…] as "averaged over many possible training sets". Bias² = (average prediction − truth)²; variance = average squared distance of a prediction from the average prediction; σ²ₑ = the noise in y itself.
 
-> **Watch out:** The decomposition applies to the **expected squared error averaged over many hypothetical models**, not to any single residual from one model (a slide suggests otherwise). It has **three** terms, not two, and the true relationship f doesn't have to be linear.
+> **Watch out:** The decomposition describes the **expected squared error averaged over many hypothetical training sets**, not any single residual from one model. It has **three** terms, and the true relationship f doesn't have to be linear.
 
 <a id="bias-variance-trade-off"></a>
 
@@ -1531,11 +1573,11 @@ Rule of thumb: **more complexity → lower bias, higher variance**. The three le
 
 _Concept_
 
-Plot error against model complexity. **Training error** (blue) keeps falling as complexity rises. **Test / prediction error** (red) falls at first, bottoms out, then rises again: past that point the model is overfitting. Answers the slide's question "why do we care about variance if more complexity always gives a more accurate model?": it's only more accurate on the data it has already seen.
+Plot error against model complexity. **Training error** (blue) keeps falling as complexity rises. **Test / prediction error** (red) falls at first, bottoms out, then rises again: past that point the model is overfitting. It answers the classic question "why do we care about variance if more complexity always gives a more accurate model?": it's only more accurate on the data it has already seen.
 
 The widening gap between the curves on the right is overfitting. Train-test splits and cross-validation are how we **estimate the red curve** in practice: compute the CV error at several complexity levels and choose the lowest.
 
-> **Watch out:** One slide says "if our **error** exceeds this sweet spot, we are overfitting"; it should read "if our model **complexity** exceeds the sweet spot".
+> **Watch out:** It's model **complexity** beyond the sweet spot that signals overfitting: the further right of the minimum you go, the more overfit the model.
 
 <a id="fitting-sine-exercise"></a>
 
@@ -1548,7 +1590,7 @@ From the Bias–Variance Tradeoff deck (after Caltech's _Learning From Data_, Ya
 - **With the whole curve visible**, H₁ wins (E_out 0.20 vs 0.50). That's pure bias: there's only one best line, so no variance.
 - **Averaged over every possible pair of points**, H₀ has bias² 0.50 + variance 0.25 = **0.75**, while H₁ has bias² 0.21 + variance 1.69 = **1.90**. The simpler model's expected error is less than half.
 
-The lesson: **choose model complexity to match the amount of data you have, not the complexity of the truth.** With lots of data, H₁'s variance would shrink and it would win. This simulation reproduces the slide's numbers:
+The lesson: **choose model complexity to match the amount of data you have, not the complexity of the truth.** With lots of data, H₁'s variance would shrink and it would win. This simulation reproduces those numbers:
 
 ```python
 rng = np.random.default_rng(42)
@@ -1567,9 +1609,9 @@ for name, P in [("H0", np.array(preds0)), ("H1", np.array(preds1))]:
 # H1: bias2=0.21 var=1.69 total=1.90
 ```
 
-ḡ(x) ("g-bar") on the slides is the **average model** over all samples; the grey band around it shows the variance.
+ḡ(x) ("g-bar") is the **average model** over all samples; the grey band around it shows the variance.
 
-> **Watch out:** The slide titled "H1" shows both models (H₀ on the left), and its "Bias" figures are squared bias.
+> **Watch out:** The "bias" figures in this comparison are **squared** bias, the term that appears in the decomposition.
 
 <a id="np-polyfit-and-np-polyval"></a>
 
@@ -1577,7 +1619,7 @@ for name, P in [("H0", np.array(preds0)), ("H1", np.array(preds1))]:
 
 _NumPy_
 
-`np.polyfit(x, y, deg)` fits a polynomial of the given degree by least squares and returns its coefficients; `np.polyval(coefs, x)` evaluates it. A quick way to see under- and overfitting live (it replaces the deck's polynomial applet, a Java applet that no longer runs in any modern browser). Degrees 0 and 1 underfit 10 noisy sine points, degree 3 looks about right, and degree 9 passes through every point and swings wildly between them.
+`np.polyfit(x, y, deg)` fits a polynomial of the given degree by least squares and returns its coefficients; `np.polyval(coefs, x)` evaluates it. A quick way to see under- and overfitting live (older Java-based curve-fitting applets no longer run in modern browsers, so this is the easiest way to experiment). Degrees 0 and 1 underfit 10 noisy sine points, degree 3 looks about right, and degree 9 passes through every point and swings wildly between them.
 
 ```python
 rng = np.random.default_rng(0)
@@ -1645,7 +1687,7 @@ train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 train_test_split(y, test_size=0.1, shuffle=False)     # time series
 ```
 
-> **Watch out:** `train_size=0.3` and `test_size=0.3` are opposites. The kNN churn notebook passes `train_size=0.3`, training on only 30% of the data; it almost certainly meant `test_size=0.3`.
+> **Watch out:** `train_size=0.3` and `test_size=0.3` are opposites, and it's an easy slip: `train_size=0.3` trains on only 30% of the data. Use `test_size` when you mean the share held out.
 
 See also: [Time series train/test split](#time-series-train-test-split), [random_state (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#random-state)
 
@@ -1665,7 +1707,7 @@ What matters for a reliable test estimate is the **absolute number** of test row
 
 _Concept_
 
-Compare the same metric on training and test data. **Test much worse than train**: overfit (high variance). **Both bad**: underfit (high bias). **Both similar and good**: likely generalizes. From the slides: train RMSE 12.3 / test RMSE 658.2 is badly overfit; 233.9 / 252.1 is not overfit but weak; 132.7 / 200.5 is the best of the three because it has the best test score. Occasionally the test score beats the training score by chance; that's fine.
+Compare the same metric on training and test data. **Test much worse than train**: overfit (high variance). **Both bad**: underfit (high bias). **Both similar and good**: likely generalizes. Worked example: train RMSE 12.3 / test RMSE 658.2 is badly overfit; 233.9 / 252.1 is not overfit but weak; 132.7 / 200.5 is the best of the three because it has the best test score. Occasionally the test score beats the training score by chance; that's fine.
 
 The lessons: pick the model with the best **test** (or cross-validated) score, then sanity-check the gap; and the **right** features matter more than the number of features (two well-chosen features beat the kitchen-sink model). A small gap doesn't mean the model is good: always compare against the baseline too.
 
@@ -1675,7 +1717,7 @@ The lessons: pick the model with the best **test** (or cross-validated) score, t
 
 _Concept_
 
-Split the data into k **folds** (usually 5 or 10). Train on k − 1 folds and test on the remaining one; repeat so every fold is the test set once; then **average** the k scores. Example from the slides: fold MSEs 42.7, 45.1, 72.8, 38.2, 49.2 give a cross-validated MSE of 49.6. More robust than one split, and no data is "thrown away".
+Split the data into k **folds** (usually 5 or 10). Train on k − 1 folds and test on the remaining one; repeat so every fold is the test set once; then **average** the k scores. Example: fold MSEs 42.7, 45.1, 72.8, 38.2, 49.2 give a cross-validated MSE of 49.6. More robust than one split, and no data is "thrown away".
 
 Fold 3 in that example (72.8) is much worse than the rest; if it had been your only test set, you'd have concluded the model was far worse than it is. Reporting **mean ± standard deviation** of the fold scores shows how much performance depends on which data the model sees. CV evaluates a **modelling approach**, not one fitted model: after choosing, fit the final model on all the data. 5 and 10 folds are popular because they balance the bias and variance of the estimate at reasonable cost.
 
@@ -1815,7 +1857,7 @@ _Concept_
 
 More data is generally good, but large datasets bring their own problems: subtle data leakage is harder to catch, compute costs and time can grow exponentially, and models can overfit spurious correlations that exist in the training data but not the real world.
 
-With many rows and especially many columns, some features will correlate with the target **purely by chance** (Tyler Vigen's "Spurious Correlations" site has fun examples). More data reduces variance, but it doesn't fix bias and it doesn't fix leakage. (The slide says costs grow "exponentially"; more typically they grow in proportion to the data size or faster, depending on the algorithm.)
+With many rows and especially many columns, some features will correlate with the target **purely by chance** (Tyler Vigen's "Spurious Correlations" site has fun examples). More data reduces variance, but it doesn't fix bias and it doesn't fix leakage. (Computing costs typically grow in proportion to the data size or faster, depending on the algorithm.)
 
 See also: [Spurious correlation (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#spurious-correlation)
 
@@ -1880,7 +1922,7 @@ See also: [StandardScaler (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit
 
 _Concept, scikit-learn_
 
-Metrics computed on different target scales can't be compared. The College notebook compares R² on log(applications) (test ≈ 0.77) with R² on raw applications (≈ 0.79); they measure different things. Back-transform first and compare in the same units:
+Metrics computed on different target scales can't be compared. It's tempting to compare R² on log(applications) (test ≈ 0.77) with R² on raw applications (≈ 0.79), but they measure different things. Back-transform first and compare in the same units:
 
 ```python
 preds_test = np.exp(lr_log.predict(X_test))         # undo the log
@@ -1897,6 +1939,8 @@ On this split the log model is worse in raw terms, but the raw model predicts **
 ## 16. k-Nearest Neighbors
 
 _The first classification model: label a new point by asking its closest neighbours. Covers distance, choosing k, why scaling is essential, and how to tell whether a classifier beats a do-nothing baseline. Examples use the iris data (`iris.csv`) and the cell phone churn data (`cell_phone_churn.csv`)._
+
+**In your capstone:** A quick, assumption-light baseline on small, scaled, numeric data. Tune k with cross-validation.
 
 <a id="classification"></a>
 
@@ -1964,7 +2008,7 @@ How "nearest" is measured. **Euclidean**: straight-line distance, √Σ(aᵢ −
 
 Worked example for points (1, 2) and (4, 6): Euclidean = √(3² + 4²) = **5**; Manhattan = 3 + 4 = **7**. `KNeighborsClassifier` defaults to `metric="minkowski", p=2` (Euclidean). Manhattan can work better with many features.
 
-> **Watch out:** The slides' distance formulas sum from i = 1 to **k**, where that k means the number of features, not the k in kNN.
+> **Watch out:** In distance formulas the sum often runs to k or p, meaning the number of **features**, not the k in kNN.
 
 See also: [Euclidean distance](#euclidean-distance), [Cosine similarity](#cosine-similarity)
 
@@ -1989,7 +2033,7 @@ knn = KNeighborsClassifier(n_neighbors=best_k).fit(X_train_sc, y_train)
 knn.score(X_test_sc, y_test)          # the honest final check
 ```
 
-> **Watch out:** The churn notebook picks k by **test** accuracy. That quietly tunes the model to the test set, so the test score stops being an honest estimate. `GridSearchCV` automates the right approach.
+> **Watch out:** It's tempting to pick k by **test** accuracy. That quietly tunes the model to the test set, so the test score stops being an honest estimate. Choose k by cross-validation; `GridSearchCV` automates it.
 
 See also: [Hyperparameter](#hyperparameter), [GridSearchCV](#gridsearchcv)
 
@@ -2001,7 +2045,7 @@ _Concept_
 
 The line or surface where a classifier switches from predicting one class to another. Plotting it shows how flexible a model is: kNN's boundaries are jagged at k = 1 and smooth at k = 50; logistic regression's is a straight line; an RBF-kernel SVM's can curve.
 
-As k increases, kNN's boundaries become **smoother and simpler** (a slide says "more distinct", which is misleading).
+As k increases, kNN's boundaries become **smoother and simpler**.
 
 <a id="voronoi-diagram"></a>
 
@@ -2058,7 +2102,7 @@ _Concept_
 
 **Strengths:** few assumptions (non-parametric); works for classification (vote) and regression (average); simple to explain. **Weaknesses:** slow and memory-hungry on large data, since every prediction compares against every training row; sensitive to noisy, imbalanced and irrelevant features (with imbalance, most points' neighbours are from the majority class); works poorly with many predictors, because in high dimensions all points end up roughly the same distance apart and "nearest" stops meaning much; and many dummy columns add dimensions (the churn data's 51 states would add 50 columns). Best with a small number of well-chosen, scaled predictors.
 
-Where nearest neighbours are used today: recommendation systems, **similarity search over embeddings** (finding similar products or documents in AI search and vector databases), anomaly detection, and filling in missing values (`KNNImputer`). The slides' "widely used for image and video processing" is dated; modern image tasks use neural networks.
+Where nearest neighbours are used today: recommendation systems, **similarity search over embeddings** (finding similar products or documents in AI search and vector databases), anomaly detection, and filling in missing values (`KNNImputer`). Image and video tasks, which once used kNN widely, now use neural networks.
 
 See also: [Curse of dimensionality (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#curse-of-dimensionality)
 
@@ -2134,6 +2178,8 @@ X = churn.drop(columns=cat_cols).drop(columns=["churn"])
 
 _Regression bent into a classifier: predicting the probability that y = 1 with an S-shaped curve, and reading its coefficients as changes in odds. Examples use graduate school admissions (`grad_admissions.csv`, admit predicted from GPA and GRE) and the possum data._
 
+**In your capstone:** The go-to interpretable classifier. Start here before trees or boosting, and explain effects as odds ratios.
+
 <a id="logistic-regression"></a>
 
 ### Logistic regression
@@ -2202,7 +2248,7 @@ A **link function** connects a linear equation to the kind of output you need. L
 
 Why the transform works: probabilities live between 0 and 1, odds between 0 and ∞, and log-odds between −∞ and ∞, which is exactly the range a straight line can produce.
 
-> **Watch out:** The slides' logit equations include "+ ε". Logistic regression has **no additive error term**: the randomness comes from the yes/no outcome itself.
+> **Watch out:** It's easy to carry "+ ε" over from linear regression, but logistic regression has **no additive error term**: the randomness comes from the yes/no outcome itself.
 
 <a id="odds"></a>
 
@@ -2221,7 +2267,7 @@ The probability that something happens divided by the probability it doesn't: **
 
 The odds of rolling a 1 on a fair die are (1/6)/(5/6) = 1/5 = 0.2, written **1:5** ("one to five": one way to win, five to lose). For rare events odds and probability are close (0.2 vs 0.167); for common events they differ a lot.
 
-> **Watch out:** A slide writes "1/5 = 5:1". **5:1** is the bookmaker's **odds against** ("5 to 1 against"). In statistics and logistic regression, "odds" always means odds **in favour**, p / (1 − p).
+> **Watch out:** Don't mix up the two conventions. **5:1** is the bookmaker's **odds against** ("5 to 1 against"). In statistics and logistic regression, "odds" always means odds **in favour**, p / (1 − p).
 
 <a id="log-odds"></a>
 
@@ -2231,7 +2277,7 @@ _Concept_
 
 The natural log of the odds, ln(p / (1 − p)), also called the **logit**. This is what logistic regression actually predicts as a linear function of the features. Log-odds of 0 means p = 0.5; positive means more likely than not. In scikit-learn, `model.decision_function(X)` returns the log-odds.
 
-> **Watch out:** A slide defines the log-odds as "the ratio of the probability of an event happening to the probability of it not happening". That ratio is the **odds**; the log-odds is its natural logarithm.
+> **Watch out:** The **odds** are the ratio p / (1 − p); the **log-odds** is its natural logarithm. The two are easy to blur.
 
 See also: [decision_function()](#decision-function)
 
@@ -2260,7 +2306,7 @@ pd.Series(logreg.coef_[0], index=X.columns)     # pair with feature names
 
 In probability terms the change depends on where you start: about **6% at GPA 3.0, 43% at 3.5 and 90% at 4.0**. The odds multiplier is the same everywhere, which is why odds are used for interpretation.
 
-> **Watch out:** The notebooks say a GPA point makes admission "135 times more likely". That's a probability statement and it's wrong: exponentiated coefficients multiply the **odds**, not the probability. Also, scikit-learn's default L2 penalty slightly shrinks the coefficients, so they differ a little from statsmodels or textbook fits.
+> **Watch out:** It's a common slip to say a GPA point makes admission "135 times more likely". That's a probability statement and it's wrong: exponentiated coefficients multiply the **odds**, not the probability. Also, scikit-learn's default L2 penalty slightly shrinks the coefficients, so they differ a little from statsmodels or textbook fits.
 
 <a id="from-coefficients-to-probability"></a>
 
@@ -2324,13 +2370,13 @@ plt.plot(xs, logreg.predict_proba(xs)[:, 1], color="red", lw=3)
 
 <a id="logistic-regression-assumptions"></a>
 
-### Logistic regression assumptions (LIM)
+### Logistic regression assumptions
 
 _Concept_
 
 Fewer than OLS: **L**inearity between each feature and the **log-odds** (not the probability); **I**ndependence of observations; and no **M**ulticollinearity (for multiple logistic regression). There's no normality or equal-variance assumption, because there are no continuous residuals to check. Practical requirements: enough data, especially enough examples of the rarer class; no extreme outliers dominating; and no perfect separation.
 
-> **Watch out:** The deck's Key Takeaways slide says "LINEM", copied from linear regression. Logistic regression actually assumes **L**, **I** and **M** only.
+> **Watch out:** Don't carry all of LINEM over from linear regression: logistic regression assumes L, I and M only.
 
 See also: [Perfect separation](#perfect-separation)
 
@@ -2342,7 +2388,7 @@ _Concept_
 
 When a feature (or combination) splits the classes perfectly, the textbook logistic regression coefficients run off to infinity, because the model can always make its predictions more confident. scikit-learn's default regularization hides this, so you get a finite but meaningless coefficient and suspiciously perfect accuracy.
 
-The possum practice notebook is the course example: `site` perfectly identifies the target population (sites 1–2 are all Victoria), which is why the solution reaches 100% training accuracy. Drop `site` and training accuracy falls to 0.91, test to 0.77 (baseline ≈ 0.54), and the age coefficient **flips sign**, so the solution's age interpretation isn't meaningful. Moral: **100% accuracy is suspicious**: look for leakage or separation.
+The possum practice notebook is the course example: `site` perfectly identifies the target population (sites 1–2 are all Victoria), so including it gives 100% training accuracy. Drop `site` and training accuracy falls to 0.91, test to 0.77 (baseline ≈ 0.54), and the age coefficient **flips sign**, so interpreting age from the model that includes `site` isn't meaningful. Moral: **100% accuracy is suspicious**: look for leakage or separation.
 
 <a id="log-loss-binary-cross-entropy"></a>
 
@@ -2350,7 +2396,7 @@ The possum practice notebook is the course example: `site` perfectly identifies 
 
 _Concept_
 
-The loss function logistic regression minimizes (the notebook calls it the **deviance**). It heavily penalizes confident wrong predictions. Unlike OLS there's no closed-form solution, so the β's are found by an iterative optimizer (the `solver`).
+The loss function logistic regression minimizes (also called the **deviance**). It heavily penalizes confident wrong predictions. Unlike OLS there's no closed-form solution, so the β's are found by an iterative optimizer (the `solver`).
 
 ```python
 metrics.log_loss(y_test, logreg.predict_proba(X_test))
@@ -2386,7 +2432,7 @@ LogisticRegression(penalty=None)     # scikit-learn 1.2–1.7
 LogisticRegression(C=np.inf)         # scikit-learn 1.8+ (penalty is deprecated)
 ```
 
-> **Watch out:** Older notebooks write `penalty='none'` (a string). That raises an error in current scikit-learn; use `penalty=None` or `C=np.inf`.
+> **Watch out:** This parameter has changed across versions, so check the documentation for the version you're running. scikit-learn 1.2 replaced the string `penalty='none'` with `penalty=None` (the string now raises an error), and 1.8 deprecates `penalty` itself: use `C=np.inf` for no penalty.
 
 With unscaled features (GRE runs 200–800, GPA 1–5) the default penalty affects coefficients unevenly, another reason to scale.
 
@@ -2407,7 +2453,7 @@ iris_logreg.coef_.shape                                    # (3, 4): one row per
 
 Also called **softmax regression**: one set of coefficients per class, with scores turned into probabilities that sum to 1. It's a genuine extension of logistic regression, not a hack. On Iris it scores training accuracy 0.975 and test 1.0 against a baseline of 0.30.
 
-> **Watch out:** The old `multi_class` parameter is deprecated in recent scikit-learn; for one-vs-rest use `OneVsRestClassifier(LogisticRegression())`.
+> **Watch out:** The `multi_class` parameter was deprecated in scikit-learn 1.5 and has since been removed; for one-vs-rest use `OneVsRestClassifier(LogisticRegression())`. Check the documentation for your version.
 
 <a id="one-vs-rest-ovr"></a>
 
@@ -2438,6 +2484,8 @@ A classic interview question. **Interpretability:** both are white-box (coeffici
 
 _Accuracy isn't enough. The confusion matrix and the metrics built from it, how moving the probability threshold trades one kind of error for another, and the ROC curve and AUC. Examples use the breast cancer data (`load_breast_cancer`, malignant = 1) and the Whickham smoking data._
 
+**In your capstone:** Choose your headline metric from the cost of each kind of error, and agree it with stakeholders before you look at results.
+
 <a id="confusion-matrix"></a>
 
 ### Confusion matrix
@@ -2456,7 +2504,7 @@ pd.DataFrame(cm,
 tn, fp, fn, tp = cm.ravel()
 ```
 
-> **Watch out:** Orientation varies. scikit-learn puts **actual in rows, predicted in columns**, negative class first: `[[TN, FP], [FN, TP]]`, so true positives are **bottom-right**. Several slides put predicted in rows and TP top-left. `ConfusionMatrixDisplay` labels the axes, which avoids the confusion.
+> **Watch out:** Orientation varies. scikit-learn puts **actual in rows, predicted in columns**, negative class first: `[[TN, FP], [FN, TP]]`, so true positives are **bottom-right**. Textbooks and slides often use the opposite layout (predicted in rows, TP top-left), so always read the axis labels. `ConfusionMatrixDisplay` labels the axes, which avoids the confusion.
 
 <a id="confusionmatrixdisplay"></a>
 
@@ -2509,7 +2557,7 @@ See also: [Null hypothesis (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Uni
 
 _Concept_
 
-The share of predictions that are wrong: (FP + FN) / total = 1 − accuracy. The kNN slides call "1 minus the accuracy" the error when choosing k.
+The share of predictions that are wrong: (FP + FN) / total = 1 − accuracy. When tuning k in kNN, "error" usually means 1 minus the accuracy.
 
 Voter example: accuracy = (40 + 25)/100 = 0.65, so the misclassification rate is 0.35. Predicting "vote" for everyone would score 55%, so the model beats the baseline by only 10 points.
 
@@ -2552,7 +2600,7 @@ tn, fp, fn, tp = metrics.confusion_matrix(y_test, y_pred).ravel()
 specificity = tn / (tn + fp)
 ```
 
-> **Watch out:** One slide defines it as "among all **true** negatives…"; it should be "among all **actual** negatives".
+> **Watch out:** The denominator is all **actual** negatives (TN + FP), not just the true negatives.
 
 <a id="false-positive-rate-fpr"></a>
 
@@ -2562,7 +2610,7 @@ _Concept_
 
 FP / (FP + TN): the proportion of actual negatives wrongly flagged. **FPR = 1 − specificity**. It's the x-axis of the ROC curve.
 
-> **Watch out:** A slide says FPR is "aka Specificity". It isn't: specificity is the true negative rate, and FPR is one minus it. A common exam and interview question.
+> **Watch out:** FPR is not specificity: specificity is the true negative rate, and FPR is one minus it. A common exam and interview question.
 
 <a id="f1-score"></a>
 
@@ -2660,7 +2708,7 @@ metrics.RocCurveDisplay.from_estimator(lr, X_test, y_test)
 plt.plot([0, 1], [0, 1], linestyle="--")      # random-guess line
 ```
 
-> **Watch out:** `metrics.plot_roc_curve()` from older tutorials has been removed; use `RocCurveDisplay.from_estimator()`.
+> **Watch out:** `metrics.plot_roc_curve()` from older tutorials was removed in scikit-learn 1.2; use `RocCurveDisplay.from_estimator()`. Check the documentation when older code fails.
 
 Each point on the curve is one threshold: threshold 1.0 predicts nothing positive (bottom-left, FPR 0 / TPR 0); threshold 0 predicts everything positive (top-right). The name comes from World War II radar engineering: judging how well radar receivers separated real aircraft from noise.
 
@@ -2738,6 +2786,8 @@ Probability-based measures such as **log loss** and the **Brier score** score th
 
 _When one class vastly outnumbers another, a model can look brilliant by ignoring the rare class. How to spot it, measure it properly, and fix it with resampling, synthetic data, class weights or a new threshold, using the `imbalanced-learn` library and the adult census income data._
 
+**In your capstone:** If your positive class is rare, judge models on recall, precision, F1 or balanced accuracy, and resample only inside a pipeline.
+
 <a id="imbalanced-classes"></a>
 
 ### Imbalanced classes
@@ -2789,13 +2839,15 @@ null_preds = ["<=50K"] * len(y_test)
 balanced_accuracy_score(y_test, null_preds)     # 0.5
 ```
 
+In the imbalanced-data notebook the plain logistic regression scores accuracy 0.988 but balanced accuracy only **0.533** (recall 0.067). The rebalanced models reach 0.72–0.75: random oversampling 0.722, class weights 0.741, SMOTE 0.743, ADASYN 0.749.
+
 <a id="undersampling"></a>
 
 ### Undersampling
 
 _Concept, imbalanced-learn_
 
-Throwing away majority-class rows until the classes are balanced. The slides' advice is "in general, don't undersample the majority class": you lose information, and on the census data it would shrink the training set from about 18,500 rows to about 450. But that rule is too absolute: with **large** datasets undersampling is fast and often works about as well. On the course data, random undersampling scored recall 0.69 vs 0.72 for oversampling, with similar precision and AUC.
+Throwing away majority-class rows until the classes are balanced. The usual advice is not to undersample the majority class: you lose information, and on the census data it would shrink the training set from about 18,500 rows to about 450. That's a sensible default rather than a rule: with **large** datasets undersampling is fast and often works about as well. On the course data, random undersampling scored recall 0.69 vs 0.72 for oversampling, with similar precision and AUC.
 
 ```python
 from imblearn.under_sampling import RandomUnderSampler
@@ -2831,6 +2883,8 @@ gs = GridSearchCV(pipe,
                   scoring="balanced_accuracy", n_jobs=-1)
 gs.fit(X_train_ss, y_train)
 ```
+
+> **Watch out:** Run this grid with the default scoring (accuracy) and it prefers the **least** oversampling (CV accuracy 0.96 at 0.25, falling to 0.80 at 1.0), because accuracy rewards ignoring the minority class. Re-scored on `balanced_accuracy` it picks 0.75 (balanced accuracy 0.722, recall 0.587, precision 0.047). The metric you tune on decides the "best" model.
 
 <a id="fit-resample"></a>
 
@@ -2885,6 +2939,10 @@ _imbalanced-learn_
 from imblearn.over_sampling import ADASYN
 pipe4 = make_pipeline(ADASYN(random_state=34), LogisticRegression(max_iter=1000))
 ```
+
+On the census data, ADASYN gives the highest recall of the notebook's methods (0.747, precision 0.035, balanced accuracy 0.749).
+
+> **Watch out:** If the model was trained on scaled data, every evaluation call needs the **scaled** test data (`X_test_ss`), including `ConfusionMatrixDisplay.from_estimator`. Passing the unscaled `X_test` is an easy slip that silently gives wrong results; a pipeline avoids it.
 
 <a id="smotenc-and-smoten"></a>
 
@@ -2955,6 +3013,8 @@ prob = logr5.predict_proba(X_test_ss)[:, 1]
 (prob >= .5).sum(), (prob >= .4).sum()   # more positives at the lower threshold
 ```
 
+With the class-weighted census model, lowering the cut-off from 0.5 to 0.4 raises the number of predicted high earners from 1,278 to 1,932.
+
 See also: [Classification threshold](#classification-threshold)
 
 <a id="calibration"></a>
@@ -3010,6 +3070,8 @@ Other options: collect more minority data, or **reframe** the problem as anomaly
 
 _Adding a penalty to a model's loss function so it can't make its coefficients too large, trading a little bias for a big drop in variance. Ridge, Lasso and ElasticNet, how to tune them, and the regularization that has been quietly switched on in logistic regression all along. Examples use the wine quality data (`winequality_merged.csv`) blown up with polynomial features to force overfitting._
 
+**In your capstone:** Use when a linear model overfits (many or correlated features). Standardize first and choose alpha or C by cross-validation.
+
 <a id="regularization"></a>
 
 ### Regularization
@@ -3018,7 +3080,7 @@ _Concept_
 
 A method for constraining ("regularizing") the size of a model's coefficients by adding a **penalty term** to the loss function. It shrinks coefficients toward zero, reduces variance and overfitting, and tends to reduce variance more than it increases bias. Use it when evidence suggests high variance: training scores much better than test scores.
 
-It can only help a model that is **overfitting**: regularizing an underfit model makes it worse. On the wine data, OLS scores training R² 0.407 vs test 0.220 (overfit); a cross-validated ridge scores training 0.348 (slightly lower) but test **0.295** (higher): exactly the trade the slides describe.
+It can only help a model that is **overfitting**: regularizing an underfit model makes it worse. On the wine data, OLS scores training R² 0.407 vs test 0.220 (overfit); a cross-validated ridge scores training 0.348 (slightly lower) but test **0.295** (higher): exactly the intended trade.
 
 <a id="why-linear-models-overfit"></a>
 
@@ -3110,9 +3172,9 @@ enet.alpha_
 
 > **Watch out:** The notebook notes that an `l1_ratio` below about 0.05 can cause numerical problems in scikit-learn.
 
-Wine data (fixed notebook): ElasticNetCV with `l1_ratio=0.5` picks α ≈ 0.013, test R² ≈ 0.286, keeping 22 of 90 features. scikit-learn advises using `Ridge` directly rather than `l1_ratio=0`.
+Wine data: ElasticNetCV with `l1_ratio=0.5` picks α ≈ 0.013, test R² ≈ 0.286, keeping 22 of 90 features. scikit-learn advises using `Ridge` directly rather than `l1_ratio=0`.
 
-> **Watch out:** The notebook's ElasticNet bonus runs **after** `X_train`/`y_train` have been overwritten by the `make_classification` example, so it fits unscaled data with a 0/1 target. Fit it on the wine `Z_train` first (or rename the classification variables).
+> **Watch out:** Reusing names like `X_train` for a second dataset in the same notebook makes it easy to fit a model to the wrong data (here, unscaled data with a 0/1 target). Give each dataset its own variable names, and fit ElasticNet on the scaled wine `Z_train`.
 
 <a id="alpha-regularization-strength"></a>
 
@@ -3124,7 +3186,7 @@ The tuning parameter that sets how strong the penalty is. **α = 0**: plain OLS.
 
 > **Watch out:** This α has nothing to do with the significance level α from hypothesis testing, or the learning rate α in gradient descent.
 
-> **Watch out:** Ridge and lasso alphas aren't on the same scale in scikit-learn. Ridge uses the plain sum of squared errors plus α‖β‖²; lasso uses (1/2n) × the sum plus α‖β‖₁. That's why the notebook searches ridge alphas of 1–100,000 but lasso alphas of 0.001–1.
+> **Watch out:** Ridge and lasso alphas aren't on the same scale in scikit-learn. Ridge uses the plain sum of squared errors plus α‖β‖²; lasso uses (1/2n) × the sum plus α‖β‖₁. That's why sensible search ranges differ: on the wine data, ridge alphas of 1–100,000 but lasso alphas of 0.001–1.
 
 <a id="ridge-and-lasso-trace-plot"></a>
 
@@ -3147,7 +3209,7 @@ plt.xscale("log")
 
 _Concept, scikit-learn_
 
-Penalties are based on coefficient size, and coefficient size depends on a feature's units. Without scaling, features are penalized for their scale rather than their importance. Always standardize first (fit on training data). The notebook relabels scaled data `Z`.
+Penalties are based on coefficient size, and coefficient size depends on a feature's units. Without scaling, features are penalized for their scale rather than their importance. Always standardize first (fit on training data). Scaled data is often named `Z`.
 
 ```python
 sc = StandardScaler()
@@ -3155,7 +3217,7 @@ Z_train = sc.fit_transform(X_train)
 Z_test = sc.transform(X_test)
 ```
 
-> **Watch out:** Standardizing and regularizing are different things; you need both. A slide says standardizing "prevents penalizing the intercept": it doesn't, because scikit-learn's ridge and lasso **never** penalize the intercept anyway. You standardize so every coefficient is penalized fairly, regardless of its feature's units.
+> **Watch out:** Standardizing and regularizing are different things; you need both. Standardizing isn't about the intercept (scikit-learn's ridge and lasso **never** penalize it); you standardize so every coefficient is penalized fairly, regardless of its feature's units.
 
 <a id="ridgecv-and-lassocv"></a>
 
@@ -3177,9 +3239,9 @@ lasso_cv.fit(Z_train, y_train)
 lasso_cv.alpha_
 ```
 
-> **Watch out:** The course notebook writes `ridge_cv = ridge_model.fit(Z_train, y_train)`, which refits the earlier `Ridge(alpha=10)` and throws the cross-validation away. Call `.fit()` on the `RidgeCV` object.
+> **Watch out:** An easy slip is `ridge_cv = ridge_model.fit(Z_train, y_train)`: that refits an earlier `Ridge(alpha=10)` and throws the cross-validation away. Call `.fit()` on the `RidgeCV` object itself, then check `ridge_cv.alpha_`.
 
-Fixed, the wine RidgeCV picks α ≈ **104.8** (test R² 0.295); with the bug the notebook reports α = 10 and test R² 0.244. LassoCV picks α ≈ 0.0076. Compare `ridge_cv.coef_` (all small, none zero) with `lasso_cv.coef_` (mostly exact zeros): that's the key visual moment.
+On the wine data, RidgeCV picks α ≈ **104.8** (test R² 0.295, against 0.244 for an untuned α = 10). LassoCV picks α ≈ 0.0076. Compare `ridge_cv.coef_` (all small, none zero) with `lasso_cv.coef_` (mostly exact zeros): that's the key visual moment.
 
 <a id="np-logspace"></a>
 
@@ -3266,7 +3328,7 @@ for a in [0, .001, .01, .25, .5, 1, 10]:
 
 Review lab results: α = 0 → SSE 0.276; α = 0.25 → 0.460; α = 1 → 0.642; α = 10 → 0.963, with the mean |coefficient| falling from 0.099 to 0.010. Higher training error isn't automatically worse: regularization's benefit shows up on **new** data, which the lab doesn't test.
 
-> **Watch out:** Unlike scikit-learn, statsmodels' `fit_regularized` also penalizes the constant, and the lab's polynomial features are unscaled (X⁵ reaches 3.2 million), so the penalty hits each term very unevenly.
+> **Watch out:** Unlike scikit-learn, statsmodels' `fit_regularized` also penalizes the constant, and unscaled polynomial features (X⁵ reaches 3.2 million in the review lab) are penalized very unevenly, so scale first.
 
 <a id="make-classification"></a>
 
@@ -3282,7 +3344,7 @@ X, y = make_classification(n_samples=1000, n_features=200,
                            n_informative=15, random_state=123)
 ```
 
-> **Watch out:** The regularization notebook splits with `test_size=0.7`, training on only 30% of the data (1,949 rows for 90 features). That makes overfitting more likely, which may be the point, but it isn't normal practice.
+> **Watch out:** `test_size=0.7` trains on only 30% of the data (1,949 rows for 90 features), which makes overfitting more likely. That's useful for demonstrating regularization, but in your own work hold out a smaller share.
 
 ---
 
@@ -3291,6 +3353,8 @@ X, y = make_classification(n_samples=1000, n_features=200,
 ## 21. Hyperparameter tuning: grid search and pipelines
 
 _Automating the search for the best model settings, and wrapping preprocessing and modeling into one object so tuning and evaluation are leak-free. Examples use the abalone data (rings predicted with kNN), South African heart disease data, and NBA game data._
+
+**In your capstone:** Wrap every preprocessing step and model in a pipeline and tune it with GridSearchCV on the training data: the backbone of a leak-free capstone.
 
 <a id="hyperparameter"></a>
 
@@ -3610,6 +3674,8 @@ test = bball[bball["Season"] == 2016]
 
 _Understanding how a model makes its decisions, why that matters (trust, fairness, regulation), which models are white or black boxes, and four tools for explaining them: tree diagrams, feature importance, partial dependence plots and SHAP. Examples use the iris data._
 
+**In your capstone:** Stakeholders will ask why. Plan global and local explanations (permutation importance, partial dependence, SHAP) as part of your results.
+
 <a id="model-explainability"></a>
 
 ### Model explainability
@@ -3650,7 +3716,7 @@ Five reasons from the slides: **trust** (people use models they understand); **f
 
 How much explanation you need depends on the stakes, not the technique. A medical scan or a loan decision: high stakes, regulated, explainability essential (a common compromise in medical imaging is a model that highlights the regions it relied on, with a human deciding). Product recommendations: low stakes per decision, so performance usually matters more. Image recognition is low-stakes for tagging holiday photos but not for facial recognition in policing.
 
-> **Watch out:** The slides say GDPR gives a "right to an explanation". That's commonly cited but legally debated. GDPR gives people rights around solely automated decisions with significant effects (Article 22) and to "meaningful information about the logic involved" (Articles 13–15). Safer wording: **GDPR requires transparency about automated decisions.**
+> **Watch out:** GDPR is often described as giving a "right to an explanation", but that's legally debated. GDPR gives people rights around solely automated decisions with significant effects (Article 22) and to "meaningful information about the logic involved" (Articles 13–15). Safer wording: **GDPR requires transparency about automated decisions.**
 
 See also: [Proxy variable](#proxy-variable)
 
@@ -3672,7 +3738,7 @@ A model whose decision process is easy to see: **linear regression** (a simple e
 
 The King's College COVID symptom model (Menni et al., _Nature Medicine_, 2020) is a **logistic regression**: one equation combining a handful of symptoms (loss of smell and taste was the strongest) with age and sex. The lesson: simple, interpretable models can be good enough, and their transparency is a huge advantage in high-stakes settings, so always try a simple model first.
 
-> **Watch out:** "White box" depends on use, not just model type: a linear model with 90 polynomial features, or a very deep tree, is hard to explain. And logistic regression outputs the **log-odds**, not a "log-odds ratio" as one slide says.
+> **Watch out:** "White box" depends on use, not just model type: a linear model with 90 polynomial features, or a very deep tree, is hard to explain. And logistic regression outputs the **log-odds** of the outcome; its exponentiated coefficients are odds ratios.
 
 <a id="black-box-model"></a>
 
@@ -3787,7 +3853,7 @@ PartialDependenceDisplay.from_estimator(clf, X_train, features=[0, 1, 2, 3],
                                         target=clf.classes_[0])
 ```
 
-Intuition: "if everyone in the dataset had a temperature of 25 °C, what would the model predict on average?" Repeat for 10, 15, 20 °C… and join the dots. For classifiers the y-axis is usually the average predicted probability of a chosen class (`target=`, needed for multiclass). The PDP's shape partly reflects the model type: **trees always give step-shaped PDPs** (predictions only change at split thresholds; the slide's "STEEP-LIKE" means step-like) and linear models always give straight lines.
+Intuition: "if everyone in the dataset had a temperature of 25 °C, what would the model predict on average?" Repeat for 10, 15, 20 °C… and join the dots. For classifiers the y-axis is usually the average predicted probability of a chosen class (`target=`, needed for multiclass). The PDP's shape partly reflects the model type: **trees always give step-shaped PDPs** (predictions only change at split thresholds) and linear models always give straight lines.
 
 > **Watch out:** PDPs average over everything else, so they can hide interactions and create unrealistic feature combinations when features are correlated. They describe what the **model** learned, not causes: a "road accidents" effect on house prices may really be about busy city-centre roads.
 
@@ -3807,7 +3873,7 @@ If the ICE lines fan out or cross, the feature's effect depends on other feature
 
 _Concept, shap_
 
-Explains individual predictions by showing how much **each feature pushed this prediction up or down** from the average prediction. **Additive** means: prediction = base value (the average prediction) + the sum of every feature's SHAP value. Averaging absolute SHAP values over many rows gives a global importance ranking. Based on Shapley values from game theory and named after Lloyd Shapley (the slides spell it "Shapely"). Works with any model, with fast exact versions for trees.
+Explains individual predictions by showing how much **each feature pushed this prediction up or down** from the average prediction. **Additive** means: prediction = base value (the average prediction) + the sum of every feature's SHAP value. Averaging absolute SHAP values over many rows gives a global importance ranking. Based on Shapley values from game theory and named after Lloyd Shapley (spelled Shapley, not "Shapely"). Works with any model, with fast exact versions for trees.
 
 ```python
 import shap   # pip install shap
@@ -3851,6 +3917,8 @@ _shap_
 ## 23. Framing a data science problem and ROI
 
 _Before building a model, make sure it's the right model for the right problem, and that it's worth building. The five key considerations for framing a project (business problem, stakeholders, success metrics and hypotheses, feasibility and ROI, and ethical, legal and strategic implications), applied to the course's running case study: predictive maintenance for a wind farm. "Framing decides whether the model matters; modelling decides whether it works."_
+
+**In your capstone:** Start your capstone here: a specific, measurable problem statement, agreed success metrics, a baseline and the expected value of the work.
 
 <a id="problem-framing"></a>
 
@@ -3997,7 +4065,7 @@ fp = fpr * (1 - base_rate) * n               # 49.5 false alarms
 tp / (tp + fp)                               # precision ≈ 0.14
 ```
 
-See also: [Precision](#precision), [False positive rate (FPR)](#false-positive-rate-fpr)
+See also: [Precision](#precision), [False positive rate (FPR)](#false-positive-rate-fpr), [Base rate fallacy](#base-rate-fallacy)
 
 <a id="framing-the-problem-type-early"></a>
 
@@ -4007,7 +4075,7 @@ _Concept_
 
 Deciding early whether the task is **classification** (categories), **regression** (continuous values) or **clustering** (grouping without labels) clarifies the goal, decides which algorithms are possible, shapes data preparation (imbalanced classes for classification; outliers and linearity for regression; scaling for clustering), and sets stakeholder expectations. "We'll flag turbines likely to fail in the next 72 hours" is a very different promise from "we'll tell you how many days each turbine has left", and neither tells engineers **what** is wrong unless that's agreed up front.
 
-The wind farm could be framed as **classification** (failure within 72 hours: yes/no), usually the simpler, more actionable start, or as predicting **time to next failure**. The slides call the latter time-series forecasting; more precisely it's a regression (or survival-analysis) problem known as **remaining useful life (RUL)** prediction, with time-series methods often used to build its features.
+The wind farm could be framed as **classification** (failure within 72 hours: yes/no), usually the simpler, more actionable start, or as predicting **time to next failure**. The latter is often described as time-series forecasting; more precisely it's a regression (or survival-analysis) problem known as **remaining useful life (RUL)** prediction, with time-series methods often used to build its features.
 
 See also: [Regression vs classification tasks](#regression-vs-classification-tasks)
 
@@ -4042,7 +4110,7 @@ ROI is the language of business stakeholders: it aligns the project with busines
 
 **Benefits** include revenue uplift (personalized marketing), cost savings (automation) and risk reduction (fraud detection). **Costs** include development (data acquisition, model building), deployment and infrastructure (cloud, APIs), and maintenance and monitoring.
 
-> **Watch out:** The notebook's names are confusing: "maintenance costs" ($10,000) is the cost of maintaining the **model**, while "current operations" ($418,500) is **turbine** maintenance. Its table also labels the one-time development cost "USD/year".
+> **Watch out:** Keep cost labels unambiguous. Here "maintenance costs" ($10,000) means maintaining the **model**, while "current operations" ($418,500) is **turbine** maintenance, and the $45,000 development cost is one-time, not per year.
 
 See also: [Risk-adjusted ROI](#risk-adjusted-roi)
 
@@ -4166,11 +4234,294 @@ A good practice exercise: rewrite "use AI to reduce customer complaints" as a sp
 
 ---
 
-<a id="s24-time-series-data-handling-and-stationarity"></a>
+<a id="s24-leveraging-genai-as-a-data-scientist"></a>
 
-## 24. Time series: data handling and stationarity
+## 24. Leveraging GenAI as a data scientist
+
+_Using generative AI tools well, not building them: how large language models work at a high level, which data science tasks suit them, coding and data parsing with chat tools and APIs, and above all how to check their output. Specific facts in this area (model names, sizes, context lengths, which tool is "best") date within months; the principles (be specific, never trust unchecked output, protect sensitive data) don't._
+
+**In your capstone:** Use GenAI to speed up code and text processing, but test everything it produces, never paste confidential data, and state how you used it.
+
+<a id="generative-ai-genai"></a>
+
+### Generative AI (GenAI)
+
+_Concept_
+
+AI systems that **generate new content** (text, code, images, audio) rather than only classifying or predicting a number. **Large language models (LLMs)** are the text-generating kind, such as GPT, Gemini and Claude. For a data scientist, GenAI is a productivity tool whose output you verify, not a replacement for understanding: "great as a helper, but not as a substitute".
+
+See also: [Large language model (LLM)](#large-language-model-llm)
+
+<a id="large-language-model-llm"></a>
+
+### Large language model (LLM)
+
+_Concept_
+
+A neural network trained on huge amounts of text to predict the **next token**. It links to models you already know: like a classifier choosing the most likely class, an LLM predicts a probability for every possible next token. The deck's five steps: (1) **input**, the prompt; (2) **tokenization**, breaking it into tokens; (3) **encoding**, turning each token into numbers (an embedding); (4) **processing**, analysing relationships between tokens; (5) **output**, generating new text one token at a time, each new token fed back in as input for the next.
+
+**Parameters** are the weights a network learns, like regression coefficients but billions of them. GPT-3 has 175 billion and was trained on about 570 GB of filtered text (selected from roughly 45 TB of raw text, about 300 billion tokens).
+
+> **Watch out:** Size figures for the newest models are usually unofficial. OpenAI hasn't disclosed GPT-4's size, data or compute ("~1.76 trillion parameters" is an unconfirmed outside estimate), and Google hasn't disclosed Gemini's sizes. Treat model-size claims with caution and check the source.
+
+See also: [Token](#token), [Transformer and attention](#transformer-and-attention)
+
+<a id="token"></a>
+
+### Token
+
+_Concept_
+
+The unit an LLM reads and writes. Tokens are often **pieces of words** ("unbelievable" → "un", "believ", "able"), not always whole words; in English one token is roughly **three-quarters of a word** on average. Context windows, prices and rate limits are all measured in tokens.
+
+<a id="embedding"></a>
+
+### Embedding
+
+_Concept_
+
+The "encoding" step: each token becomes a vector of numbers that captures its meaning, learned from how it's used. Words used in similar contexts end up with similar vectors. This is the **distributional hypothesis**: "You shall know a word by the company it keeps" (linguist J. R. Firth, 1957). Embeddings also power similarity search: finding the nearest vectors is the nearest-neighbour idea from kNN.
+
+See also: [kNN strengths and weaknesses](#knn-strengths-and-weaknesses)
+
+<a id="transformer-and-attention"></a>
+
+### Transformer and attention
+
+_Concept_
+
+The architecture introduced in Google's 2017 paper "Attention Is All You Need", which set the stage for generative AI. **Attention** lets the model weigh how relevant every other word is when interpreting each word, for example working out what "it" refers to in "the cake was in the oven; it was delicious". Transformers process whole sequences in **parallel** (unlike earlier recurrent networks), which made training on huge datasets practical. GPT = **G**enerative **P**re-trained **T**ransformer.
+
+<a id="temperature-and-sampling"></a>
+
+### Temperature and sampling
+
+_Concept_
+
+Always picking the single most likely next token tends to produce repetitive, dull text, so models **sample** from the probabilities instead; lower-probability choices sometimes give a better output. **Temperature** controls how adventurous the sampling is: low = predictable and consistent, high = creative but more error-prone. **Beam search**, an alternative, keeps several candidate sequences ("beams") and picks the best overall; it's common in translation, while chatbots more often sample.
+
+For data work, use a **low temperature** when you want consistent, repeatable answers (classifying text, extracting fields). Because of sampling, the same input can get different answers on different runs, so check consistency.
+
+<a id="how-llms-are-trained"></a>
+
+### How LLMs are trained
+
+_Concept_
+
+Three stages. **Pre-training**: exposure to vast amounts of text, learning to predict the next word; usually called **self-supervised**, because the "labels" are just the next words. **Fine-tuning** (instruction tuning): a smaller, task-specific dataset of example prompts and good responses, teaching the model to follow instructions and hold conversations. **RLHF** (reinforcement learning from human feedback): human raters compare pairs of responses, a **reward model** learns their preferences, and the LLM is then trained to produce responses the reward model scores highly. Newer approaches (e.g. DPO, AI-feedback methods) are also used. Without tuning, a pre-trained model just continues text; fine-tuning makes it conversational; human feedback aligns its responses with broad human values.
+
+> **Watch out:** In RLHF, feedback comes mainly from trained raters and a learned reward model, not from live conversations with users.
+
+See also: [Reinforcement learning](#reinforcement-learning)
+
+<a id="context-window"></a>
+
+### Context window
+
+_Concept_
+
+Everything the model can "see" at once, measured in tokens: your prompt, any pasted documents or data, and the conversation so far. When a conversation exceeds it, the earliest content drops out, and models may use information in the middle of a long document less reliably. For large datasets, send the data in **batches through code** rather than pasting everything into one chat.
+
+> **Watch out:** Context lengths change quickly: GPT-4 launched in ChatGPT with 8,192 tokens in March 2023, and many current models handle hundreds of thousands of tokens, some over a million. Check the documentation for the model you're using.
+
+<a id="multimodal-llm"></a>
+
+### Multimodal LLM
+
+_Concept_
+
+A model that processes two or more modalities (text, images, audio, video) and the relationships between them, for example interpreting an X-ray together with the doctor's notes. Most major assistants are now multimodal: they can read charts, screenshots and PDFs. For data scientists that means asking about a chart image or turning a photographed table into data, always checking the result.
+
+<a id="hallucination"></a>
+
+### Hallucination
+
+_Concept_
+
+Fluent, confident, **invented** content. The classic case: ChatGPT claimed a law professor was at the centre of a harassment scandal, citing a newspaper article that didn't exist. Never trust citations, numbers or facts from an LLM without checking them against a real source.
+
+<a id="ethical-concerns-with-genai"></a>
+
+### Ethical concerns with GenAI
+
+_Concept_
+
+Four from the deck: **bias and fairness** (models reflect biases in their training data); **transparency and accountability** (it's often unclear what a model was trained on, why it gave an answer, and who's responsible for errors; undisclosed training data also raises copyright questions); **data privacy and security** (data sent to an AI service may be stored or used depending on its terms; one 2023 analysis found about 11% of what employees pasted into ChatGPT was confidential); and **social and environmental impact** (jobs and skills, and the large energy and water use of training and running models).
+
+See also: [Ethical, legal and strategic implications](#ethical-legal-and-strategic-implications), [Data privacy with GenAI tools](#data-privacy-with-genai-tools)
+
+<a id="data-privacy-with-genai-tools"></a>
+
+### Data privacy with GenAI tools
+
+_Concept, Python_
+
+Never paste confidential, personal or client data into tools your organization hasn't approved; check your AI policy. And never put **API keys** directly in notebook code you might share: read them from an environment variable or a secrets store.
+
+```python
+import os
+api_key = os.environ["GEMINI_API_KEY"]            # set outside the notebook
+
+from google.colab import userdata                 # in Google Colab: the Secrets panel
+api_key = userdata.get("GEMINI_API_KEY")
+```
+
+See also: [Data minimization and anonymization](#data-minimization-and-anonymization)
+
+<a id="where-genai-helps-in-the-data-science-lifecycle"></a>
+
+### Where GenAI helps in the data science lifecycle
+
+_Concept_
+
+Good candidates are tasks that can be distilled into a precise prompt, need less expert judgement, and give **checkable** results: boilerplate and repetitive code, documentation, regular expressions, explaining errors or unfamiliar APIs, first-draft visualizations, and parsing messy text (free text, addresses, scraped data). Poor candidates: framing the problem, choosing metrics or features, judging whether results make business sense, ethical decisions, and anything needing confidential data in an unapproved tool.
+
+The course's judgement calls: choosing a model's independent variables, **not suitable** (needs domain expertise; risk of features that correlate but fail a sense check); documenting a function, **good** (easy to check in code review); understanding an unfamiliar API, **good** (quick to test); standardizing messy addresses, **good with checking** (watch for invented details); sentiment analysis of reviews, **reasonable**, if validated against a hand-labelled sample.
+
+**Rule of thumb: use GenAI where you can verify the answer more easily than you could produce it yourself.**
+
+<a id="generation-mode-vs-analysis-mode"></a>
+
+### Generation mode vs analysis mode
+
+_Concept_
+
+Two ways a data scientist uses GenAI. In **generation mode** the model produces content, typically code, from a prompt; you check it by running and testing it. In **analysis mode** you give the model content (text data) to clean, classify, extract from or summarize; you check it by spot-checking against the source and measuring accuracy on a labelled sample.
+
+See also: [Testing AI-generated code](#testing-ai-generated-code), [Validating GenAI classifications](#validating-genai-classifications)
+
+<a id="chat-interface-vs-api"></a>
+
+### Chat interface vs API
+
+_Concept_
+
+Chat interfaces are fine for quick, one-off tasks. For anything large-scale or repeatable, call the model through its **API** (application programming interface) from your own Python code: you can process thousands of rows in a loop, control settings such as temperature, ask for structured output and log the results. It usually needs an API key and may cost money per token.
+
+See also: [Calling an LLM from Python](#calling-an-llm-from-python)
+
+<a id="calling-an-llm-from-python"></a>
+
+### Calling an LLM from Python
+
+_Python_
+
+The typical pattern: install the provider's SDK, read the API key securely, create a client, then loop over rows of data, sending each in a prompt with fixed instructions, a low temperature and a constrained output format, and collect the responses. With Google's current Gemini SDK (`pip install google-genai`):
+
+```python
+from google import genai
+from google.genai import types
+
+client = genai.Client(api_key=api_key)
+config = types.GenerateContentConfig(temperature=0, system_instruction=(
+    "Classify the news article into exactly one of: politics, business, sport, health, other. "
+    "Reply with the label only."))
+
+labels = []
+for text in df["article"].head(20):                 # start small, then scale up
+    response = client.models.generate_content(model="gemini-2.5-flash", contents=text, config=config)
+    labels.append(response.text.strip().lower())
+df.loc[df.index[:20], "ai_label"] = labels
+```
+
+> **Watch out:** SDKs and model names change often: the older `google-generativeai` package has been replaced by `google-genai`, and model names are retired regularly. Check the provider's current documentation, and test the install cell before class.
+
+<a id="prompting-for-code"></a>
+
+### Prompting for code
+
+_Concept_
+
+Say what the code should do, the inputs and outputs, the libraries to use and any constraints; paste the **full** error message when debugging; ask the model to explain its code; and iterate rather than expecting perfection first time. Useful coding tasks: write code from scratch, write documentation, explain undocumented code, explain technical documentation, review code and suggest improvements, and debug. A good reliability test is a web scraper (e.g. "print Wikipedia's featured-article box"): generated code often guesses HTML element IDs and breaks when the page layout has changed.
+
+<a id="genai-tools-for-data-scientists"></a>
+
+### GenAI tools for data scientists
+
+_Concept_
+
+As of August 2025: **GPT** (OpenAI; chat and API); **Gemini** (Google; integrates with Google Colab); **Claude** (Anthropic; chat and API); **Cursor** (an AI-first code editor built on VS Code, whose inline edit can see your project files); **GitHub Copilot** (coding assistant inside VS Code, JetBrains and other editors); **Perplexity** (AI search); and **NotebookLM** (turns uploaded documents into summaries and podcast-style audio overviews). The "best" tool changes every few months, so choose based on your organization's approved tools, data-privacy terms, cost, and how well it does on **your** tasks: run the same prompt in several and compare whether the code runs, does what was asked, is concise, and handles errors.
+
+<a id="parsing-unstructured-data-with-genai"></a>
+
+### Parsing unstructured data with GenAI
+
+_Concept_
+
+Analysis-mode tasks: standardizing formats, extracting entities (names, places, dates), classifying text into fixed categories, and summarizing. Ask for **structured** output (a fixed set of labels, or JSON) so results can be loaded into pandas and checked. Messy numeric data needs special care, because AI tools and AI-written code often get some cases **silently** wrong: currency symbols and codes, thousands separators vs decimal commas ("4,50" in European formats), units ("per lb" vs "per kg"), abbreviations ("2.5k") and missing values.
+
+> **Watch out:** Learn EDA without AI first; AI can then speed you up, but it isn't a replacement for learning the basics.
+
+<a id="modelling-with-genai-what-to-check"></a>
+
+### Modelling with GenAI: what to check
+
+_Concept_
+
+AI-generated modelling code often skips a step. Check for: a train-test split **before** any fitting; scaling and other preprocessing fitted on training data only (ideally in a pipeline); no leakage (the target, or features derived from it); sensible handling of categorical and missing values; and metrics computed on the test set and compared with a baseline.
+
+See also: [Data leakage (in model evaluation)](#data-leakage-in-model-evaluation), [Pipeline + GridSearchCV](#pipeline-gridsearchcv)
+
+<a id="how-genai-output-goes-wrong"></a>
+
+### How GenAI output goes wrong
+
+_Concept_
+
+When writing code, GenAI can produce code that (1) doesn't run; (2) **runs and looks correct but does a different task**; or (3) works but is longer and more verbose than necessary. Number 2 is the most dangerous: no error message, just wrong results. When analysing data, it can draw the wrong conclusions, misclassify records, clean data inconsistently, and give different answers for the same row on different runs.
+
+<a id="testing-ai-generated-code"></a>
+
+### Testing AI-generated code
+
+_Python_
+
+Check generated code against inputs where **you** know the right answer, including awkward edge cases. A typical first attempt at "convert price strings to numbers":
+
+```python
+def clean_price(text):                       # what a GenAI tool might write
+    return float(text.replace("$", "").replace(",", "").strip())
+
+tests = {"$1,234.50": 1234.5, "  99 ": 99.0, "USD 3.20": 3.2, "2.5k": 2500.0, "€4,50": 4.5}
+for raw, expected in tests.items():
+    try:
+        result = clean_price(raw)
+        status = "OK" if abs(result - expected) < 1e-9 else f"WRONG (got {result})"
+    except ValueError:
+        status = "ERROR"
+    print(f"{raw!r:13} -> {status}")
+# '$1,234.50' OK | '  99 ' OK | 'USD 3.20' ERROR | '2.5k' ERROR | '€4,50' ERROR
+```
+
+Two inputs work and three fail. The worst case is silent: if the function also stripped the € sign, "€4,50" would become 450, wrong by a factor of 100 with no error. Tests with known answers catch this; eyeballing a few rows might not. Other checks: a line-by-line code review, reading the documentation it wrote against what the code actually does, and **rubber duck debugging** (explaining the code out loud, line by line, until gaps in understanding become obvious).
+
+<a id="validating-genai-classifications"></a>
+
+### Validating GenAI classifications
+
+_scikit-learn_
+
+When GenAI labels data, treat it like any classifier: hand-label a random sample (say 50–100 rows), compare with the AI's labels, and build a confusion matrix. Report precision and recall per class, not just accuracy, exactly as in the classification metrics section.
+
+```python
+from sklearn.metrics import confusion_matrix, classification_report
+
+sample = df.sample(100, random_state=42)          # hand-label these in a "human_label" column
+print(confusion_matrix(sample["human_label"], sample["ai_label"]))
+print(classification_report(sample["human_label"], sample["ai_label"]))
+```
+
+See also: [Confusion matrix](#confusion-matrix), [Macro, weighted and micro averages](#macro-weighted-and-micro-averages)
+
+---
+
+<a id="s25-time-series-data-handling-and-stationarity"></a>
+
+## 25. Time series: data handling and stationarity
 
 _Data where order matters. Working with dates in pandas (indexing, resampling, rolling windows, lags and differences), stationarity, and reading autocorrelation plots. Examples use Apple stock prices (`AAPL.csv`), Australian population, New Haven temperatures and UK lung disease deaths._
+
+**In your capstone:** If your data has a time order, plot it, check stationarity and split chronologically before anything else.
 
 <a id="time-series"></a>
 
@@ -4180,7 +4531,38 @@ _Concept_
 
 A series of observations taken at **equally spaced intervals** (days, months, quarters, years). The data are **dependent**: each row is related to the rows before it, so we care about row-to-row relationships. That breaks the independence assumption behind OLS and ordinary train-test splitting. Forecasting works best when the past genuinely predicts the future: weather, sales and deaths, yes; the stock market, no.
 
+Most classical methods assume **equally spaced** observations; irregular data (transactions at random times) is usually resampled onto a regular grid first. A league table at one moment is **cross-sectional** data; a team's points recorded every week would be a time series. Because the order carries information, you can't shuffle the rows, and there's no random train-test split.
+
+Notation: capital Xₜ is the random process; lower-case xₜ the values actually observed; xₜ₋ₕ is the value h periods ago, where **h is the lag**.
+
+See also: [Johnson & Johnson earnings (running example)](#johnson-and-johnson-earnings-running-example)
+
 See also: [Statistical independence](#statistical-independence)
+
+<a id="johnson-and-johnson-earnings-running-example"></a>
+
+### Johnson & Johnson earnings (running example)
+
+_statsmodels, pandas_
+
+The quarterly earnings per share of Johnson & Johnson, 1960–1980, is the running example in the Time Series I and II notes. It's non-stationary in three ways at once: an upward **trend**, quarterly **seasonality**, and swings that **grow over time** (increasing variance). It's available through statsmodels (an internet connection is needed to download it).
+
+```python
+import statsmodels.api as sm
+
+jj = sm.datasets.get_rdataset("JohnsonJohnson").data
+jj.index = pd.period_range("1960Q1", periods=len(jj), freq="Q").to_timestamp()
+x = jj["value"]                                    # quarterly earnings per share
+x.groupby(x.index.year).mean().head(3)             # yearly averages: 0.6575, 0.6925, 0.7525
+```
+
+**Offline alternative:** the course `data/` folder has the same series as `jj-sales.csv`, alongside `lung-deaths.csv` (monthly UK lung-disease deaths, 1974–1979) and `bj-sales.csv` (the Box–Jenkins sales series). These are the files `graph-gen-solution.ipynb` uses to draw the slide figures.
+
+```python
+jj = pd.read_csv("../data/jj-sales.csv")
+jj["date"] = pd.to_datetime(jj["date"])
+jj = jj.set_index("date")
+```
 
 <a id="datetime-index"></a>
 
@@ -4227,7 +4609,9 @@ aapl.resample("ME").mean()      # monthly averages
 aapl.resample("QS").sum()       # quarterly totals, labelled by quarter start
 ```
 
-> **Watch out:** The notebook uses `"M"` and `"Q"`. pandas 2.2 deprecated those and pandas 3 rejects them; use `"ME"` and `"QE"`. Resampling to `"D"` also creates rows for weekends, filled with 0 when you `.sum()`.
+> **Watch out:** Frequency codes changed recently, so check the pandas documentation for your version: pandas 2.2 deprecated `"M"`, `"Q"` and `"Y"` and pandas 3 rejects them; use `"ME"`, `"QE"` and `"YE"`. Many tutorials still use the old codes. Resampling to `"D"` also creates rows for weekends, filled with 0 when you `.sum()`.
+
+`groupby(x.index.year)` is a version-proof alternative for yearly summaries.
 
 See also: [.resample() (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#resample)
 
@@ -4245,6 +4629,8 @@ aapl["Adj Close"].rolling(12).std()
 ```
 
 > **Watch out:** A rolling forecast uses "delayed" information, and choosing the wrong window makes it either too jumpy or too slow to react.
+
+To use a rolling mean as a **forecast**, shift it so each prediction only uses past values: `y.rolling(h).mean().shift(1)`. The window size is a bias–variance trade-off: a small window reacts quickly but is noisy; a large window is smooth but lags behind. A 4-quarter window also averages out yearly seasonality in quarterly data.
 
 <a id="macd-chart"></a>
 
@@ -4275,18 +4661,38 @@ aapl["open_lag1"] = aapl["Open"].shift()       # yesterday's open
 aapl["Open"].shift(7)                          # one week ago
 ```
 
+The first row of a shift (or diff) is always NaN: you lose one row per lag, so decide whether to drop it.
+
+```python
+pd.DataFrame({"x": x, "shift_1": x.shift(1), "diff_1": x.diff()}).head(3)
+# x = 0.71, 0.63, 0.85; shift_1 = NaN, 0.71, 0.63; diff_1 = NaN, -0.08, 0.22
+```
+
 <a id="differencing-and-diff"></a>
 
 ### Differencing and .diff()
 
 _pandas_
 
-Today's value minus yesterday's: ∇Xₜ = Xₜ − Xₜ₋₁ = Xₜ − BXₜ. Differencing removes trend and is the main way to make a series stationary. Differencing twice is `.diff().diff()`.
+Today's value minus yesterday's: ∇Xₜ = Xₜ − Xₜ₋₁ = (1 − B)Xₜ (∇ is "nabla", B the backshift). Differencing removes a steady trend: if sales rise by about 10 a month, the differences hover around 10 with no trend. It's the main way to make a series stationary.
 
 ```python
 aapl["open_diff"] = aapl["Open"].diff()        # same as Open - Open.shift()
-air.diff().diff()                              # second difference
+air.diff().diff()                              # second difference: the change in the change
+x.diff(12)                                     # seasonal difference: this month minus 12 months ago
 ```
+
+> **Watch out:** Differencing twice, `x.diff().diff()` = Xₜ − 2Xₜ₋₁ + Xₜ₋₂ (like acceleration vs speed), is **not** the same as `x.diff(2)` = Xₜ − Xₜ₋₂, a lag-2 difference.
+
+See also: [Seasonal differencing](#seasonal-differencing)
+
+<a id="seasonal-differencing"></a>
+
+### Seasonal differencing
+
+_pandas_
+
+Subtracting the value from the same point in the previous cycle: `x.diff(12)` for monthly data, `x.diff(4)` for quarterly. It removes a repeating seasonal pattern the way ordinary differencing removes a trend, and the two are often combined (`x.diff().diff(4)`). Seasonal ARIMA models (SARIMA) build it in.
 
 <a id="stationarity"></a>
 
@@ -4294,7 +4700,11 @@ air.diff().diff()                              # second difference
 
 _Concept_
 
-A series is **stationary** if its statistical properties (mean, variance, autocorrelation) don't change over time: no trend, constant spread. Most classical forecasting models (AR, MA, ARMA) only work on stationary data. Australia's population is clearly not stationary (strong upward trend) but its first difference roughly is; New Haven's annual temperature is "trendless enough" already.
+A series is **(weakly) stationary** if three things don't change over time: (1) its **mean** (no trend); (2) its **variance** (no growing or shrinking swings); and (3) its **autocorrelation**, which depends only on how far apart two values are, not on when you look. Most classical forecasting models (AR, MA, ARMA) assume it, because they learn patterns from the past and need those patterns to persist.
+
+Australia's population is clearly not stationary (strong upward trend) but its first difference roughly is; New Haven's annual temperature is "trendless enough" already. Johnson & Johnson earnings need a **log transform first**: differencing alone leaves it non-stationary (ADF p-value 0.909), while log-then-difference makes it stationary (p ≈ 0.000). Logs turn swings that grow with the level into constant-sized ones, and differences of logs are approximately percentage changes.
+
+> **Watch out:** It's easy to treat a trendless seasonal series as stationary. Strictly, seasonality breaks stationarity: with a regular seasonal pattern (like the UK lung-disease deaths) the expected value in January differs from July, so the mean depends on time. Such a series has no long-term **trend** but still needs seasonal differencing or a SARIMA model.
 
 See also: [Augmented Dickey–Fuller (ADF) test](#augmented-dickey-fuller-adf-test), [Differencing and .diff()](#differencing-and-diff)
 
@@ -4302,9 +4712,16 @@ See also: [Augmented Dickey–Fuller (ADF) test](#augmented-dickey-fuller-adf-te
 
 ### Autocorrelation
 
-_Concept_
+_Concept, pandas_
 
-The correlation of a series with **its own past values**. Autocorrelation at lag 1 compares each value with the previous one; at lag 12 (monthly data), with the same month last year. Strong autocorrelation is why time series data aren't independent.
+The correlation (−1 to 1) of a series with **a copy of itself shifted back h periods** ("auto" = self). Autocorrelation at lag 1 compares each value with the previous one; at lag 12 (monthly data), with the same month last year. Strong autocorrelation is why time series data aren't independent, and high autocorrelation at lag h means the value h periods ago helps predict today: the basis of autoregressive models. Look for the lag that matches the cycle: 7 for weekly patterns in daily data, 12 for yearly patterns in monthly data, 4 for quarterly.
+
+```python
+x.autocorr(lag=4)                                   # simplest
+h = 4; np.corrcoef(x[h:], x.shift(h)[h:])[0, 1]      # same thing by hand
+```
+
+> **Watch out:** A common hand-written version, `np.corrcoef(x[1:], x.shift(h)[1:])`, only works for h = 1; for larger lags it returns NaN, because shifting by h creates h missing values but `[1:]` drops only one. statsmodels' `acf()` uses a slightly different formula (the overall mean and variance), so its values can differ, especially on trending data (raw J&J at lag 4: 0.995 vs 0.824). On non-stationary data autocorrelations are dominated by the trend, so make the series stationary first.
 
 <a id="acf-plot"></a>
 
@@ -4317,6 +4734,13 @@ The **autocorrelation function** plot shows the autocorrelation at every lag, wi
 ```python
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 plot_acf(lung)
+```
+
+Lag 0 is always 1 (a series correlates perfectly with itself). A **wave** in the ACF reflects a cycle: values correlate with the same month in other years (lags 12, 24) and anti-correlate six months apart. A **slow, steady decline** is the signature of non-stationarity. After log-differencing the J&J series, the seasonal structure appears as spikes at lags 4, 8 and 12 (lag-4 autocorrelation 0.85).
+
+```python
+stationary = np.log(x).diff().dropna()
+plot_acf(stationary, lags=16); plot_pacf(stationary, lags=16)
 ```
 
 <a id="pacf-plot"></a>
@@ -4333,6 +4757,10 @@ from statsmodels.tsa.stattools import acf, pacf
 acf(lung.deaths, nlags=24)
 ```
 
+It shows the **direct** link between xₜ and xₜ₋ₕ rather than links passed along through intermediate days. With a pure 7-day pattern, the ACF shows echoes at every multiple of 7, while the PACF shows only the original lag-7 link. A slowly decaying ACF plus a PACF with one big spike at lag 1 is the classic picture of a trending, random-walk-like series: difference first.
+
+See also: [Reading ACF and PACF to choose p and q](#reading-acf-and-pacf-to-choose-p-and-q)
+
 <a id="seasonality"></a>
 
 ### Seasonality
@@ -4340,6 +4768,8 @@ acf(lung.deaths, nlags=24)
 _Concept_
 
 A pattern that repeats with a fixed, known **period** d: d = 12 for monthly data, d = 4 for quarterly, d = 7 for daily data with a weekly cycle. Mathematically sₜ = sₜ₊d: the December 2010 effect equals the December 2011 effect.
+
+Common periods: 7 (daily data, weekly cycle), 12 (monthly, yearly), 4 (quarterly, yearly), 24 (hourly, daily). A series can have several cycles at once, which makes it harder to model. ("Paid every two weeks" is fortnightly or biweekly.)
 
 <a id="trend"></a>
 
@@ -4357,13 +4787,19 @@ _Concept_
 
 A series of independent random values with mean zero and constant variance: no pattern left to model. The goal of time series modeling, as with OLS residuals, is to reduce what's left over to white noise.
 
+Checking residuals for white noise is the time series version of the LINE checks: plot them, look at their ACF (no significant bars = random), or run a Ljung–Box test.
+
+See also: [Ljung–Box test](#ljung-box-test)
+
 ---
 
-<a id="s25-time-series-forecasting-models"></a>
+<a id="s26-time-series-forecasting-models"></a>
 
-## 25. Time series: forecasting models
+## 26. Time series: forecasting models
 
 _From simple decomposition to ARIMA, then three extensions from Time Series III: GLS (adding x-variables), GARCH (modeling changing volatility) and VAR (forecasting several series together). Examples use Nottingham temperatures, airline passengers, Disney stock and U.S. macroeconomic data (`sm.datasets.macrodata`)._
+
+**In your capstone:** Compare every forecast with naive and seasonal-naive baselines, choose orders by AIC, check the residuals, then refit on all the data.
 
 <a id="classical-decomposition"></a>
 
@@ -4371,7 +4807,13 @@ _From simple decomposition to ARIMA, then three extensions from Time Series III:
 
 _Concept_
 
-Splitting a series into three parts: **Yₜ = mₜ + sₜ + εₜ**, a **trend** component, a **seasonal** component with fixed period d, and random **noise**. If what's left after removing trend and seasonality is pure noise, you have a sensible forecasting model.
+Splitting a series into three parts. The **additive** model is **Yₜ = mₜ + sₜ + εₜ**: a **trend**, a **seasonal** component with a fixed period, and random **noise**. If what's left after removing trend and seasonality is pure noise, you have a sensible forecasting model: project the trend and repeat the seasonal pattern. In an additive model the seasonal values average to zero over a cycle; they push the series above or below the trend.
+
+When seasonal swings **grow with the level** (as in J&J), use the **multiplicative** model **Yₜ = mₜ × sₜ × εₜ**, which is equivalent to an additive model on log(Yₜ). Classical decomposition also assumes the seasonal pattern is identical in every cycle, a simplification.
+
+> **Watch out:** The letter d is overloaded in time series: it can mean the deseasonalized series dₜ, the number of differences in ARIMA(p, d, q), or the seasonal period. Check which one a formula means.
+
+See also: [seasonal_decompose()](#seasonal-decompose)
 
 <a id="seasonal-decompose"></a>
 
@@ -4379,13 +4821,37 @@ Splitting a series into three parts: **Yₜ = mₜ + sₜ + εₜ**, a **trend**
 
 _statsmodels_
 
-Decomposes a series and plots the observed data, trend, seasonal and residual components. Its algorithm beats doing it by hand.
+Decomposes a series and plots the observed data, trend, seasonal and residual components. Choose `model="additive"` or `"multiplicative"` and set the `period`.
 
 ```python
 from statsmodels.tsa.seasonal import seasonal_decompose
-decomp = seasonal_decompose(nottem)       # needs a datetime index with a frequency
-decomp.plot()
+
+add = seasonal_decompose(y, model="additive", period=4)
+mult = seasonal_decompose(y, model="multiplicative", period=4)
+add.plot(); mult.plot()                     # compare the residual panels
+add.seasonal[:4].round(3).tolist()          # J&J: [0.222, 0.244, 0.309, -0.774]  amounts added
+mult.seasonal[:4].round(3).tolist()         # J&J: [0.993, 1.033, 1.114, 0.86]   factors multiplied
 ```
+
+On J&J the additive residuals fan out over time (wrong model for growing swings), while the multiplicative residuals are much more even: Q4 sits about 14% below trend. That motivates taking logs before ARIMA.
+
+> **Watch out:** `seasonal_decompose` is itself a classical centred-moving-average method, much like decomposing by hand; for a more robust modern decomposition use `statsmodels.tsa.seasonal.STL`.
+
+<a id="naive-and-seasonal-naive-forecasts"></a>
+
+### Naive and seasonal naive forecasts
+
+_Concept, NumPy_
+
+The baselines every forecast must beat. The **naive** forecast says the next value equals the latest observed value (that's exactly ARIMA(0, 1, 0), a random walk). The **seasonal naive** forecast repeats the value from the same point in the previous cycle (same quarter last year). On J&J's last two years, MAE is 4.88 for naive, 2.54 for seasonal naive, and 0.67 for a seasonal ARIMA: baselines show how much the model really adds.
+
+```python
+naive = np.repeat(train.iloc[-1], len(test))                      # repeat the last value
+seasonal_naive = np.tile(train.iloc[-4:].values, len(test) // 4)   # repeat the last year
+np.mean(np.abs(test.values - seasonal_naive))                     # MAE
+```
+
+See also: [Null model (baseline) for regression](#null-model-baseline-for-regression)
 
 <a id="seasonal-mean-forecast"></a>
 
@@ -4416,6 +4882,8 @@ y_train, y_test = train_test_split(nottem, test_size=0.1, shuffle=False)
 y_train, y_test = air.iloc[:-24], air.iloc[-24:]       # hold out the last two years
 ```
 
+The full forecasting workflow from the course: parse dates and set a DatetimeIndex → plot → check stationarity (look, then ADF) → transform and difference → read the ACF/PACF → split chronologically → build naive baselines → fit candidate models and compare AIC → check residuals → forecast the test period and compare MAE with the baselines → **refit on all the data** before forecasting the real future.
+
 <a id="autoregression-ar"></a>
 
 ### Autoregression (AR)
@@ -4423,6 +4891,8 @@ y_train, y_test = air.iloc[:-24], air.iloc[-24:]       # hold out the last two y
 _Concept_
 
 A model that regresses a series on **its own past values**: AR(p) uses the last p values, Yₜ = φ₀ + φ₁Yₜ₋₁ + … + φₚYₜ₋ₚ + εₜ. For certain φ values it's the same as a rolling mean.
+
+φ (phi) is the weight on a past value: if φ₁ = 0.8, today is 80% an echo of yesterday plus a fresh shock. Autocorrelation **measures** the relationship with the past; autoregression **uses** it to predict. In practice a constant is usually included. For a pure AR(p), the **PACF cuts off after lag p**. One-line memory aid: AR = tomorrow looks a bit like today.
 
 <a id="moving-average-model-ma"></a>
 
@@ -4434,6 +4904,8 @@ A model that predicts the current value from **past error terms**: MA(q) uses th
 
 > **Watch out:** This is **not** the rolling mean, which is also commonly called a "moving average".
 
+It's an average of past **errors** (shocks), not of the data: θ (theta) is the weight on a past shock, εₜ₋₁ is how far off you were yesterday, and MA(1) carries a fraction θ₁ of it into today. Examples: a promotion that boosts sales this week and a bit next week; a viral post that lifts traffic for a few days. For a pure MA(q), the **ACF cuts off after lag q**. Memory aid: MA = yesterday's surprise echoes into today.
+
 <a id="arma-p-q"></a>
 
 ### ARMA(p, q)
@@ -4441,6 +4913,8 @@ A model that predicts the current value from **past error terms**: MA(q) uses th
 _Concept_
 
 AR(p) and MA(q) combined: Yₜ = intercept + AR terms + MA terms + error. Requires a stationary series.
+
+ARMA captures both "momentum" (AR) and "shock carry-over" (MA) with few parameters.
 
 <a id="arima-p-d-q"></a>
 
@@ -4458,13 +4932,55 @@ model.summary()
 y_test_pred = model.predict(start=y_test.index[0], end=y_test.index[-1])
 ```
 
+"Integrated" because the original series is recovered by summing (integrating) the differences. Memory aid: I = remove the trend first. Useful special cases: ARIMA(1, 0, 0) = AR(1); **ARIMA(0, 1, 0) = a random walk** (forecast = last value, the naive forecast); ARIMA(0, 1, 1) is similar to simple exponential smoothing. `model.forecast(steps)` forecasts beyond the end of the training data.
+
+If you modelled log(y), convert forecasts back with `np.exp()` before computing MAE, so errors are in the original units.
+
+See also: [SARIMA](#sarima), [Naive and seasonal naive forecasts](#naive-and-seasonal-naive-forecasts)
+
+<a id="sarima"></a>
+
+### SARIMA
+
+_statsmodels_
+
+Seasonal ARIMA adds seasonal terms (seasonal AR, differencing and MA at the seasonal lag) through `seasonal_order=(P, D, Q, s)`. The course demonstration fits J&J's log earnings with a first difference plus a seasonal difference, choosing p and q by AIC:
+
+```python
+import itertools
+from statsmodels.tsa.arima.model import ARIMA
+
+y = np.log(jj["value"])
+train, test = y[:-8], y[-8:]                                  # last 2 years held out
+results = []
+for p, q in itertools.product(range(3), range(3)):
+    fit = ARIMA(train, order=(p, 1, q), seasonal_order=(0, 1, 0, 4)).fit()
+    results.append(((p, 1, q), round(float(fit.aic), 1)))
+best = min(results, key=lambda r: r[1])                       # ((1, 1, 1), -125.4)
+fit = ARIMA(train, order=best[0], seasonal_order=(0, 1, 0, 4)).fit()
+forecast = np.exp(fit.forecast(8))                            # back to earnings per share
+np.mean(np.abs(np.exp(test) - forecast))                      # MAE ≈ 0.67 (seasonal naive ≈ 2.54)
+```
+
+**SARIMAX** adds external predictors (the X), like ARIMA's `exog`. statsmodels may print convergence warnings for some grid combinations; that's common.
+
+See also: [Other forecasting models](#other-forecasting-models)
+
+<a id="other-forecasting-models"></a>
+
+### Other forecasting models
+
+_Concept_
+
+Beyond ARIMA, from the deck's "what else?" slide: **ETS / Holt–Winters** exponential smoothing models level, trend and seasonality with exponentially weighted averages; **Prophet** combines trend, seasonality, holidays and events and is designed for accessible business forecasting; and **tree-based models** (e.g. XGBoost) forecast using lag features, rolling statistics, calendar features and external predictors.
+
 <a id="choosing-p-d-and-q"></a>
 
 ### Choosing p, d and q
 
 _Concept_
 
-**d** is the smallest number of differences that makes the series stationary, judged by eye or with the ADF test. **p** and **q** are chosen by searching over values and keeping the model with the lowest AIC. `GridSearchCV` doesn't work with statsmodels, so the notebook writes its own loop.
+**d** is the smallest number of differences that makes the series stationary, judged by eye or with the ADF test. **p** and **q** are shortlisted from the ACF/PACF of the **stationary** series, then decided by searching over values and keeping the model with the lowest AIC (and residuals that look like white noise).
 
 ```python
 from itertools import product
@@ -4475,6 +4991,20 @@ for p, q in product(range(13), range(13)):
     results.append((p, q, m.aic))
 pd.DataFrame(results, columns=["p", "q", "aic"]).sort_values("aic").head()
 ```
+
+> **Watch out:** Don't use `GridSearchCV` here: its random folds would train on the future and test on the past. Time series need a chronological hold-out or `TimeSeriesSplit`.
+
+See also: [Reading ACF and PACF to choose p and q](#reading-acf-and-pacf-to-choose-p-and-q)
+
+<a id="reading-acf-and-pacf-to-choose-p-and-q"></a>
+
+### Reading ACF and PACF to choose p and q
+
+_Concept_
+
+Rules of thumb for a **stationary** series: for a pure **AR(p)**, the PACF cuts off after lag p (and the ACF decays gradually); for a pure **MA(q)**, the ACF cuts off after lag q (and the PACF decays). Mixed ARMA processes show gradual decay in both. Real data is messier than the textbook pictures: on differenced J&J, both plots spike at lag 1 (about −0.38) and at the seasonal lag 4, suggesting several candidates; the AIC search then picks ARIMA(1, 1, 1). Use the plots to shortlist, and let AIC and residual checks decide.
+
+> **Watch out:** Read the plots of the **stationary** (differenced) series. If the ACF decays slowly, the series isn't stationary yet: difference again before choosing p and q.
 
 <a id="itertools-product"></a>
 
@@ -4490,17 +5020,32 @@ Generates every combination of items from several lists: the Cartesian product, 
 
 _statsmodels_
 
-A hypothesis test for stationarity. **H₀: the series is not stationary; H₁: it is.** A small p-value (below 0.05) means you can treat the series as stationary. The airline data needed two differences.
+A hypothesis test for stationarity. **H₀: the series is non-stationary (has a unit root); H₁: it is stationary.** A small p-value (below 0.05) means you can treat the series as stationary. Students often get this backwards.
 
 ```python
 from statsmodels.tsa.stattools import adfuller
-adf, pval, *_ = adfuller(air.diff().diff().dropna())
-pval
+
+for name, series in [("raw", x), ("diff", x.diff()), ("log diff", np.log(x).diff())]:
+    print(name, round(adfuller(series.dropna())[1], 3))
+# J&J: raw 1.0, diff 0.909 (still non-stationary), log diff 0.0 (stationary)
 ```
 
 > **Watch out:** Drop the NaNs that differencing creates, or `adfuller` will fail. Recent statsmodels releases also warn that `adfuller`'s return format is changing; the p-value is the second value returned.
 
 See also: [p-value (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#p-value)
+
+<a id="ljung-box-test"></a>
+
+### Ljung–Box test
+
+_statsmodels_
+
+Tests whether a model's residuals still contain autocorrelation. **H₀: no autocorrelation up to the chosen lag** (the residuals look like white noise). Here a **large** p-value is what you want: nothing left to model. On the J&J seasonal ARIMA, p = 0.22 at lag 8.
+
+```python
+from statsmodels.stats.diagnostic import acorr_ljungbox
+acorr_ljungbox(fit.resid[5:], lags=[8])["lb_pvalue"]    # skip the first residuals lost to differencing
+```
 
 <a id="aic-akaike-information-criterion"></a>
 
@@ -4514,13 +5059,30 @@ The preferred evaluation metric for ARIMA models in place of R². It balances fi
 model.aic
 ```
 
+George Box and Gwilym Jenkins' 1970 textbook popularized the ARIMA workflow (identify, estimate, check), often called the **Box–Jenkins method**; AIC-based selection is its modern form.
+
 <a id="generalized-least-squares-gls"></a>
 
 ### Generalized least squares (GLS)
 
-_Concept_
+_Concept, statsmodels_
 
-OLS on time series violates independence, because its errors are assumed iid (identical, independent and with no subscript on σ²). GLS lets the residuals **track the dependence from row to row** by changing the assumed covariance structure: yₜ = xₜᵀβ + Wₜ, where Wₜ is an ARMA(p, q) process instead of plain noise. In practice: regression on x-variables with ARIMA errors.
+OLS assumes errors are iid: independent (the "~" in εₜ ~ N(0, σ²)) and identically distributed with one constant variance (no subscript on σ²). In matrix terms, the errors' covariance matrix is σ²I, diagonal with no correlation. **GLS allows a general covariance matrix Σ**, so errors close in time can be correlated. In practice Σ is given a simple structure such as ARMA errors: yₜ = xₜᵀβ + Wₜ, where Wₜ is an ARMA(p, q) process. That's **regression with ARMA errors**: the regression explains y using x, and the ARMA part soaks up the leftover time-correlation.
+
+The course demonstration on US macro data: does disposable-income growth predict consumption growth?
+
+```python
+macro = sm.datasets.macrodata.load_pandas().data
+macro.index = pd.period_range("1959Q1", periods=len(macro), freq="Q").to_timestamp()
+growth = np.log(macro[["realcons", "realdpi"]]).diff().dropna() * 100      # % growth
+ols = sm.OLS(growth["realcons"], sm.add_constant(growth["realdpi"])).fit()
+gls = ARIMA(growth["realcons"], exog=growth["realdpi"], order=(1, 0, 0)).fit()   # AR(1) errors
+ols.params["realdpi"], gls.params["realdpi"]                                # 0.341 vs 0.297
+```
+
+statsmodels also offers `GLSAR` for regression with autoregressive errors.
+
+> **Watch out:** OLS isn't forbidden for time series: its coefficients can still be reasonable, but their standard errors and p-values are wrong (usually too optimistic), and the information in the error correlation is wasted.
 
 <a id="exogenous-and-endogenous-variables"></a>
 
@@ -4529,6 +5091,8 @@ OLS on time series violates independence, because its errors are assumed iid (id
 _Concept_
 
 Time series vocabulary for x and y. **Exogenous** (the x-variables, from outside the system; note the **x** in e**x**ogenous) and **endogenous** (the y-variable being forecast). statsmodels arguments are named `exog` and `endog`.
+
+Exogenous = determined **outside** the model (an input); endogenous = determined **inside** it (the target).
 
 <a id="arima-with-exog-gls-in-python"></a>
 
@@ -4546,7 +5110,7 @@ gls = ARIMA(y_train, exog=X_train, order=(2, 1, 2), freq="QE-DEC").fit()
 preds = gls.predict(start=X_test.index[0], end=X_test.index[-1], exog=X_test)
 ```
 
-> **Watch out:** The notebook writes `freq="Q-DEC"`; with pandas 3 use `"QE-DEC"`.
+> **Watch out:** Frequency strings changed in pandas 2.2: use `freq="QE-DEC"` (older code writes `"Q-DEC"`, which pandas 3 rejects).
 
 <a id="statsmodels-macrodata"></a>
 
@@ -4572,11 +5136,16 @@ df = df.drop(columns=["year", "quarter"])
 
 _Concept, NumPy_
 
-For prices Pₜ: Pₜ itself is non-stationary, Xₜ = log Pₜ behaves like a random walk, and the difference Zₜ = Xₜ − Xₜ₋₁ (the log return) looks like white noise. But it is **not independent** white noise: big moves cluster together, and that dependence isn't visible in the ACF.
+For a price Pₜ: Pₜ itself is non-stationary; Xₜ = log Pₜ behaves roughly like a **random walk** (also non-stationary); and the difference Zₜ = Xₜ − Xₜ₋₁, the log return (≈ the daily percentage change), is approximately **stationary** and looks like white noise. But it is **not independent** white noise: big moves cluster together. Returns themselves are nearly uncorrelated (you can't predict tomorrow's direction), but their **size** is predictable.
 
 ```python
 z = 100 * np.log(prices["Adj Close"]).diff().dropna()    # scaled log returns
+z.autocorr(1), (z ** 2).autocorr(1)                      # returns ≈ 0; squared returns clearly > 0
 ```
+
+> **Watch out:** A random walk is **not** stationary, so log prices aren't either; it's the log **returns** that are approximately stationary. And the dependence in returns is invisible in their ACF but clearly visible in the ACF of the **squared** returns.
+
+See also: [Volatility clustering](#volatility-clustering)
 
 <a id="volatility-clustering"></a>
 
@@ -4586,6 +5155,8 @@ _Concept_
 
 Calm periods are followed by calm periods and turbulent periods by turbulent ones: the size of today's move predicts the size (not the direction) of tomorrow's. GARCH models exist to capture this.
 
+On simulated GARCH data with 2,000 observations, the lag-1 autocorrelation is 0.017 for returns but 0.077 for squared returns (significant at that sample size).
+
 <a id="conditional-heteroscedasticity"></a>
 
 ### Conditional heteroscedasticity
@@ -4593,6 +5164,8 @@ Calm periods are followed by calm periods and turbulent periods by turbulent one
 _Concept_
 
 Variance that changes over time and depends on recent history. "Heteroscedastic" = unequal variance; "conditional" = conditional on the past. Series like this "jump around too much" for ARIMA.
+
+It relaxes the **E** (equal variance) assumption, just as GLS relaxes the **I** (independence) assumption.
 
 <a id="arch-p"></a>
 
@@ -4602,24 +5175,31 @@ _Concept_
 
 **A**uto**R**egressive **C**onditional **H**eteroscedasticity. Models the series as Zₜ ~ N(0, hₜ) where the variance hₜ = α₀ + Σαᵢ Z²ₜ₋ᵢ depends on the last p squared values. It looks like an AR(p) process, but on the conditional **variance** of Zₜ rather than its value.
 
+An equivalent form: Zₜ = √hₜ · εₜ with εₜ ~ N(0, 1). A big move yesterday, up **or** down, raises today's variance. ARCH was introduced by Robert Engle (1982), who shared the 2003 Nobel Memorial Prize in Economics partly for it.
+
 <a id="garch-p-q"></a>
 
 ### GARCH(p, q)
 
 _Concept, arch_
 
-**G**eneralized ARCH: adds an MA-like term so the variance also depends on its own past values: hₜ = α₀ + Σαᵢ Z²ₜ₋ᵢ + Σβⱼ hₜ₋ⱼ. Used heavily in finance to forecast **volatility** (risk). Its mean forecast is usually flat near zero; the useful output is the forecast **variance**.
+**G**eneralized ARCH (Tim Bollerslev, 1986): adds past variances so volatility decays gradually instead of depending only on the last few returns: hₜ = α₀ + Σαᵢ Z²ₜ₋ᵢ + Σβⱼ hₜ₋ⱼ. Intuition: today's volatility = baseline + reaction to recent shocks (α) + persistence of recent volatility (β). The α sum is "AR-like" and the β sum "MA-like", though the analogy is loose. Used heavily in finance to forecast **volatility** (risk, option pricing). Its mean forecast is usually flat near zero; the useful output is the forecast **variance**.
+
+**GARCH(1, 1)** is the workhorse; α + β close to 1 means volatility shocks are persistent (typical values: α ≈ 0.05–0.1, β ≈ 0.85–0.95). In the `arch` package, `p` counts the squared-return (α) terms and `q` the variance (β) terms.
 
 ```python
 from arch import arch_model   # pip install arch
 
 z_train, z_test = train_test_split(z, shuffle=False, test_size=0.05)
-garch = arch_model(z_train, vol="Garch", p=2, q=2).fit()
+garch = arch_model(z_train, vol="Garch", p=1, q=1).fit(disp="off")
+garch.params                        # omega, alpha[1], beta[1]
 preds = garch.forecast(horizon=len(z_test), reindex=False)
-preds.variance          # forecast volatility along the horizon
+preds.variance                      # forecast volatility along the horizon
 ```
 
-> **Watch out:** `arch` asks you to rescale small numbers (like daily returns) for numerical stability, which is why the notebook multiplies by 100.
+Fitting simulated data with known parameters (ω 0.1, α 0.1, β 0.85) recovers them well (0.108, 0.083, 0.866).
+
+> **Watch out:** GARCH isn't in statsmodels; it needs the `arch` package. `arch` asks you to rescale small numbers (like daily returns) for numerical stability, which is why returns are multiplied by 100. The letter h means the conditional variance here, but the lag in Time Series I and hot-coffee sales in the VAR example.
 
 <a id="univariate-vs-multivariate-time-series"></a>
 
@@ -4628,6 +5208,8 @@ preds.variance          # forecast volatility along the horizon
 _Concept_
 
 **Univariate**: forecasting one response variable. **Multivariate**: forecasting several at once in a single model, like simultaneous regression, because the series influence each other (hot and iced coffee sales).
+
+Examples: GDP and unemployment; sales of related products; temperatures in neighbouring cities. In the coffee case the relationship works through a shared driver (the weather) and substitution (a customer buys one or the other).
 
 <a id="vector-autoregression-var"></a>
 
@@ -4650,13 +5232,24 @@ model.k_ar               # number of lags chosen (9 in the notebook)
 model.plot_forecast(10)
 ```
 
+The **cross terms** (β₁₂: yesterday's iced sales → today's hot sales; β₂₁ the reverse) are what VAR adds over separate AR models; if they matter, one series helps forecast the other (tested formally with **Granger causality**). The number of parameters grows quickly, k² per lag for k series, so VARs usually use few series and lags. A second course demonstration models GDP growth and consumption growth together:
+
+```python
+data = growth[["realgdp", "realcons"]]
+var = VAR(data).fit(maxlags=8, ic="aic")
+var.k_ar                                                  # 3 lags chosen by AIC
+var.forecast(data.values[-var.k_ar:], steps=2)            # next 2 quarters, both series
+```
+
 ---
 
-<a id="s26-simulation"></a>
+<a id="s27-simulation"></a>
 
-## 26. Simulation
+## 27. Simulation
 
 _Building a computer model of a system and running it to see what happens under different assumptions, without touching the real system. The components and pillars of a simulation, the four common approaches (discrete event, agent-based, Monte Carlo and system dynamics), building simulations in Python with NumPy, and checking that they can be trusted. Examples use a coffee shop queue, a flood-risk estimate and a town's population._
+
+**In your capstone:** Use simulation for "what if" questions and to put uncertainty ranges (percentiles) around projections such as ROI.
 
 <a id="simulation"></a>
 
@@ -4686,7 +5279,7 @@ _Concept_
 
 From the slides: **safe** (test "what-ifs" such as staffing changes without risking production); **cost-effective** (test a marketing campaign without alerting competitors); **experiment** (a hospital trials staff schedules for peak hours); **understand dynamics** (watch behaviour unfold over time, such as traffic-light timing); and **forecast accuracy**.
 
-> **Watch out:** More detail doesn't automatically mean more accuracy. A detailed simulation built on wrong assumptions is precisely wrong, as the deck's own Simplification pillar and limitations slide point out.
+> **Watch out:** More detail doesn't automatically mean more accuracy. A detailed simulation built on wrong assumptions is precisely wrong (see the Simplification pillar and the limitations of simulation).
 
 <a id="key-components-of-a-simulation"></a>
 
@@ -4791,7 +5384,7 @@ arrival_times = np.cumsum(gaps)
 per_hour = rng.poisson(lam=15, size=8)         # arrivals in each of 8 hours
 ```
 
-> **Watch out:** "Arrivals follow a Poisson distribution" (as the author's notes say) is shorthand: the counts are Poisson, the gaps are exponential.
+> **Watch out:** "Arrivals follow a Poisson distribution" is shorthand: the counts per period are Poisson, the gaps between arrivals are exponential.
 
 <a id="np-random-default-rng"></a>
 
@@ -4847,7 +5440,7 @@ print(f"Estimated flood probability: {overflow.mean():.4f}")   # ≈ 0.0201 (exa
 
 Monte Carlo is overkill for this simple case, but realistic versions (rainfall varying continuously, river levels depending on several days, upstream flows interacting) have no neat formula. It's also often combined with other approaches, such as running a DES 1,000 times with random inputs, as in the coffee shop.
 
-See also: [Simulation (Monte Carlo)](#simulation-monte-carlo), [Law of Large Numbers (LLN)](#law-of-large-numbers-lln), [Vectorized simulation](#vectorized-simulation)
+See also: [Simulation (Monte Carlo)](#simulation-monte-carlo), [Law of Large Numbers (LLN)](#law-of-large-numbers-lln), [Vectorized simulation](#vectorized-simulation), [Markov Chain Monte Carlo (MCMC)](#markov-chain-monte-carlo-mcmc)
 
 <a id="vectorized-simulation"></a>
 
@@ -4903,7 +5496,7 @@ _Concept_
 
 A cycle where a quantity affects its own future values. A **reinforcing** (positive) loop amplifies change: more people → more births → faster growth. A **balancing** (negative) loop counteracts it: more people → more deaths. In the population example, with these constant rates the reinforcing loop wins, so growth is exponential.
 
-> **Watch out:** The deck's description muddles this: the **deaths outflow is itself the balancing loop**; births are the reinforcing loop. It isn't that the population "might stabilize" under these rates; it grows by 2% a year.
+> **Watch out:** It's easy to misread the loops: the **deaths outflow is itself the balancing loop** and births are the reinforcing loop. With constant rates of 3% and 1% the population doesn't stabilize; it grows by 2% a year.
 
 <a id="choosing-a-simulation-approach"></a>
 
@@ -4977,11 +5570,13 @@ Changing one input at a time and watching how much the output moves. Inputs with
 
 See also: [Risk-adjusted ROI](#risk-adjusted-roi)
 
-<a id="s27-decision-trees"></a>
+<a id="s28-decision-trees"></a>
 
-## 27. Decision trees
+## 28. Decision trees
 
 _A flowchart learned from data. How the CART algorithm chooses splits using Gini impurity, how to stop a tree from memorizing the training data, and how to read and visualize one. Examples use the cleaned Titanic data (`titanic_clean.csv`)._
+
+**In your capstone:** A single tree is a transparent baseline and a good way to explain rules to stakeholders. Control its depth to avoid overfitting.
 
 <a id="decision-tree"></a>
 
@@ -4990,6 +5585,10 @@ _A flowchart learned from data. How the CART algorithm chooses splits using Gini
 _Concept_
 
 A model shaped like a flowchart that ends in a decision; each split represents a condition being true or false ("age < 34?", "has degree?"). For linear models an algorithm learns β; for trees it learns **where the splits occur**. Works for classification and regression, and is white-box.
+
+The learned "parameters" of a tree are which feature to split on at each node, the threshold, and the prediction at each leaf. A 0/1 feature is split as `has_degree < 0.5`. The same prediction can appear at several leaves via different paths. Trees will happily split on irrelevant features (the slides' left-handedness example) if they happen to fit the training data: a route to overfitting.
+
+> **Watch out:** Don't confuse the two kinds of tree: one that predicts a category (Candidate A or B) is a **classification** tree; a regression tree predicts a number at each leaf.
 
 <a id="root-node-internal-node-leaf-and-branch"></a>
 
@@ -5007,6 +5606,8 @@ _Concept_
 
 **C**lassification **A**nd **R**egression **T**rees, the standard way to fit a tree: (1) for each variable, find the best split value according to a splitting criterion; (2) split the data at the best split overall; (3) repeat on each new subset until a stopping criterion is met; (4) optionally prune (not done by default).
 
+CART (Breiman, Friedman, Olshen and Stone, 1984) builds **binary** trees: every split has exactly two branches. In step 1, the algorithm tries every feature and every possible threshold between its sorted values, scores each candidate split, and keeps the best. On the breast cancer data an unrestricted tree reaches depth 7 with 18 leaves and **100% training accuracy**, but 92.3% on test data.
+
 <a id="greedy-algorithm"></a>
 
 ### Greedy algorithm
@@ -5023,6 +5624,8 @@ _Concept_
 
 The loss a split is chosen to reduce. For **regression trees**: the MSE. For **classification trees**: Gini impurity by default (entropy is an alternative). The tree tries every possible split and keeps the one that reduces the loss most.
 
+**Why not accuracy?** A useful split often leaves both children predicting the majority class, so accuracy doesn't change and can't tell good splits from useless ones. Gini can. In the phone example, the age split predicts Android on both sides, yet still slightly lowers Gini. Before any split, the node predicts the majority class (Android): 15/25 = 60% accuracy, the null model. For regression trees, `criterion="squared_error"`, and each leaf predicts the mean of its points.
+
 <a id="gini-impurity"></a>
 
 ### Gini impurity
@@ -5038,6 +5641,8 @@ def gini(counts):
 
 gini([10, 15])          # 0.48
 ```
+
+Intuition: Gini is the probability that two points drawn at random (with replacement) from the node belong to **different** classes. With k equally common classes the maximum is **1 − 1/k**: 0.5 for two classes, 0.67 for three.
 
 Another worked example: a node with 8 rainy and 2 dry days has Gini 1 − (0.8² + 0.2²) = **0.32**. scikit-learn's feature importance is built from these impurity reductions.
 
@@ -5060,7 +5665,9 @@ w_age = 12/25 * gini([4, 8]) + 13/25 * gini([6, 7])       # ≈ 0.47
 
 _Concept_
 
-An alternative impurity measure, −Σ pᵢ log pᵢ (`criterion="entropy"`). Gini's "cousin": both are differentiable, but Gini is usually preferred for its preference for pure nodes.
+An alternative impurity measure, −Σ pᵢ log pᵢ (`criterion="entropy"`). In practice Gini and entropy almost always choose the same or very similar splits; Gini is scikit-learn's default mainly because it's slightly cheaper to compute (no logarithms).
+
+> **Watch out:** You'll sometimes see Gini's "differentiability" given as its advantage. Trees aren't fitted with gradients, so that doesn't matter here; the choice between Gini and entropy rarely changes the tree.
 
 <a id="stopping-criteria"></a>
 
@@ -5068,7 +5675,22 @@ An alternative impurity measure, −Σ pᵢ log pᵢ (`criterion="entropy"`). Gi
 
 _Concept, scikit-learn_
 
-By default a tree keeps splitting until every leaf is pure, which is the perfectly overfit model. Any stopping rule acts as regularization, and each is a tuning parameter: **`max_depth`** (levels allowed), **`min_samples_split`** (minimum rows needed to split a node, default 2), **`min_samples_leaf`** (minimum rows in a leaf, default 1: alarm bells), and `min_impurity_decrease`.
+By default a tree keeps splitting until every leaf is pure, which is the perfectly overfit model. Any stopping rule acts as regularization, and each is a tuning parameter:
+
+- **`max_depth`**: levels allowed.
+- **`min_samples_split`**: minimum rows a node needs before it may split (default 2).
+- **`min_samples_leaf`**: minimum rows each resulting leaf must have (default 1: alarm bells).
+- **`min_impurity_decrease`**: the minimum reduction in impurity a split must achieve.
+- `max_leaf_nodes` and `ccp_alpha` (pruning).
+
+`min_samples_split` and `min_samples_leaf` differ: with `min_samples_split=10`, a node of 12 can still split into 11 and 1; with `min_samples_leaf=5` that split isn't allowed. `min_samples_leaf` directly prevents tiny, noisy leaves, so tune both.
+
+```python
+params = {"max_depth": [2, 3, 4, 5, None], "min_samples_split": [2, 10, 20],
+          "min_samples_leaf": [1, 5, 10]}
+gs = GridSearchCV(DecisionTreeClassifier(random_state=42), params, cv=5).fit(X_tr, y_tr)
+gs.best_params_, gs.best_score_          # breast cancer: min_samples_split=10, CV 0.934
+```
 
 <a id="ccp-alpha-cost-complexity-pruning"></a>
 
@@ -5113,7 +5735,7 @@ cv_scores = [cross_val_score(DecisionTreeClassifier(max_depth=d), X, y, cv=5).me
 plt.plot(depths, cv_scores)
 ```
 
-> **Watch out:** The notebook's first loop scores on the training data, which only shows overfitting increasing.
+> **Watch out:** Scoring each depth on the **training** data only shows overfitting increasing; always compare depths on cross-validated or test scores.
 
 <a id="export-text"></a>
 
@@ -5136,21 +5758,25 @@ _Concept_
 
 Another way to picture a tree: each split draws an axis-parallel line, dividing the feature space into rectangles, each with one prediction. For regression it looks like a 3D staircase. This is why trees can't draw smooth diagonal boundaries.
 
+Each split draws a line parallel to an axis ("age < 34" is a vertical line). A consequence of the staircase shape: trees produce **step-shaped** predictions and **can't extrapolate** beyond the range of their training data.
+
 <a id="decision-tree-pros-and-cons"></a>
 
 ### Decision tree pros and cons
 
 _Concept_
 
-**Pros:** white-box (easy to visualize and explain), non-parametric, scale of features doesn't matter, fast, little feature engineering (interactions are built in), handle categorical features naturally. **Cons:** prone to overfitting without tuning, overly simple when tuned (both high bias and high variance), work poorly with imbalanced data, greedy. Ensembles fix most of the cons.
+**Pros:** white-box (easy to visualize and explain), non-parametric, scale of features doesn't matter (no scaling needed: trees only compare values to thresholds), fast, little feature engineering (interactions are built in), handle categorical features naturally. **Cons:** overfit easily without stopping rules; **unstable** (a small change in the data can produce a very different tree); step-shaped predictions that can't extrapolate; biased towards the majority class with imbalanced data (use `class_weight="balanced"`); greedy. Random forests and gradient boosting fix most of the cons, at some cost to interpretability.
 
 ---
 
-<a id="s28-ensembles-bagging-and-random-forests"></a>
+<a id="s29-ensembles-bagging-and-random-forests"></a>
 
-## 28. Ensembles: bagging and random forests
+## 29. Ensembles: bagging and random forests
 
 _Combining many models into one stronger one. Bootstrapping, bagging decision trees to cut their variance, estimating error with out-of-bag samples, and random forests' extra trick of decorrelating the trees. Examples use the ISLR heart disease data (`Heart.csv`)._
+
+**In your capstone:** Random forests are a strong, low-effort default for tabular data. Use cross-validated or OOB scores and permutation importance.
 
 <a id="ensemble-model"></a>
 
@@ -5160,13 +5786,19 @@ _Concept_
 
 A model that combines the predictions of many (often weaker) models into one. It's an actual statistical fact that aggregating many "ok" models beats relying on one. Ensembling mainly reduces variance, which makes overfit decision trees a prime candidate. Three main methods: **bagging**, **boosting** and **stacking**.
 
+Single trees are interpretable but high-variance; linear models are stable but often too simple (high bias). Ensembles trade some interpretability for much better accuracy. It works when the individual models make **different** mistakes that partly cancel out.
+
 <a id="wisdom-of-the-crowd"></a>
 
 ### Wisdom of the crowd
 
 _Concept_
 
-"Individuals are dumb, but crowds are smart." The average of many people's guesses at Penelope the cow's weight is closer than most individual guesses, because independent errors cancel out. Ensembles apply the same idea to models.
+"Individuals are dumb, but crowds are smart." In NPR Planet Money's 2015 experiment, over 17,000 people guessed Penelope the cow's weight online, and the **average** guess was within a few percent of the truth, closer than most individual guesses. Averaging cancels individual errors, and the spread of an average shrinks as more guesses are added.
+
+The condition that matters: the crowd must make **fairly independent** errors. If everyone copies one person, averaging doesn't help. Correlated trees are bagging's main weakness, and the reason random forests exist.
+
+> **Watch out:** It's tempting to think averaging improves any set of models. Averaging mainly reduces **variance**; averaging high-bias models leaves most of their bias in place. Reducing bias is boosting's job.
 
 <a id="bootstrap-sample"></a>
 
@@ -5179,6 +5811,14 @@ A random sample **with replacement**, the same size as the original data. Some r
 ```python
 idx = np.random.choice(len(df), size=len(df), replace=True)
 boot = df.iloc[idx]
+```
+
+On average a bootstrap sample contains about 63% of the distinct rows; about **36.8% (1/e)** are left out. Those left-out rows are the **out-of-bag** observations. In the deck's 9-row example, rows 1, 4, 6 and 9 weren't picked (4 of 9).
+
+```python
+rng = np.random.default_rng(0)
+idx = rng.choice(n, size=n, replace=True)
+1 - len(np.unique(idx)) / n          # ≈ 0.368 for large n
 ```
 
 <a id="bootstrapping"></a>
@@ -5202,9 +5842,11 @@ plt.hist(boot_medians, bins=20)
 
 _Concept_
 
-Draw a bootstrap sample, fit a model (usually an overfit decision tree) to it, and repeat B times (often 100–500). Predict with the **mean** of the B predictions (regression) or the **majority vote** (classification). Averaging unbiased, high-variance models gives an unbiased model with lower variance.
+Draw a bootstrap sample, fit a model (usually a deep, deliberately overfit decision tree: low bias, high variance) to it, and repeat B times (often 100–500). Predict with the **mean** of the B predictions (regression) or the **majority vote** (classification). Averaging unbiased, high-variance models gives an unbiased model with lower variance. More trees never hurt accuracy, only training time, and because the models are independent they can be trained in parallel (`n_jobs=-1`). scikit-learn's classifiers actually average the predicted **probabilities** across trees ("soft voting"), which usually matches the majority vote.
 
-> **Watch out:** The trees are built from largely the same data, so they're correlated, which limits how much averaging can reduce variance. Random forests address this.
+Why correlation limits it: if B trees each have variance σ² and pairwise correlation ρ, their average has variance **ρσ² + (1 − ρ)σ²/B**. More trees shrink the second term, but the first term never goes away. Random forests attack ρ.
+
+On the Heart data: a single tree memorizes the training data (100%) but scores 0.720 on test; 500 bagged trees score 0.813 (CV 0.766). Same model type, much less variance.
 
 <a id="baggingclassifier"></a>
 
@@ -5227,7 +5869,7 @@ pgrid = {"estimator__max_depth": [1, 2, 3, 4, None],
 gs = GridSearchCV(bag, pgrid, cv=5, n_jobs=4)
 ```
 
-> **Watch out:** Older code uses `base_estimator=`; it was renamed `estimator` in scikit-learn 1.2.
+> **Watch out:** Older code uses `base_estimator=`; scikit-learn 1.2 renamed it `estimator` and 1.4 removed the old name, so check the documentation if older examples fail.
 
 <a id="out-of-bag-oob-observations-and-error"></a>
 
@@ -5244,6 +5886,8 @@ bag.fit(X, y)
 bag.oob_score_
 ```
 
+`oob_score_` is accuracy for classifiers and R² for regressors. Set `oob_score=True` **before** fitting (it requires `bootstrap=True`, the default). On the Heart data, the random forest's OOB accuracy (0.788) almost matches its 5-fold CV accuracy (0.784), at no extra cost; the test score (0.840) differs because the test set has only 75 patients.
+
 <a id="feature-importance-in-ensembles"></a>
 
 ### Feature importance in ensembles
@@ -5256,13 +5900,21 @@ Bagging gains accuracy but loses the single readable tree. You can still summari
 importances = np.mean([t.feature_importances_ for t in bag.estimators_], axis=0)
 ```
 
+On the Heart random forest the top five are fairly even: Oldpeak 0.113, MaxHR 0.107, Ca 0.106, Age 0.101, Thal_normal 0.097.
+
+> **Watch out:** Forest importances are more stable than a single tree's but still **biased** towards continuous and high-cardinality features, and computed on training data. `permutation_importance` on test data is more reliable.
+
+See also: [Permutation importance](#permutation-importance)
+
 <a id="random-forest"></a>
 
 ### Random forest
 
 _Concept_
 
-Bagged decision trees plus one more source of randomness: **at each split, only a random subset of m features is considered**. If one feature is very strong, plain bagging would put it at the top of every tree, so the trees are near-copies; random forests **decorrelate** the trees so that averaging reduces variance more. When m = p it's ordinary bagging.
+Bagged decision trees plus one more source of randomness: **at each split, only a fresh random subset of m features is considered**. If one feature is very strong, plain bagging would put it at the top of every tree, so the trees would be near-copies; random forests **decorrelate** the trees so that averaging reduces variance more. A side effect: weaker features get a chance to be used, so the forest explores more patterns. When m = p (all features) it's ordinary bagging. Leo Breiman introduced the method in 2001.
+
+> **Watch out:** It's easy to describe random forests as giving each tree its own feature subset. It's a new random subset at **each split**; Choosing one subset per tree is a different technique (the "random subspace" method).
 
 <a id="max-features"></a>
 
@@ -5270,7 +5922,9 @@ Bagged decision trees plus one more source of randomness: **at each split, only 
 
 _scikit-learn_
 
-How many features each split may consider (m). The original authors recommend **√p for classification** and **p/3 for regression**; the authors of _The Elements of Statistical Learning_ suggest treating it as a tuning parameter.
+How many features each split may consider (m). The original recommendations are **√p for classification** and **p/3 for regression**; _The Elements of Statistical Learning_ suggests treating it as a tuning parameter. With 16 features, √16 = 4 per split.
+
+> **Watch out:** scikit-learn's defaults don't all follow the recommendation. `RandomForestClassifier` uses `max_features="sqrt"`, but `RandomForestRegressor` defaults to `max_features=1.0` (all features), which makes it **plain bagging** unless you change it. The default number of trees is 100 (it was 10 before scikit-learn 0.22); 500 is a common choice.
 
 <a id="randomforestclassifier-and-randomforestregressor"></a>
 
@@ -5290,13 +5944,23 @@ pd.DataFrame({"feature": X.columns, "importance": rf.feature_importances_}) \
 cross_val_score(rf, X, y, cv=10).mean()
 ```
 
+The course comparison on the Heart data (297 patients, null accuracy 0.533):
+
+| Model                     | Train | CV    | OOB   | Test  |
+| ------------------------- | ----- | ----- | ----- | ----- |
+| Single tree               | 1.000 | 0.730 |       | 0.720 |
+| 500 bagged trees          | 1.000 | 0.766 | 0.752 | 0.813 |
+| Random forest (500 trees) | 1.000 | 0.784 | 0.788 | 0.840 |
+
+Decorrelating the trees helped on every measure. Tune `max_features`, `min_samples_leaf` and `n_estimators` with `GridSearchCV`; `max_features=16` (all features) reproduces bagging.
+
 <a id="random-forest-pros-and-cons"></a>
 
 ### Random forest pros and cons
 
 _Concept_
 
-**Pros:** performance competitive with the best supervised methods; more reliable feature importance than a single tree; OOB error for free (though you still need a test set when tuning). **Cons:** less interpretable (black box), slower to train and to predict.
+**Pros:** performance competitive with the best supervised methods; little tuning needed; no scaling; handles non-linearity and interactions; robust to outliers; OOB error for free (though you still need a test set when tuning); feature importances that are more stable than a single tree's. **Cons:** less interpretable (black box), slower to train and to predict. One-line summary: bagging averages away variance; random forests make the trees different enough for averaging to work even better.
 
 <a id="parallelizable"></a>
 
@@ -5313,6 +5977,8 @@ The trees in bagging and random forests are independent, so they can be trained 
 _Concept_
 
 Ensembling models of **any** kind together (linear regression, Lasso, a tree, a neural net…), then combining their predictions, either by voting/averaging or with a final model that learns how to weight them (`StackingClassifier`).
+
+In scikit-learn: `StackingClassifier` / `StackingRegressor`. Common in competitions; less common in production because of the added complexity.
 
 <a id="votingclassifier"></a>
 
@@ -5344,11 +6010,13 @@ It depends on the task. In many business cases interpretability matters more tha
 
 ---
 
-<a id="s29-ensembles-boosting"></a>
+<a id="s30-ensembles-boosting"></a>
 
-## 29. Ensembles: boosting
+## 30. Ensembles: boosting
 
 _The opposite strategy to bagging: chain weak, high-bias models together so each one fixes the previous one's mistakes. AdaBoost (built from scratch and in scikit-learn), gradient boosting and XGBoost. Examples use the spam detection data (`spam.csv`) and `make_moons`._
+
+**In your capstone:** Gradient boosting often gives the best accuracy on tabular data. Tune the learning rate, number of trees and depth with cross-validation, and compare it with a random forest.
 
 <a id="boosting"></a>
 
@@ -5358,13 +6026,15 @@ _Concept_
 
 An ensemble method that fits models **sequentially**, each one paying more attention to the parts of the data the previous ones got wrong. It takes **weak learners** and successively boosts them to **reduce bias**, just as a tutor focuses on the fractions a friend keeps getting wrong rather than the multiplication they already know.
 
+Bagging starts from low-bias, high-variance models and lowers the variance; boosting starts from high-bias, low-variance models and lowers the bias. Both aim for the sweet spot of the bias–variance curve from opposite ends. Boosting can overshoot into **overfitting** if run too long (too many trees, too high a learning rate). Gradient-boosted trees are often the most accurate models for tabular data.
+
 <a id="weak-learner"></a>
 
 ### Weak learner
 
 _Concept_
 
-A model only a little better than random guessing: underfit, high-bias. In boosting it's almost always a very shallow decision tree.
+A model only a little better than random guessing: underfit, high-bias. Trees score well on almost everything practical (mixed feature types, missing values, outliers, irrelevant inputs, speed) except predictive power, and boosting fixes exactly that weakness. **AdaBoost** typically uses one-split **stumps** (scikit-learn's default); **gradient boosting** usually uses small trees (scikit-learn default `max_depth=3`, XGBoost default 6), which can capture interactions between features.
 
 <a id="decision-stump"></a>
 
@@ -5384,11 +6054,14 @@ stump = DecisionTreeClassifier(max_depth=1)
 
 _Concept_
 
-|                 | Bagging                | Boosting        |
-| --------------- | ---------------------- | --------------- |
-| Learners        | Independent (parallel) | Sequential      |
-| Goal            | Reduce **variance**    | Reduce **bias** |
-| Typical learner | Deep, overfit trees    | Decision stumps |
+|                              | Bagging / random forest | Boosting                                             |
+| ---------------------------- | ----------------------- | ---------------------------------------------------- |
+| Learners                     | Independent (parallel)  | Sequential                                           |
+| Goal                         | Reduce **variance**     | Reduce **bias**                                      |
+| Typical learner              | Deep, overfit trees     | Stumps (AdaBoost) or small trees (gradient boosting) |
+| Overfitting with more models | No (only slower)        | Yes, if run too long                                 |
+
+One-line summary: bagging averages independent overfit trees; boosting adds sequential underfit trees, each fixing the last one's errors.
 
 <a id="adaboost"></a>
 
@@ -5397,6 +6070,10 @@ _Concept_
 _Concept_
 
 **Ada**ptive **Boost**ing. Start with equal weights on every observation. Repeat: fit a weak learner on the weighted data; compute its weighted error rate εₘ; give the learner a say in the final vote of **αₘ = ½ ln((1 − εₘ)/εₘ)**; then **increase the weights of the misclassified points** and decrease the rest. The final prediction is the sign of the weighted vote: sign(Σ αₘ Gₘ(x)). For the maths, y is coded as −1/1 instead of 0/1.
+
+AdaBoost was introduced by Freund and Schapire (1997). Reading αₘ: if err = 0.5 (guessing), α = 0 (no say); if err = 0.1, α = ½ ln 9 ≈ 1.1, and misclassified points end up weighted 9 times as heavily as correct ones relative to before. The AdaBoost.M1 version (as in _The Elements of Statistical Learning_) writes α = ln((1 − err)/err) (≈ 2.2 here) and multiplies only the misclassified weights by e^α = 9; the two forms give the same relative weights. Each stump is one vertical or horizontal line, but their weighted combination draws a complex boundary.
+
+> **Watch out:** This α is unrelated to the regularization α or the gradient descent step size; scikit-learn's `learning_rate` scales it. AdaBoost is sensitive to **noisy labels**: it keeps up-weighting points it can't fit.
 
 <a id="observation-weights"></a>
 
@@ -5464,6 +6141,8 @@ ada.fit(X_train, y_train)
 ada.score(X_train, y_train), ada.score(X_test, y_test)
 ```
 
+On the Spambase data (4,601 emails, 57 word- and character-frequency features, 39.4% spam), 200 default stumps reach training 0.948 and test **0.933**: a small train–test gap, because boosting stumps doesn't overfit quickly.
+
 <a id="learning-rate-and-n-estimators"></a>
 
 ### learning_rate and n_estimators
@@ -5478,7 +6157,11 @@ _scikit-learn_
 
 _Concept_
 
-Instead of reweighting observations, each new weak tree is fitted to the **residuals** (more precisely, the negative gradient of the loss) of the current ensemble, and its predictions are added on to correct them. Start from the null model, fit a shallow tree to the residuals, adjust, add, repeat. Unlike AdaBoost, you can choose the loss function.
+Instead of reweighting observations, each new tree is fitted to the **residuals** of the current ensemble (all of them; big residuals simply have more influence), and a small step of that tree is added on. Precisely, each tree fits the **negative gradient** of the loss (the "pseudo-residuals"); for squared error those are exactly y − ŷ, and for classification the loss ("deviance") is log loss. Each update is multiplied by a small **learning rate** (shrinkage, e.g. 0.1), so many small steps are taken, which reduces overfitting. It's gradient descent, but each step adds a tree instead of changing a coefficient. Introduced by Jerome Friedman (2001); unlike AdaBoost, you can choose the loss.
+
+Analogy: golf. The first shot gets you near the hole; each following putt corrects the remaining distance. Each tree is a putt.
+
+> **Watch out:** Each tree fits the **negative** gradient, the direction that reduces the loss; it's easy to drop the minus sign.
 
 <a id="gradientboostingclassifier"></a>
 
@@ -5497,22 +6180,31 @@ gs = GridSearchCV(gb, pgrid, cv=5, n_jobs=6).fit(X_train, y_train)
 gs.best_params_
 ```
 
+Key hyperparameters: `n_estimators`, `learning_rate`, `max_depth`, and `subsample` (below 1.0 gives stochastic gradient boosting). Smaller learning rates need more trees but usually generalize better. On the spam data, 100 depth-3 trees (the defaults) score 0.968 train / **0.946** test, beating 200 stumps: slightly bigger trees capture interactions between words. scikit-learn's `HistGradientBoostingClassifier` is a much faster version that handles missing values natively.
+
 <a id="xgboost"></a>
 
 ### XGBoost
 
 _Concept, xgboost_
 
-e**X**treme **G**radient **Boost**ing: an optimized, regularized gradient boosting algorithm with its own library. Pros: Kaggle-winning predictions, handles missing data natively, engineered to be parallelizable and to scale to massive (distributed) data. Cons: prone to overfitting, can be slow on large data.
+e**X**treme **G**radient **Boost**ing (Chen and Guestrin, 2016): gradient boosting with built-in **regularization** (penalties on tree complexity and leaf weights), second-order (Newton-style) optimization, efficient handling of sparse and missing data, and speed. It isn't part of scikit-learn but provides a scikit-learn-compatible API, so it works with pipelines and `GridSearchCV`. Alternatives with similar performance: LightGBM, CatBoost and scikit-learn's `HistGradientBoostingClassifier`.
 
 ```python
 # pip install xgboost
 from xgboost import XGBClassifier
 
-xgb = XGBClassifier(n_estimators=100, max_depth=1)
+X.columns = X.columns.str.replace("[", "lbracket", regex=False)   # see Watch out
+xgb = XGBClassifier(n_estimators=300, learning_rate=0.1, max_depth=4, random_state=42, n_jobs=-1)
 xgb.fit(X_train, y_train)
-xgb.score(X_test, y_test)
+xgb.score(X_test, y_test)                                          # spam: 0.952
+pd.Series(xgb.feature_importances_, index=X.columns).nlargest(3)
+# char_freq_$ 0.242, word_freq_remove 0.115, char_freq_! 0.099
 ```
+
+**Controlling overfitting:** lower `learning_rate` (eta), smaller `max_depth`, `subsample` and `colsample_bytree` below 1, regularization (`reg_lambda`, `reg_alpha`), and early stopping on a validation set.
+
+> **Watch out:** XGBoost rejects feature names containing `[`, `]` or `<` (the spam data's `char_freq_[` raises an error), so rename columns first. It's efficient **for a boosting library** and scales to massive data, but it's still slower than a linear model or a single tree, especially when heavily tuned.
 
 <a id="catboost"></a>
 
@@ -5528,7 +6220,11 @@ Another gradient boosting library, suggested as a next step. Its strength is nat
 
 _Concept_
 
-**Pros:** top-tier performance and all the benefits of tree-based models. **Cons:** "all hope of interpretation, gone"; the highest computational cost in the course; and because each model depends on the last, the core algorithm can't be parallelized (XGBoost parallelizes within each tree).
+**Pros:** top-tier performance and all the benefits of tree-based models. **Cons:** harder to tune (many hyperparameters), slower to train, can overfit if run too long, sensitive to noisy labels, and the highest computational cost in the course. Interpretation isn't totally gone: feature importance, partial dependence plots and SHAP all work on boosted trees.
+
+> **Watch out:** "Can boosting be parallelized?" has a two-part answer: boosting **rounds** must run in sequence, but XGBoost, LightGBM and `HistGradientBoosting` parallelize the work **within** each tree.
+
+See also: [Model explainability](#model-explainability)
 
 <a id="comparing-adaboost-gradient-boosting-and-xgboost"></a>
 
@@ -5537,6 +6233,8 @@ _Concept_
 _Concept_
 
 **AdaBoost** reweights the observations the previous model got wrong. **Gradient boosting** fits each new model to the previous model's residuals. **XGBoost** is gradient boosting optimized for large data with missing values.
+
+Spam test accuracy (null 0.606): AdaBoost 0.933; gradient boosting 0.946; XGBoost 0.952; **random forest 0.953**. Boosting isn't always the winner: here a random forest ties it. Always compare against simpler baselines. Why not always boost? Simpler models are often good enough, and easier to tune, explain and maintain.
 
 <a id="make-moons"></a>
 
@@ -5553,11 +6251,13 @@ X, y = make_moons(n_samples=300, noise=0.5, random_state=42)
 
 ---
 
-<a id="s30-support-vector-machines"></a>
+<a id="s31-support-vector-machines"></a>
 
-## 30. Support vector machines
+## 31. Support vector machines
 
 _Classifiers that find the widest possible gap between classes, then bend that gap with kernels. Maximal margin, soft margin and kernel SVMs, and the hyperparameters C and kernel. Examples use the wine data (red vs white) and the MNIST handwritten digits._
+
+**In your capstone:** Use SVMs when accuracy matters more than interpretability on scaled, medium-sized data.
 
 <a id="support-vector-machine-svm"></a>
 
@@ -5725,11 +6425,13 @@ _Concept_
 
 ---
 
-<a id="s31-gradient-descent-and-optimization"></a>
+<a id="s32-gradient-descent-and-optimization"></a>
 
-## 31. Gradient descent and optimization
+## 32. Gradient descent and optimization
 
 _How models are actually fitted when there's no formula for the answer: walk downhill on the loss function. The algorithm, the learning rate, and what goes wrong. Examples fit a slope by hand to simulated soda sales._
+
+**In your capstone:** Explains what's happening when models fit, and why convergence warnings, scaling and learning rates matter.
 
 <a id="optimization"></a>
 
@@ -5739,6 +6441,8 @@ _Concept_
 
 Finding the minimum or maximum of an **objective function**, possibly subject to constraints. The calculus way is to set the derivative to zero and solve. With one notable exception (OLS), ML loss functions can't be solved that way, so we use iterative methods.
 
+Maximizing f is the same as minimizing −f, so ML usually talks only about minimizing. Everyday examples: the shortest route, the cheapest delivery schedule, the best coefficients for a model.
+
 <a id="derivative"></a>
 
 ### Derivative
@@ -5747,13 +6451,17 @@ _Concept_
 
 The slope of the tangent line to a function at a point. **Positive**: the function goes up to the right, so move left to go down. **Negative**: move right. **Zero**: a minimum, maximum or inflection point. For several parameters the vector of derivatives is the **gradient**.
 
+Example: f(x) = x² has derivative 2x, so at x = 3 the slope is 6. Setting the derivative to zero finds the flat spots: for f(x) = (x − 3)² + 1, f′(x) = 2(x − 3) = 0 gives the minimum at x = 3. But a zero derivative is necessary, not sufficient: f(x) = x³ is flat at x = 0 without a peak or valley (an inflection point).
+
 <a id="loss-function"></a>
 
 ### Loss function
 
 _Concept_
 
-A function measuring the difference between y and ŷ, where **lower is better**. Examples: MSE (OLS), MSE + penalty (Ridge, Lasso), log loss (logistic regression), Gini/MSE (trees). R² and accuracy aren't loss functions, because higher is better.
+A function measuring the difference between y and ŷ, where **lower is better**; minimizing it means making predictions as close to the truth as possible, and the model's coefficients are the "position" being searched over. Examples: MSE (OLS), MSE + penalty (Ridge, Lasso), log loss (logistic regression), Gini/MSE (trees). Related words: **cost function** (often the average over all rows), **objective function** (whatever the algorithm optimizes).
+
+Why isn't accuracy used for **training**? It's a step function: nudging a coefficient slightly usually changes no predictions, so its gradient is zero almost everywhere and gives gradient descent nothing to follow. Log loss is smooth, so it works. For a positive case (y = 1) log loss is −log ŷ: small when ŷ is near 1, huge when ŷ is near 0, so confident wrong answers are punished hardest.
 
 <a id="closed-form-solution"></a>
 
@@ -5761,7 +6469,11 @@ A function measuring the difference between y and ŷ, where **lower is better**.
 
 _Concept_
 
-An exact formula for the answer. OLS has one: β̂ = (XᵀX)⁻¹Xᵀy. Lasso and logistic regression don't, so they need gradient descent or a similar algorithm.
+An exact formula for the answer. OLS has one: β̂ = (XᵀX)⁻¹Xᵀy, and so does ridge regression. Lasso and logistic regression don't: lasso's |β| penalty has a sharp corner at zero (no derivative there, which is also why it produces exact zeros), and log loss has no algebraic minimum. Even OLS is sometimes solved iteratively on very large data, because inverting XᵀX gets expensive with many features.
+
+What libraries actually use: scikit-learn's `Lasso` uses **coordinate descent** (optimizing one coefficient at a time), and `LogisticRegression` defaults to **L-BFGS**, a quasi-Newton method; that's where `LogisticRegression`'s convergence warnings come from. Neural networks use gradient descent variants such as Adam.
+
+See also: [Quasi-Newton methods (BFGS, L-BFGS)](#quasi-newton-methods-bfgs-l-bfgs)
 
 <a id="gradient-descent"></a>
 
@@ -5781,13 +6493,55 @@ for i in range(300):
     x = x - alpha * f_deriv(x)
 ```
 
+With several coefficients, the **gradient** is the vector of derivatives with respect to each one; it points in the direction of steepest increase, so moving against it is **steepest descent**. Because each move is α × slope, the steps shrink automatically as the curve flattens near the bottom, and a slight overshoot is fine: the slope on the other side points back. Stop when the step falls below a tolerance (e.g. 10⁻⁸), the loss stops improving, or `max_iter` is reached (scikit-learn then raises a ConvergenceWarning).
+
+Worked example: minimize f(x) = x² (f′(x) = 2x) from x₀ = 5 with α = 0.1: x₁ = 5 − 0.1 × 10 = 4, x₂ = 4 − 0.1 × 8 = 3.2; each step multiplies x by 0.8, heading towards 0.
+
+A reusable version, applied to the deck's "food for thought" function, whose minimum has no algebraic solution:
+
+```python
+def gradient_descent(grad, x0, alpha, tol=1e-8, max_iter=10_000):
+    x = x0
+    for k in range(max_iter):
+        step = alpha * grad(x)
+        x = x - step                       # move opposite to the gradient
+        if abs(step) < tol:                # stop when the move is small enough
+            return x, k + 1
+    return x, max_iter
+
+f  = lambda x: -np.log(x) / (1 + x)
+df = lambda x: -(1/x + 1 - np.log(x)) / (1 + x)**2
+x_min, iters = gradient_descent(df, x0=1.0, alpha=5.0)   # x ≈ 3.5911, f(x) ≈ -0.2785, 155 steps
+```
+
 <a id="learning-rate-step-size"></a>
 
 ### Learning rate (step size, α)
 
 _Concept_
 
-How far to move each step. **Too large**: you overshoot the minimum and bounce around or diverge. **Too small**: convergence takes forever, or never happens in your iteration budget. Choosing it is "probably the most difficult problem". In the soda example, α = 0.01 diverges and α = 0.0001 converges near the true slope of 1,000.
+How far to move each step: new position = old position − α × gradient. **Too large**: you overshoot and bounce or diverge. **Too small**: convergence takes forever, or never happens in your iteration budget. On f(x) = x² from x = 5:
+
+```python
+for alpha in [0.01, 0.1, 0.9, 1.1]:
+    x, iters = gradient_descent(lambda x: 2 * x, x0=5.0, alpha=alpha, max_iter=200)
+# 0.01: x = 0.088 after 200 steps (too slow) | 0.1: converged in 84 steps
+# 0.9: converged in 94 (zig-zagging)        | 1.1: x ≈ 3.4e16 (diverged)
+```
+
+A practical recipe: try values on a log scale (0.001, 0.01, 0.1, 1), plot the loss against iterations, and pick the largest α that decreases the loss smoothly. α is a hyperparameter, like k in kNN.
+
+> **Watch out:** α means different things across the course: the step size here, the regularization strength in scikit-learn (often written λ in textbooks), the significance level in statistics, and AdaBoost's model weight.
+
+See also: [Feature scaling and gradient descent](#feature-scaling-and-gradient-descent)
+
+<a id="feature-scaling-and-gradient-descent"></a>
+
+### Feature scaling and gradient descent
+
+_Concept_
+
+Gradient descent converges much faster, and one "normal" α works, when features are **standardized**. In the soda notebook, temperatures around 45 make the gradient scale with x² (≈ 2,000), so α = 0.01 explodes (β₁ ≈ 3.8 × 10¹⁶⁵ after 100 steps) and only a tiny α (0.0001) converges; the stability limit is roughly α < 0.0005. Standardize the feature and α = 0.1 works. Poorly scaled features also create long, flat valleys in the loss surface. It's another reason for the `StandardScaler` habit.
 
 <a id="convergence-and-tolerance"></a>
 
@@ -5808,7 +6562,7 @@ def check_update(beta_1, updated_beta_1, tolerance=0.1):
 
 _NumPy, Python_
 
-The notebook fits β₁ in sodas = 200,000 + 1,000·temp + ε by minimizing MSE. The gradient of MSE with respect to β₁ is (2/n) Σ −xᵢ(yᵢ − (β₁xᵢ + β₀)).
+The notebook fits β₁ in sodas = 200,000 + 1,000·temp + ε by minimizing MSE (temperatures drawn from a Poisson(45) distribution). The gradient of MSE with respect to β₁ is (2/n) Σ −xᵢ(yᵢ − (β₁xᵢ + β₀)); the vectorized NumPy line replaces a slow loop.
 
 ```python
 def beta_1_gradient(x, y, beta_1, beta_0):
@@ -5823,8 +6577,25 @@ def gradient_descent(x, y, beta_1=0, alpha=0.01, max_iter=100):
     print("Did not converge: don't trust beta_1")
     return beta_1
 
-gradient_descent(df["temp"], df["sodas"], beta_1=20, alpha=0.0001)
+gradient_descent(df["temp"], df["sodas"], beta_1=20, alpha=0.0001)   # ≈ 1,012.7 in about 16 steps
 ```
+
+The result matches the exact least-squares slope with β₀ fixed (1,012.8); the true value is 1,000, and the gap is noise in the sample. When it doesn't converge, change α rather than raising `max_iter`.
+
+**Fitting all the coefficients at once** recovers the closed-form answer:
+
+```python
+rng = np.random.default_rng(0)
+X = np.column_stack([np.ones(200), rng.normal(size=(200, 2))])
+y = X @ np.array([3.0, 2.0, -1.0]) + rng.normal(scale=0.5, size=200)
+beta = np.zeros(3)
+for _ in range(1000):
+    gradient = -2 / len(y) * X.T @ (y - X @ beta)       # gradient of the MSE
+    beta -= 0.1 * gradient
+beta.round(3), np.linalg.solve(X.T @ X, X.T @ y).round(3)   # identical
+```
+
+> **Watch out:** This example fixes β₀ at its true value (200,000) and only learns β₁, a deliberate simplification; fitting both gives β₀ ≈ 198,639 and β₁ ≈ 1,042.
 
 <a id="local-vs-global-minimum"></a>
 
@@ -5834,13 +6605,17 @@ _Concept_
 
 A **local minimum** is lower than its neighbours; the **global minimum** is the lowest point overall. Gradient descent can get trapped in a local minimum depending on where it starts. The fix is to check that the loss function is convex.
 
+Gradient descent only sees the local slope, so on a non-convex loss it can stop in a local minimum. Mitigations: several random starts, momentum-based optimizers, or accepting a "good enough" minimum (common in neural networks). The starting point doesn't affect where you end up on a **convex** loss, only how long it takes.
+
 <a id="convex-function"></a>
 
 ### Convex function
 
 _Concept_
 
-A perfectly U-shaped function: the straight line between any two points on it lies above the curve. A convex function has only one minimum, so gradient descent can't get trapped. All the loss functions in this course are convex, except neural networks'.
+A bowl-shaped function: pick any two points on the curve and the straight line between them never dips below the curve (on a W-shape, the line between the two valleys passes under the middle hump). For a convex function **every local minimum is a global minimum**, so gradient descent can't get trapped. Convex: MSE for linear regression, ridge and lasso losses, and log loss for logistic regression. Non-convex: neural network losses, and some other methods such as k-means.
+
+> **Watch out:** The "second derivative never negative" test only applies to twice-differentiable functions: |β| (the lasso penalty) is convex but has no derivative at 0.
 
 <a id="flat-curves-vanishing-steps"></a>
 
@@ -5850,6 +6625,8 @@ _Concept_
 
 Problem 4: where the curve is very flat, the gradient is tiny, so steps shrink and progress stalls even far from the minimum.
 
+In neural networks this is related to **vanishing gradients**. Poorly scaled features also create flat valleys; standardizing helps.
+
 <a id="choosing"></a>
 
 ### Choosing α
@@ -5858,13 +6635,17 @@ _Concept_
 
 Four approaches from the slides: (1) **manually**, by guess-and-check (also standard for neural nets); (2) **let α shrink over time** (sensible, but rarely works well); (3) **use a fancier algorithm**: IRLS (used by GLMs such as logistic regression), Adam and RMSProp (neural networks); (4) **second-order methods** such as Newton's method.
 
+Learning-rate **schedules** (step decay, cosine decay) are widely used in deep learning alongside adaptive optimizers.
+
 <a id="adam-rmsprop-and-irls"></a>
 
 ### Adam, RMSProp and IRLS
 
 _Concept_
 
-Smarter optimizers that adapt the step size automatically. **Adam** (adaptive momentum) and **RMSProp** are standard for neural networks. **Iteratively reweighted least squares** fits generalized linear models such as logistic regression.
+Smarter optimizers that adapt the step size automatically. **Adam** (Adaptive Moment Estimation) keeps running averages of past gradients (momentum) and of their squares, giving each parameter its own adaptive step; it's the default optimizer for most neural networks. **RMSProp** scales steps by recent gradient sizes. **Iteratively reweighted least squares (IRLS)** solves a sequence of weighted least-squares problems; statsmodels fits logistic regression this way (equivalent to Newton's method for that problem).
+
+> **Watch out:** Adam stands for Adaptive **Moment Estimation**; "Adaptive Momentum" is a common slip.
 
 <a id="newton-s-method"></a>
 
@@ -5872,7 +6653,24 @@ Smarter optimizers that adapt the step size automatically. **Adam** (adaptive mo
 
 _Concept_
 
-A **second-order** method: it uses the second derivative too, replacing α with 1/f″(x), so steps automatically shrink near the minimum. Faster and more reliable than first-order gradient descent, but second derivatives (and, with many parameters, the inverse Hessian matrix) are usually far too expensive to compute.
+A **second-order** method: it uses the curvature (the second derivative) as well as the slope, replacing α with 1/f″(x). Dividing by the curvature takes big steps where the function curves gently and small steps where it curves sharply; on a quadratic like x² it lands on the minimum in **one step**. With n parameters it needs the gradient ∇f and the **Hessian** ∇²f, the n × n matrix of all second derivatives: a model with a million parameters would need a trillion entries, which is why it's rarely used directly.
+
+> **Watch out:** Newton's method converges very fast **near** the minimum of a well-behaved convex function, but it isn't guaranteed to work: it can diverge when started far away, and on non-convex functions it converges to any flat spot, including maxima and saddle points. And derivatives don't have to be estimated: automatic differentiation (PyTorch, TensorFlow, JAX) computes exact derivatives of any program.
+
+See also: [Quasi-Newton methods (BFGS, L-BFGS)](#quasi-newton-methods-bfgs-l-bfgs)
+
+<a id="quasi-newton-methods-bfgs-l-bfgs"></a>
+
+### Quasi-Newton methods (BFGS, L-BFGS)
+
+_Concept, scikit-learn_
+
+Methods that approximate the inverse Hessian cheaply from recent gradients, getting much of Newton's speed without computing second derivatives. **L-BFGS** (limited-memory BFGS) is scikit-learn's default solver for `LogisticRegression` (`solver="lbfgs"`), so you've been using a near-Newton method all along. `scipy.optimize.minimize` uses BFGS by default for unconstrained problems.
+
+```python
+from scipy.optimize import minimize
+minimize(lambda v: f(v[0]), x0=[1.0], method="L-BFGS-B", bounds=[(0.01, None)]).x   # ≈ [3.591]
+```
 
 <a id="stochastic-gradient-descent-sgd"></a>
 
@@ -5884,11 +6682,13 @@ A variant that estimates the gradient from one row or a small batch at a time in
 
 ---
 
-<a id="s32-unsupervised-learning-and-k-means-clustering"></a>
+<a id="s33-unsupervised-learning-and-k-means-clustering"></a>
 
-## 32. Unsupervised learning and k-means clustering
+## 33. Unsupervised learning and k-means clustering
 
 _No y-variable: finding structure in X itself. What clustering is for, how k-means works, and how to judge clusters when there's no right answer, using inertia, the elbow method and the silhouette score. Examples use `make_blobs`, Old Faithful geyser eruptions and the seeds and iris labs._
+
+**In your capstone:** For segmentation questions: scale, compare k with inertia and silhouette, then profile the clusters so they mean something to the business.
 
 <a id="unlabeled-data"></a>
 
@@ -5932,6 +6732,24 @@ _Concept_
 
 There are many because "the notion of cluster cannot be precisely defined": **k-means** (mean centroids), **DBSCAN** (density), **hierarchical/agglomerative** (merging), affinity propagation, mean shift, spectral clustering, Birch and k-medoids. Clustering is exploratory, not confirmatory.
 
+<a id="birch-and-affinity-propagation"></a>
+
+### Birch and Affinity Propagation
+
+_scikit-learn_
+
+Two further scikit-learn clustering algorithms, offered as a bonus in the comparison lab. **Birch** builds a compact tree of cluster summaries in one pass over the data, so it scales to very large datasets; you can still set `n_clusters` for the final grouping. **Affinity Propagation** finds clusters by points "sending messages" to each other until a set of exemplar points emerges; like DBSCAN it **chooses the number of clusters itself**, controlled by its `damping` and `preference` settings, and it's slow on large data.
+
+```python
+from sklearn.cluster import Birch, AffinityPropagation
+
+Birch(n_clusters=3).fit(Xs).labels_                       # scaled iris: ARI ≈ 0.66
+ap = AffinityPropagation(random_state=42).fit(Xs)
+len(ap.cluster_centers_indices_)                          # 9 clusters found on scaled iris
+```
+
+Left to choose for itself, Affinity Propagation finds 9 clusters on iris, a reminder that "the algorithm picks k" doesn't mean it picks the k you'd expect.
+
 <a id="k-means"></a>
 
 ### k-means
@@ -5939,6 +6757,8 @@ There are many because "the notion of cluster cannot be precisely defined": **k-
 _Concept_
 
 Partitions the data into **k** clusters, each with a **centroid** (its mean), assigning every point to its nearest centroid so as to minimize the within-cluster sum of squares. Algorithm: (1) pick k; (2) initialize k centroids; (3) assign each point to the nearest centroid; (4) move each centroid to the centre of its cluster; (5) repeat 3–4 until the centroids stop moving. It's guaranteed to converge, but possibly to a local minimum.
+
+k-means minimizes the within-cluster squared distance, and its loss is non-convex: different starting centroids can give different answers, which is why `n_init` runs it several times.
 
 <a id="centroid"></a>
 
@@ -5974,6 +6794,8 @@ km.fit(X_scaled)
 df["cluster"] = km.labels_
 ```
 
+> **Watch out:** `KMeans()` with no arguments uses **8 clusters**; always set `n_clusters`. And since scikit-learn 1.4, `n_init="auto"` runs k-means only **once** with k-means++, so an unlucky start can land in a poor local minimum. On scaled iris, a single run with `random_state=42` splits setosa in two and merges the other species (ARI 0.43); `n_init=10` gives the clean answer (ARI ≈ 0.62). Without `random_state`, the clusters change on every run. Use `KMeans(n_clusters=3, n_init=10, random_state=42)`.
+
 <a id="labels-and-cluster-centers"></a>
 
 ### labels* and cluster_centers*
@@ -5988,6 +6810,31 @@ centroids = pd.DataFrame(sc.inverse_transform(km.cluster_centers_), columns=["x1
 df.groupby("cluster").mean()        # same centroids, computed from the data
 ```
 
+<a id="cluster-labels-are-arbitrary"></a>
+
+### Cluster labels are arbitrary
+
+_Concept, pandas_
+
+Cluster numbers are just names: "cluster 0" in one run might be "cluster 2" in the next, and neither has anything to do with class 0 in your true labels. That's why the evaluation lab asks you to match clusters to species before comparing them. Compare with a **crosstab**, or use metrics that ignore the numbering (ARI, homogeneity, completeness, V-measure).
+
+```python
+import seaborn as sns
+from sklearn.preprocessing import LabelEncoder
+
+iris = sns.load_dataset("iris")                   # or sklearn.datasets.load_iris()
+X, y = iris.drop(columns="species"), iris["species"]
+labels = KMeans(n_clusters=3, n_init=10, random_state=42).fit(StandardScaler().fit_transform(X)).labels_
+
+pd.crosstab(y, labels)                            # setosa sits alone in one cluster;
+                                                  # versicolor and virginica overlap
+species_ind = LabelEncoder().fit_transform(y)     # 'setosa' -> 0, 'versicolor' -> 1, ...
+mapping = pd.crosstab(labels, species_ind).idxmax(axis=1)    # each cluster -> its majority class
+aligned = pd.Series(labels).map(mapping)          # now comparable with species_ind
+```
+
+See also: [External cluster metrics](#external-cluster-metrics), [Adjusted Rand index (ARI)](#adjusted-rand-index-ari)
+
 <a id="scaling-before-clustering"></a>
 
 ### Scaling before clustering
@@ -5995,6 +6842,10 @@ df.groupby("cluster").mean()        # same centroids, computed from the data
 _Concept_
 
 k-means uses distances, so a feature with a large range dominates. In the slides, the red point's 5 nearest neighbours look completely different once the x-axis is rescaled. Standardize first, though in the seeds lab unscaled data happened to score better, so it's worth checking.
+
+The seeds lab writes a function that tries every k on the raw data, `normalize`d rows, `StandardScaler` and `MinMaxScaler`, and keeps the highest silhouette.
+
+> **Watch out:** There's no universally best scaler, so compare a few. Silhouette scores computed on differently scaled versions of the data are each measured in their own space, so comparing them across scalings is only a rough guide.
 
 <a id="make-blobs"></a>
 
@@ -6010,7 +6861,7 @@ Generates round, well-separated clusters: the ideal case for k-means. `make_circ
 
 _Concept, scikit-learn_
 
-The sum of squared distances from each point to its cluster's centroid. **Low inertia = dense clusters.** Worked example from the slides: centroid (5, 7) and points (7, 10), (8, 8), (3, 5), (7, 5) give 13 + 10 + 8 + 8 = 39. (The slide shows 9 for the point (8, 8) and a total of 38, but 3² + 1² = 10.) Problems: it isn't interpretable, and it always falls as k rises, so you can't just minimize it.
+The sum of squared distances from each point to its cluster's centroid. **Low inertia = dense clusters.** Worked example from the slides: centroid (5, 7) and points (7, 10), (8, 8), (3, 5), (7, 5) give 13 + 10 + 8 + 8 = 39. Problems: it isn't interpretable, and it always falls as k rises, so you can't just minimize it.
 
 ```python
 km.inertia_
@@ -6047,6 +6898,8 @@ silhouette_list = [silhouette_score(X_scaled,
 plt.plot(range(2, 11), silhouette_list, marker="o")
 ```
 
+> **Watch out:** Silhouette rewards compact, round blobs, so it can mislead for density-based clusters. On the circles data, DBSCAN's correct two-ring solution scores silhouette **0.24**, lower than k-means' completely wrong solution (0.27). For non-convex clusters, judge visually or with labels. And compute it on the **same (scaled) data** the model was fitted on; passing the unscaled X is an easy slip.
+
 <a id="choosing-the-number-of-clusters"></a>
 
 ### Choosing the number of clusters
@@ -6054,6 +6907,8 @@ plt.plot(range(2, 11), silhouette_list, marker="o")
 _Concept_
 
 There's no single right answer. Options: domain knowledge or business needs ("I need three marketing profiles"), visualization (only practical in 2–3 dimensions), the elbow method, the silhouette score, or, if the clusters feed a supervised model, tuning k for that model's performance.
+
+> **Watch out:** The silhouette score finds the **best-separated** grouping, which isn't always the "true" number of groups. On scaled iris it prefers k = 2 (0.58) over k = 3 (0.48), because setosa is far from the other two species, which overlap. The seeds lab's automatic search also picks k = 2 for three wheat varieties, which is why silhouette alone can be untrustworthy. Combine scores with plots and domain knowledge.
 
 <a id="k-means-assumptions"></a>
 
@@ -6089,11 +6944,13 @@ Reusing a model trained on one task as the starting point for a related task. Us
 
 ---
 
-<a id="s33-dbscan-and-hierarchical-clustering"></a>
+<a id="s34-dbscan-and-hierarchical-clustering"></a>
 
-## 33. DBSCAN and hierarchical clustering
+## 34. DBSCAN and hierarchical clustering
 
 _Two clustering methods that break k-means's rules: DBSCAN finds dense regions of any shape and labels outliers, and agglomerative clustering builds clusters by merging. Plus metrics for comparing clusters with known labels. Examples use NHL team statistics, `make_circles` and seven shape-testing datasets (flame, spiral, jain…)._
+
+**In your capstone:** Use DBSCAN or HDBSCAN for irregular shapes and outliers, and agglomerative clustering when a hierarchy helps tell the story.
 
 <a id="dbscan"></a>
 
@@ -6103,13 +6960,17 @@ _Concept_
 
 **D**ensity-**B**ased **S**patial **C**lustering of **A**pplications with **N**oise. Clusters are areas of **high density** separated by low-density areas. It finds clusters of any contiguous shape, works out how many clusters there are, and leaves outliers unclustered.
 
+Proposed by Ester, Kriegel, Sander and Xu (1996). Clusters grow by connecting **core points** that are within eps of each other ("reachability"); border points are reached but don't spread the cluster further. Uses: spatial data (GPS hotspots, crime locations), anomaly detection (unusual transactions as noise), irregularly shaped groups.
+
+See also: [HDBSCAN](#hdbscan)
+
 <a id="eps-and-min-samples"></a>
 
 ### eps and min_samples
 
 _scikit-learn_
 
-DBSCAN's two hyperparameters. **`eps`** (epsilon) is the search radius: the maximum distance for two points to count as neighbours. **`min_samples`** is the minimum number of points within `eps` to form a dense region. Having to choose both is "a huge disadvantage": poor choices give too many outliers or one giant cluster.
+DBSCAN's two hyperparameters. **`eps`** (epsilon) is the search radius: the maximum distance for two points to count as neighbours. **`min_samples`** is the number of points (**including the point itself**) that must lie within eps of a point for it to be a **core point**. The defaults are `eps=0.5, min_samples=5`. Always scale features first, because eps is a distance.
 
 ```python
 from sklearn.cluster import DBSCAN
@@ -6117,6 +6978,28 @@ from sklearn.cluster import DBSCAN
 dbscan = DBSCAN(eps=0.5, min_samples=3)
 dbscan.fit(X_scaled)
 dbscan.labels_
+```
+
+Results are very sensitive to eps. On the NHL practice lab (90 team-seasons, 25 standardized features, `min_samples=3`): eps = 2 gives 2 clusters and 84 of 90 points as noise; eps = 3 gives 5 clusters and 39 noise; eps = 4 gives 1 cluster and 4 noise. Having to choose both is "a huge disadvantage".
+
+> **Watch out:** `min_samples` isn't "the minimum size of a cluster": it's the neighbourhood count (including the point itself) that makes a point a core point.
+
+See also: [k-distance plot](#k-distance-plot)
+
+<a id="k-distance-plot"></a>
+
+### k-distance plot
+
+_scikit-learn, matplotlib_
+
+A heuristic for choosing eps: for each point, find the distance to its k-th nearest neighbour (k = min_samples), sort those distances, and plot them. The "elbow", where distances start rising steeply, is a reasonable eps: points beyond it sit in sparse regions.
+
+```python
+from sklearn.neighbors import NearestNeighbors
+
+k = 3
+dists, _ = NearestNeighbors(n_neighbors=k).fit(X_scaled).kneighbors(X_scaled)
+plt.plot(np.sort(dists[:, -1]))          # look for the elbow
 ```
 
 <a id="core-border-and-noise-points"></a>
@@ -6146,6 +7029,8 @@ n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
 (labels == -1).sum()          # number of outliers
 ```
 
+> **Watch out:** Clustering metrics treat −1 as just one more cluster. On the "jain" shape dataset, DBSCAN finds one cluster plus 100 noise points yet still scores ARI 0.97, because the noise happens to match the sparser true cluster.
+
 <a id="dbscan-pros-and-cons"></a>
 
 ### DBSCAN pros and cons
@@ -6153,6 +7038,23 @@ n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
 _Concept_
 
 **Pros:** any contiguous shape (k-means only handles round blobs); tells you how many clusters there are; finds outliers. **Cons:** needs roughly uniform density; two hyperparameters to tune; bad settings flag too many outliers; struggles when data are dense in one area and spread out elsewhere (as with the NHL data). Ideal for rings (`make_circles`).
+
+**Verified on the course's circles data:** DBSCAN recovers both rings perfectly (adjusted Rand index 1.0), while k-means slices them into halves (ARI ≈ 0).
+
+See also: [HDBSCAN](#hdbscan)
+
+<a id="hdbscan"></a>
+
+### HDBSCAN
+
+_scikit-learn_
+
+Hierarchical DBSCAN: handles clusters of **varying density**, DBSCAN's main weakness, and only needs `min_cluster_size` (no eps). In scikit-learn since version 1.3; noise points are still labelled −1.
+
+```python
+from sklearn.cluster import HDBSCAN
+labels = HDBSCAN(min_cluster_size=10).fit_predict(X_scaled)
+```
 
 <a id="make-circles"></a>
 
@@ -6191,13 +7093,17 @@ agg.fit(X_scaled)
 agg.labels_
 ```
 
+Instead of `n_clusters`, you can set `distance_threshold` to cut the tree at a chosen height.
+
 <a id="linkage"></a>
 
 ### Linkage
 
 _Concept_
 
-How the distance between two clusters is measured when merging. **Ward** (default): merge the pair that least increases within-cluster variance. **Single**: minimum distance between any two points (single-linkage clustering; can follow long chains and odd shapes). Also **complete** (maximum distance) and **average**.
+How the distance between two clusters is measured when merging. **Ward** (default): merge the pair that least increases within-cluster variance; it makes compact, similar-sized, k-means-like clusters and requires Euclidean distance. **Single**: minimum distance between any two points; it follows chains of nearby points, so it handles long, curved shapes, but can "chain" separate clusters together through a few bridging points. Also **complete** (maximum distance) and **average** (average distance).
+
+On the comparison lab's spiral data, single linkage scores ARI **1.0** vs ward ≈ 0; on "pathbased", single scores 0.0 (chaining merges everything) vs ward 0.48.
 
 <a id="dendrogram"></a>
 
@@ -6213,13 +7119,44 @@ Z = linkage(X_scaled, method="ward")
 dendrogram(Z)
 ```
 
+Long vertical gaps between joins suggest natural places to cut.
+
 <a id="comparing-clustering-algorithms"></a>
 
 ### Comparing clustering algorithms
 
 _Concept_
 
-The comparison lab runs k-means, agglomerative and DBSCAN side by side on seven shape datasets. Rough lessons: k-means and Ward suit compact, similar-sized blobs (r15); single linkage and DBSCAN follow curved or nested shapes (spiral, jain, flame); varying densities defeat DBSCAN. Always look at the clusters, not just a score.
+The comparison lab runs k-means, agglomerative clustering and DBSCAN on seven benchmark shape datasets with known labels. Scored with the adjusted Rand index (1 = perfect, 0 = chance), using the notebook's parameters:
+
+| Dataset     | True k | k-means | Ward  | Single | DBSCAN |
+| ----------- | ------ | ------- | ----- | ------ | ------ |
+| flame       | 2      | 0.45    | 0.19  | 0.01   | 0.88   |
+| aggregation | 7      | 0.76    | 0.81  | 0.80   | 0.81   |
+| compound    | 6      | 0.54    | 0.55  | 0.74   | 0.96   |
+| jain        | 2      | 0.32    | 0.51  | 0.26   | 0.97   |
+| pathbased   | 3      | 0.46    | 0.48  | 0.00   | 0.92   |
+| r15         | 15     | 0.99    | 0.98  | 0.54   | 0.79   |
+| spiral      | 3      | −0.01   | −0.00 | 1.00   | 1.00   |
+
+No algorithm wins everywhere. DBSCAN excels on irregular shapes; k-means and ward are best on round, well-separated blobs (r15); single linkage is perfect on the spiral and useless on pathbased. **Choosing a method:** round blobs and a known k → k-means; irregular shapes and outliers → DBSCAN or HDBSCAN; you need a hierarchy or dendrogram → agglomerative, with the linkage chosen to suit the shapes. Always look at the clusters, not just a score.
+
+> **Watch out:** Set `random_state=42` on `KMeans` so results don't change on each run. k-medoids isn't in core scikit-learn (it's in the separate `scikit-learn-extra` package).
+
+See also: [Adjusted Rand index (ARI)](#adjusted-rand-index-ari)
+
+<a id="adjusted-rand-index-ari"></a>
+
+### Adjusted Rand index (ARI)
+
+_scikit-learn_
+
+An external clustering metric: how well the cluster labels agree with the true labels, counting pairs of points placed together or apart, corrected for chance. **1 = perfect match, ≈ 0 = random, can be slightly negative.** Like V-measure, it ignores the cluster numbering.
+
+```python
+from sklearn.metrics import adjusted_rand_score
+adjusted_rand_score(df["label"], AgglomerativeClustering(3, linkage="single").fit(df[["x", "y"]]).labels_)
+```
 
 <a id="external-cluster-metrics"></a>
 
@@ -6237,6 +7174,10 @@ metrics.v_measure_score(y, labels)
 metrics.adjusted_mutual_info_score(y, labels)
 ```
 
+On the NHL data, DBSCAN's clusters barely match team rank (homogeneity 0.118, completeness 0.103, V-measure 0.11): not every dataset has natural clusters, which is itself a useful finding.
+
+See also: [Adjusted Rand index (ARI)](#adjusted-rand-index-ari)
+
 <a id="normalize-vs-scalers"></a>
 
 ### normalize() vs scalers
@@ -6253,11 +7194,13 @@ Xmm = MinMaxScaler().fit_transform(X)
 
 ---
 
-<a id="s34-principal-component-analysis-pca"></a>
+<a id="s35-principal-component-analysis-pca"></a>
 
-## 34. Principal component analysis (PCA)
+## 35. Principal component analysis (PCA)
 
 _Squeezing many correlated variables into a few uncorrelated ones that keep most of the information. What PCA does visually, how SVD does it mathematically, how many components to keep, and when not to use it. Examples use the wine data and the "Doug the Pug" image compression demo._
+
+**In your capstone:** Use PCA to compress many correlated features or to visualize structure, and tune the number of components inside a pipeline.
 
 <a id="dimensionality-reduction"></a>
 
@@ -6267,13 +7210,19 @@ _Concept_
 
 Reducing the number of variables (dimensions) while keeping as much useful information as possible. Helps when there are too many variables, some meaningless and some redundant (multicollinear). An unsupervised technique.
 
+Two kinds: **feature selection** keeps a subset of the original features (lasso dropping features); **feature extraction** creates new features from combinations of the originals (PCA). PCA is the most common linear method; t-SNE and UMAP are non-linear methods used mainly for visualization. Examples of wide data: surveys with 200 questions, sensors with hundreds of readings, images with thousands of pixels, the 90 polynomial wine features.
+
 <a id="principal-component-analysis-pca"></a>
 
 ### Principal component analysis (PCA)
 
 _Concept_
 
-Condenses your x-variables into **principal components**: new variables that are combinations of the originals, ordered by how much of the data's variability they capture, and **uncorrelated** with each other. Keep the first few and drop the rest: perhaps z₁…z₁₀ carry as much information as x₁…x₂₀₀. PCA ignores y entirely.
+Condenses your x-variables into **principal components**: new variables that are combinations of the originals, ordered by how much of the data's variability (its "information") they capture, and **uncorrelated** with each other. Keep the first few and drop the rest: perhaps z₁…z₁₀ carry as much information as x₁…x₂₀₀. Geometrically, PCA is a **rotation** of the (centred) axes to line up with the directions the data spread along. PCA ignores y entirely, which is why it's often used as a preprocessing step before a supervised model.
+
+Benefits: faster models, less overfitting, easy 2D/3D visualization, and no multicollinearity.
+
+> **Watch out:** PCs are **uncorrelated** (perpendicular directions), which isn't the same as independent unless the data are multivariate normal. And a component doesn't automatically keep the predictive power of the variables it combines: because PCA is unsupervised, the highest-variance direction isn't necessarily the most predictive, and occasionally a small-variance direction is exactly what separates the classes.
 
 See also: [PCA (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#principal-component-analysis-pca)
 
@@ -6304,6 +7253,12 @@ plt.scatter(Z[:, 0], Z[:, 1], c=wine["red_wine"], alpha=0.2, cmap="Dark2")
 
 > **Watch out:** Always standardize first, or the column with the biggest units dominates PC1.
 
+`PCA(n_components=0.9)` keeps just enough components for 90% of the variance. `pc.transform(X)` returns the **PC scores**, the data in the new coordinates.
+
+On the wine data (6,497 wines, 12 standardized features, target `red_wine`): PC1 explains 25.3%, PC2 22.1%, PC3 13.7% (61% in three), and 8 of 12 components reach 90%. A PC1-vs-PC2 scatter separates red and white wines well, even though PCA never saw the labels.
+
+> **Watch out:** Be clear about the target: here the model predicts `red_wine` (colour), with quality kept as a feature. PCA strictly requires **centring**; standardizing as well is needed whenever features use different units, which is almost always.
+
 <a id="explained-variance-and-explained-variance-ratio"></a>
 
 ### Explained variance and explained variance ratio
@@ -6317,17 +7272,28 @@ pc.explained_variance_ratio_
 np.cumsum(pc.explained_variance_ratio_)
 ```
 
+Each component's variance is σ²/(n − 1), where σ is its singular value; that's exactly `explained_variance_`.
+
+```python
+np.argmax(np.cumsum(pc.explained_variance_ratio_) >= 0.9) + 1    # components needed for 90%: 8
+```
+
+> **Watch out:** `explained_variance_` holds the **variances** of the components, not the singular values (σ) themselves; the two are easy to mix up.
+
 <a id="loadings-components"></a>
 
 ### Loadings (components\_)
 
 _scikit-learn_
 
-`pc.components_` holds the weights (loadings) that build each component from the original features, one row per component. Large absolute weights show which features drive a component; in the wine data, sulfur dioxide and density contribute most to PC1. This is the Vᵀ matrix from the SVD.
+`pc.components_` holds the weights (loadings) that build each component from the original features, one row per component. Large absolute weights show which features drive a component. On the standardized wine data, PC1 is driven by **total sulfur dioxide (0.47), free sulfur dioxide (0.42) and volatile acidity (−0.39)**. This is the Vᵀ matrix from the SVD.
 
 ```python
 pd.DataFrame(pc.components_[:3], columns=X.columns, index=["PC1", "PC2", "PC3"])
+pd.Series(pc.components_[0], index=X.columns).sort_values(key=abs, ascending=False).head(3)
 ```
+
+> **Watch out:** Read loadings from PCA (or SVD) on **standardized** data. On unscaled data, sulfur dioxide and density appear to dominate PC1 simply because of their units.
 
 <a id="scree-plot"></a>
 
@@ -6340,6 +7306,8 @@ A plot of explained variance ratio against component number. The old statisticia
 ```python
 plt.plot(pc.explained_variance_ratio_, marker="o")
 ```
+
+Common rules for how many components to keep: enough to explain 80–90% of the variance; the elbow of the scree plot; or, best when there's a downstream model, tune the number by cross-validation.
 
 <a id="choosing-n-components-with-grid-search"></a>
 
@@ -6360,18 +7328,25 @@ gs = GridSearchCV(pipe, {"pc__n_components": np.arange(1, 40)}, cv=5, n_jobs=4)
 gs.fit(X_train, y_train)
 ```
 
+In the course pipeline (scaler → 90 polynomial features → PCA → logistic regression with `penalty=None`, `max_iter=5000`), CV accuracy for predicting wine colour rises quickly then flattens: 1 PC 0.803, 2 → 0.814, 3 → 0.857, 5 → 0.937, 10 → 0.978, 20 → 0.984, best 36 PCs (0.992 CV, 0.993 test). A few components get you most of the way.
+
+> **Watch out:** The older syntax `LogisticRegression(penalty='none')` errors in current scikit-learn; use `penalty=None` (or `C=np.inf` from 1.8), and check the documentation for your version.
+
 <a id="singular-value-decomposition-svd"></a>
 
 ### Singular value decomposition (SVD)
 
 _Concept, NumPy_
 
-Every matrix can be decomposed as **X = U D Vᵀ**. For an n × p scaled data matrix: **U** (n × p) holds the left-singular vectors, **D** (p × p, diagonal) the **singular values** (always positive, in descending order, measuring how much information each direction holds), and **Vᵀ** (p × p) the right-singular vectors. U and V are orthogonal (UᵀU = I). PCA is computed this way.
+Every matrix can be decomposed as **X = U D Vᵀ**, like factorizing a number (12 = 2 × 2 × 3) to reveal its structure: rotation × stretching × rotation. For an n × p centred (usually standardized) data matrix: **U** (n × p) holds the left-singular vectors, **D** (p × p, diagonal) the **singular values** (non-negative, in descending order, measuring how much information each direction holds), and **Vᵀ** (p × p) the right-singular vectors, whose rows are the principal component directions. U and V are orthogonal (UᵀU = I). PCA is computed this way, and Z = XV gives the PC scores.
 
 ```python
-u, s, vh = np.linalg.svd(X_sc, full_matrices=False)
-vh[:3, :3]          # matches pc.components_ (up to sign)
+u, s, vh = np.linalg.svd(X_sc, full_matrices=False)      # SCALED data
+np.allclose(np.abs(vh), np.abs(pc.components_))           # True (signs can flip)
+np.allclose(s**2 / (len(X_sc) - 1), pc.explained_variance_)   # True
 ```
+
+> **Watch out:** Run the SVD on the **same standardized data** PCA was fitted on, or the vectors won't match `pc.components_`. Singular values are non-negative (they can be zero).
 
 <a id="dimensionality-reduced-reconstruction"></a>
 
@@ -6405,6 +7380,8 @@ _Concept_
 
 **Use it** when p ≫ n (or p ≈ n), when variables are highly multicollinear (including images, which are correlated by design), or when there are simply many variables. **Don't use it** when you need to interpret the model, since components are blends of the original features, or when you only have a few features.
 
+Summary of the trade-off: fewer, uncorrelated features (faster, less overfitting, no multicollinearity), but the components are hard to interpret and PCA ignores the target. PCA **extracts** features; it doesn't **select** them.
+
 <a id="covariance-matrix-eigenvectors-and-eigenvalues"></a>
 
 ### Covariance matrix, eigenvectors and eigenvalues
@@ -6415,11 +7392,13 @@ Matt's "three signposts" for explaining PCA in an interview. PCA finds the **eig
 
 ---
 
-<a id="s35-recommender-systems"></a>
+<a id="s36-recommender-systems"></a>
 
-## 35. Recommender systems
+## 36. Recommender systems
 
 _Suggesting items a user will like. The main families of recommenders, and an item-based collaborative filter built from MovieLens ratings with a pivot table, a sparse matrix and cosine similarity._
+
+**In your capstone:** For "what should we recommend?" questions with ratings data, an item-based cosine-similarity recommender is a solid first build.
 
 <a id="recommender-system"></a>
 
@@ -6456,6 +7435,14 @@ A table with one row per item, one column per user and ratings as values: the in
 ```python
 df = pd.merge(ratings, movies, on="movieId", how="left")
 rating_mx = pd.pivot_table(df, index="title", columns="userId", values="rating")
+```
+
+Build it from a merge of ratings and movie titles. A **left** merge keeps every rating and attaches its title (many ratings to one movie). Always check row counts after a merge: the merged table should have exactly as many rows as `ratings`; more means duplicate keys, fewer means lost rows.
+
+```python
+df = pd.merge(ratings, movies, on="movieId", how="left")
+ratings.shape, movies.shape, df.shape            # rows of df should equal rows of ratings
+df = df.drop(columns=["timestamp", "movieId", "genres"])
 ```
 
 See also: [.merge() (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#merge)
@@ -6511,6 +7498,652 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 
 ---
 
+<a id="s37-bayesian-statistics"></a>
+
+## 37. Bayesian statistics
+
+_A one-shot introduction to the other school of statistics: treating unknown parameters as uncertain, describing that uncertainty with probability distributions, and updating them with data (prior + data → posterior). Covers Bayes' theorem, probability mass and density functions, conjugate priors, MCMC and an election-forecasting example, building on the probability and simulation sections._
+
+**In your capstone:** Use Bayesian methods to combine prior knowledge with limited data, and to report results as direct probabilities ("P(B beats A) = 97%").
+
+<a id="bayesian-statistics"></a>
+
+### Bayesian statistics
+
+_Concept_
+
+An approach to statistics that treats unknown quantities (parameters) as **uncertain**, describes that uncertainty with probability distributions, and **updates** them as data arrives. The workflow: (1) make parametric assumptions about the process; (2) assign **prior** beliefs to the parameters, reflecting prior knowledge and how confident you are; (3) collect data; (4) combine prior and data into **posterior** estimates. Today's posterior can become tomorrow's prior as new data arrives. Named after Thomas Bayes (c. 1701–1761), an English minister and mathematician whose theorem was published after his death; Pierre-Simon Laplace developed the ideas much further.
+
+See also: [Frequentist vs Bayesian](#frequentist-vs-bayesian), [Bayes' theorem](#bayes-theorem)
+
+<a id="frequentist-vs-bayesian"></a>
+
+### Frequentist vs Bayesian
+
+_Concept_
+
+The philosophical difference is about **parameters**. In **frequentist** statistics (everything earlier in the course: hypothesis tests, p-values, confidence intervals), a parameter such as a true average is a **fixed, unknown number**, and probability describes how often things happen over many repetitions. In **Bayesian** statistics, parameters are **random variables** with distributions, so you can assign prior information to them and make direct probability statements about them.
+
+The usual case made for Bayesian methods: frequentism struggles with one-time events (an election), small or expensive samples, bad luck in small experiments, and can only use data, not other knowledge. The real heart of it is the last point: Bayesian methods formally include prior knowledge (expert opinion, previous studies).
+
+> **Watch out:** Neither approach always wins. Frequentist methods are used for elections and small samples too, and with lots of data the two approaches usually give similar answers. Both are widely used.
+
+See also: [Probability](#probability)
+
+<a id="bayes-theorem"></a>
+
+### Bayes' theorem
+
+_Concept_
+
+Derived from the multiplication rule: P(A ∩ B) = P(A)P(B | A) = P(B)P(A | B), so
+
+**P(B | A) = P(A | B) · P(B) / P(A)**
+
+It **flips the conditional**, turning P(A | B), which is often easy to know, into P(B | A), which is what we usually want. The classic example: a disease affects 1% of people; a test catches 99% of cases but gives false positives 5% of the time. Then P(disease | positive) = 0.99 × 0.01 / (0.99 × 0.01 + 0.05 × 0.99) ≈ **0.167**: only about 1 in 6 positives actually have the disease.
+
+```python
+p_d, sens, false_pos = 0.01, 0.99, 0.05
+p_pos = sens * p_d + false_pos * (1 - p_d)          # total probability of testing positive
+sens * p_d / p_pos                                   # 0.167
+```
+
+See also: [Base rate fallacy](#base-rate-fallacy), [Multiplication rule (intersections)](#multiplication-rule-intersections), [Conditional probability](#conditional-probability)
+
+<a id="base-rate-fallacy"></a>
+
+### Base rate fallacy
+
+_Concept_
+
+Ignoring how rare something is when interpreting evidence: assuming a 99%-sensitive test means a positive result is 99% likely to be right. When the base rate is low, most positives are false alarms, as in the disease example (1 in 6) and the wind farm's alarm precision (about 14%). Confusing P(positive | disease) with P(disease | positive) is known in law as the **prosecutor's fallacy**.
+
+See also: [Base rate and false alarms](#base-rate-and-false-alarms)
+
+<a id="prior-likelihood-and-posterior"></a>
+
+### Prior, likelihood and posterior
+
+_Concept_
+
+Bayes' theorem with whole distributions, where θ stands for the parameters and x for the data:
+
+**f(θ | x) = f(x | θ) · f(θ) / f(x)**
+
+- **Prior f(θ):** what you believe about the parameters before seeing the data, as a distribution (e.g. "elections usually end close to 50/50"; "previous studies found an effect around 2%"). A **strong** (narrow) prior needs a lot of data to move; a **weak** (wide) prior lets the data dominate.
+- **Likelihood f(x | θ):** how probable the observed data would be for each possible parameter value (e.g. a binomial likelihood for a poll). Less an assumption than a choice of how to parametrize the problem.
+- **Marginal f(x):** the probability of the data, which doesn't depend on θ; it's just the constant that makes the posterior integrate to 1 (you can usually ignore it).
+- **Posterior f(θ | x):** your updated beliefs after the data.
+
+So **posterior ∝ likelihood × prior** (∝ = "proportional to": the shape is right, it just needs rescaling).
+
+<a id="probability-mass-and-density-functions"></a>
+
+### Probability mass and density functions
+
+_Concept, SciPy_
+
+Every random variable has a function describing where its probability is spread, usually written f. For a **discrete** variable, the **probability mass function (PMF)** gives actual probabilities: P(X = x) = f(x). For a **continuous** variable, the **probability density function (PDF)** gives a density, not a probability; probabilities are **areas** under the curve, and a density can even exceed 1.
+
+```python
+from scipy import stats
+stats.binom.pmf(55, 100, 0.5)        # 0.0485 = P(exactly 55 heads in 100 fair flips)
+stats.norm.pdf(0)                    # 0.3989 = a density at 0, not a probability
+stats.norm.cdf(1) - stats.norm.cdf(-1)   # 0.683 = P(-1 < Z < 1), an area
+```
+
+See also: [Normal distribution (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#normal-gaussian-distribution)
+
+<a id="conjugate-prior-beta-binomial"></a>
+
+### Conjugate prior (Beta–binomial)
+
+_Concept, SciPy_
+
+A prior that, combined with a particular likelihood, gives a posterior in the **same family**, so the posterior has a formula and no simulation is needed. The standard example: a **Beta(a, b)** prior on a proportion plus binomial data (s successes, f failures) gives a **Beta(a + s, b + f)** posterior. The **Beta distribution** lives between 0 and 1, which makes it a natural prior for a rate or probability; Beta(1, 1) is flat, and Beta(50, 50) is concentrated near 0.5.
+
+A poll of 100 voters with 55 for candidate A:
+
+```python
+for name, a, b in [("flat prior", 1, 1), ("'close to 50/50' prior", 50, 50)]:
+    post = stats.beta(a + 55, b + 45)
+    lo, hi = post.ppf([0.025, 0.975])
+    print(f"{name}: mean {post.mean():.3f}, 95% interval {lo:.3f}-{hi:.3f}, P(A wins) {1 - post.cdf(0.5):.2f}")
+# flat prior:             mean 0.549, interval 0.452-0.644, P(A wins) 0.84
+# 'close to 50/50' prior: mean 0.525, interval 0.456-0.594, P(A wins) 0.76
+```
+
+The prior tempers an over-confident reading of one poll: the estimate shrinks from 0.549 towards 0.5, and the chance that A is ahead falls from 84% to 76%.
+
+<a id="credible-interval"></a>
+
+### Credible interval
+
+_Concept_
+
+A Bayesian interval that is a direct probability statement about the parameter: "there's a 95% probability the true support is between 45.2% and 64.4%". A frequentist **confidence interval** can't be read that way, because the true value is fixed; its 95% describes the method's long-run success rate over repeated samples. With lots of data and weak priors the two intervals are often numerically similar.
+
+> **Watch out:** Frequentists report uncertainty too, not just a point estimate (standard errors, confidence intervals); the difference is the interpretation.
+
+<a id="grid-approximation"></a>
+
+### Grid approximation
+
+_NumPy, SciPy_
+
+Computing a posterior without a formula: evaluate likelihood × prior on a fine grid of parameter values, then divide by the total so it sums to 1. It shows that the "ignored denominator" is just this rescaling, and reproduces the conjugate answer exactly.
+
+```python
+grid = np.linspace(0, 1, 1001)
+unnormalized = stats.binom.pmf(55, 100, grid) * stats.beta.pdf(grid, 50, 50)
+posterior = unnormalized / unnormalized.sum()
+np.sum(grid * posterior)             # 0.525, same as the formula
+```
+
+Grids work for one or two parameters; with many parameters the number of grid points explodes, which is where MCMC comes in.
+
+<a id="markov-chain-monte-carlo-mcmc"></a>
+
+### Markov Chain Monte Carlo (MCMC)
+
+_Concept_
+
+A family of algorithms that draw random samples whose distribution matches the posterior, **without ever computing f(x)**. Except in simple conjugate cases, posteriors can't be calculated by hand, so in practice you sample. With thousands of posterior samples you can compute anything: the mean, credible intervals, the probability a parameter exceeds a threshold. It builds directly on the Monte Carlo ideas from the simulation section.
+
+See also: [Monte Carlo simulation](#monte-carlo-simulation), [PyMC](#pymc)
+
+<a id="pymc"></a>
+
+### PyMC
+
+_Python_
+
+The leading Python library for Bayesian modelling with MCMC (install with `pip install pymc`). You write the prior and likelihood, and PyMC samples the posterior. The poll model:
+
+```python
+import pymc as pm
+
+with pm.Model():
+    p = pm.Beta("p", alpha=50, beta=50)                    # prior: close to 50/50
+    pm.Binomial("votes", n=100, p=p, observed=55)          # likelihood: 55 of 100
+    trace = pm.sample(2000, random_seed=42)
+trace.posterior["p"].mean().item()                          # ≈ 0.525, matching the formula
+```
+
+Alternatives include Stan (via CmdStanPy) and NumPyro.
+
+> **Watch out:** Older tutorials refer to "PyMC3". The library was renamed **PyMC** from version 4, and some of its API changed, so follow the current documentation. On some restricted or single-core environments sampling can fail while detecting CPU cores; pass `chains=2, cores=1` to `pm.sample`.
+
+<a id="bayesian-election-forecasting"></a>
+
+### Bayesian election forecasting
+
+_Concept_
+
+Elections happen once, which makes them a natural fit for Bayesian methods. Nate Silver's forecasts (formerly at FiveThirtyEight, now in his Silver Bulletin newsletter) are the deck's example. His **prior** uses a fact people forget early in an election cycle: elections usually end up close to 50/50, which stops a forecast overreacting to one dramatic early poll. Poll data form the **likelihood**, and polls are graded by quality, acting like weights (another prior assumption). Schematically: f(p | x) ∝ f(x | p, θ) · f(p) · f(θ), where p is the probability candidate A wins and θ the poll-quality ratings.
+
+> **Watch out:** Judging a single probabilistic forecast is hard. In 2016 his model gave Trump about a 30% chance, higher than most rivals: the result was a surprise, but not proof the forecast was "wrong". FiveThirtyEight was closed by ABC News in 2025, and "Twitter" is now X.
+
+<a id="bayesian-a-b-testing"></a>
+
+### Bayesian A/B testing
+
+_NumPy_
+
+Comparing two conversion rates by sampling from each posterior. Page A converts 120 of 1,000 visitors and page B 150 of 1,000; with flat Beta(1, 1) priors:
+
+```python
+rng = np.random.default_rng(42)
+a = rng.beta(1 + 120, 1 + 880, 100_000)        # posterior samples for page A's rate
+b = rng.beta(1 + 150, 1 + 850, 100_000)        # posterior samples for page B's rate
+(b > a).mean()                                 # P(B is better) ≈ 0.975
+np.mean(b / a - 1)                             # expected relative lift ≈ 26%
+```
+
+The output answers the business question directly ("97.5% probability B converts better"), which a p-value doesn't.
+
+See also: [A/B test (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#a-b-test)
+
+---
+
+<a id="s38-capstone-playbook"></a>
+
+## 38. Capstone playbook
+
+_How to use this glossary for your capstone: running the data science lifecycle end to end on your own, specific question. Each stage lists what to do, the entries to read, and the mistakes that are easiest to make. Four tested code templates (classification, regression, time series and clustering) give you a leak-free starting point to adapt to your data._
+
+<a id="using-this-glossary-for-your-capstone"></a>
+
+### Using this glossary for your capstone
+
+_Concept_
+
+Your capstone answers one specific question by following the **data science lifecycle**: frame the problem → get and understand the data → choose a validation strategy → build baselines → train and tune candidate models → evaluate honestly → interpret and explain → communicate the value → plan deployment and next steps. The stages below map each step to the sections of this glossary. It's a loop, not a line: findings at any stage can send you back to reframe the question or rethink the data, and that's normal.
+
+A strong capstone shows **judgement** as much as technique: why this question, why this metric, why this model, how you know it isn't leaking or overfitting, and what the result means for the stakeholder.
+
+See also: [Data science lifecycle](#data-science-lifecycle), [Modeling workflow (end to end)](#modeling-workflow-end-to-end)
+
+<a id="stage-1-frame-the-question"></a>
+
+### Stage 1: Frame the question
+
+_Concept_
+
+Write a **specific, measurable** problem statement before touching a model: what you'll predict or discover, for whom, the decision it supports, and how you'll know it worked. Decide the **problem type** (regression, classification, time series forecasting, clustering, recommendation) and the **success metrics**, both technical (e.g. recall ≥ 0.8) and business (e.g. fewer missed failures). Estimate the **value** (ROI) and check the **ethics**: whose data is it, and who's affected by mistakes?
+
+Read: [Problem framing](#problem-framing), [Problem statement](#problem-statement), [SMART goals](#smart-goals), [Stakeholder](#stakeholder), [Success metrics and hypotheses](#success-metrics-and-hypotheses), [Framing the problem type early](#framing-the-problem-type-early), [Feasibility assessment](#feasibility-assessment), [Return on investment (ROI)](#return-on-investment-roi), [Ethical, legal and strategic implications](#ethical-legal-and-strategic-implications), [Framing checklist](#framing-checklist).
+
+> **Watch out:** "Predict X" isn't a problem statement until it says why it matters and what counts as success. And with a rare outcome, a success target of "high accuracy" is meaningless: see [Base rate and false alarms](#base-rate-and-false-alarms).
+
+<a id="stage-2-get-and-understand-the-data"></a>
+
+### Stage 2: Get and understand the data
+
+_Concept_
+
+Identify the **target** column and each feature's type, clean it, and explore it (the Unit 2 EDA toolkit). Check class balance, missing values, outliers, correlations, and whether rows are independent or ordered in time. For every feature, ask: **would I know this value at the moment I make the prediction?** If not, it's leakage.
+
+Read: [Types of variables](#types-of-variables), [Data leakage (in model evaluation)](#data-leakage-in-model-evaluation), [Imbalanced classes](#imbalanced-classes), [No multicollinearity (M)](#no-multicollinearity-m), [Time series](#time-series), and the [Unit 2 glossary](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD) for cleaning and EDA.
+
+> **Watch out:** Columns that are consequences of the target (like `accept` and `enroll` when predicting applications, or `casual` + `registered` when predicting total rentals) make a model look brilliant and useless at the same time. Drop them before modelling.
+
+<a id="stage-3-choose-the-split-and-validation-strategy"></a>
+
+### Stage 3: Choose the split and validation strategy
+
+_Concept_
+
+Split **before** any fitting, so the test set represents genuinely unseen data. Use a stratified split for imbalanced classification, a chronological split for anything time-ordered, and group-aware splits when the same customer or patient appears in several rows. Tune with cross-validation on the training data only; look at the test set **once**, at the end.
+
+Read: [Train-test split](#train-test-split), [test_size, stratify and shuffle](#test-size-stratify-and-shuffle), [k-fold cross-validation](#k-fold-cross-validation), [Other cross-validation schemes](#other-cross-validation-schemes), [Three-way split (validation set)](#three-way-split-validation-set), [Time series train/test split](#time-series-train-test-split).
+
+> **Watch out:** Each time you change a model because of its test score, the test set leaks a little into your choices. Make decisions on cross-validation scores.
+
+<a id="stage-4-build-baselines"></a>
+
+### Stage 4: Build baselines
+
+_Concept_
+
+Every result needs a comparison. Before any real model, compute what you'd get with no model at all: the mean (regression), the majority class (classification) or the last value or last season (forecasting). Then build one simple, interpretable model (linear or logistic regression, a shallow tree). Report every later model against both.
+
+Read: [Null model (baseline) for regression](#null-model-baseline-for-regression), [Null accuracy](#null-accuracy), [DummyClassifier](#dummyclassifier), [Naive and seasonal naive forecasts](#naive-and-seasonal-naive-forecasts).
+
+```python
+from sklearn.dummy import DummyClassifier, DummyRegressor
+DummyClassifier(strategy="most_frequent").fit(X_train, y_train).score(X_test, y_test)
+DummyRegressor(strategy="mean").fit(X_train, y_train)
+```
+
+<a id="stage-5-choose-candidate-models"></a>
+
+### Stage 5: Choose candidate models
+
+_Concept_
+
+Pick two to four candidates suited to your problem type and data size, ranging from interpretable to powerful (for tabular classification: logistic regression → random forest → gradient boosting). Use the [Choosing an approach by question type](#choosing-an-approach-by-question-type) and [Model selection cheat sheet](#model-selection-cheat-sheet) tables below. More complex isn't automatically better: with limited data a simpler model often generalizes best.
+
+Read: [Bias–variance trade-off](#bias-variance-trade-off), [Fitting sine exercise](#fitting-sine-exercise), [Which model is best?](#which-model-is-best).
+
+<a id="choosing-an-approach-by-question-type"></a>
+
+### Choosing an approach by question type
+
+_Concept_
+
+| Your question looks like…                       | Problem type              | Start with                             | Then try                                                          | Headline metrics                                   | Baseline               |
+| ----------------------------------------------- | ------------------------- | -------------------------------------- | ----------------------------------------------------------------- | -------------------------------------------------- | ---------------------- |
+| "How much / how many…?"                         | Regression                | Linear regression                      | Ridge/Lasso, random forest, gradient boosting                     | RMSE or MAE, R²                                    | Predict the mean       |
+| "Will it happen / which category…?"             | Classification            | Logistic regression                    | kNN, random forest, gradient boosting, SVM                        | F1, recall/precision, ROC AUC                      | Majority class         |
+| "…and the event is rare"                        | Imbalanced classification | Logistic regression with class weights | Resampling in a pipeline, boosting                                | Recall, precision, F1, balanced accuracy, PR curve | Majority class         |
+| "What will it be next week/month?"              | Time series forecasting   | Seasonal naive, ARIMA/SARIMA           | ARIMA with exogenous predictors, VAR, tree models on lag features | MAE (or RMSE), AIC for model choice                | Naive / seasonal naive |
+| "How volatile/risky will it be?"                | Volatility forecasting    | GARCH(1, 1)                            | Other GARCH orders                                                | Forecast variance vs realized                      | Constant variance      |
+| "What natural groups exist?"                    | Clustering                | k-means on scaled data                 | DBSCAN/HDBSCAN, agglomerative                                     | Silhouette, inertia (elbow), cluster profiles      | —                      |
+| "Can I simplify these many features?"           | Dimensionality reduction  | PCA                                    | PCA inside a supervised pipeline                                  | Explained variance; downstream CV score            | All features           |
+| "What should we recommend?"                     | Recommendation            | Item-based collaborative filtering     | Content-based, hybrid                                             | Sense-checked recommendations, hit rate            | Most popular items     |
+| "Which version is better, and how sure are we?" | Experiment / Bayesian     | Bayesian A/B test                      | Frequentist test (Unit 2)                                         | P(B better), credible interval                     | —                      |
+| "What happens if…?"                             | Simulation                | Monte Carlo                            | Discrete event, agent-based, system dynamics                      | Distribution of outcomes (percentiles)             | Current state          |
+
+See also: [Regression vs classification tasks](#regression-vs-classification-tasks), [Choosing a classification metric](#choosing-a-classification-metric), [Choosing a regression metric](#choosing-a-regression-metric)
+
+<a id="model-selection-cheat-sheet"></a>
+
+### Model selection cheat sheet
+
+_Concept, scikit-learn_
+
+| Model                       | Task                     | Scale features?                  | Key hyperparameters                                | Interpretability            | Watch for                               |
+| --------------------------- | ------------------------ | -------------------------------- | -------------------------------------------------- | --------------------------- | --------------------------------------- |
+| Linear regression           | Regression               | No (yes to compare coefficients) | —                                                  | High                        | Assumptions (LINEM), outliers, leakage  |
+| Ridge / Lasso / ElasticNet  | Regression               | **Yes**                          | `alpha`, `l1_ratio`                                | High                        | Choose alpha by CV                      |
+| Logistic regression         | Classification           | Recommended                      | `C`, penalty                                       | High (odds ratios)          | Default L2 penalty, perfect separation  |
+| kNN                         | Both                     | **Yes**                          | `n_neighbors`, `weights`, `p`                      | Medium                      | Slow on big data, many features         |
+| Decision tree               | Both                     | No                               | `max_depth`, `min_samples_leaf`, `ccp_alpha`       | High                        | Overfits; unstable                      |
+| Random forest               | Both                     | No                               | `n_estimators`, `max_features`, `min_samples_leaf` | Medium (importances)        | Regressor default uses all features     |
+| Gradient boosting / XGBoost | Both                     | No                               | `learning_rate`, `n_estimators`, `max_depth`       | Low–medium (SHAP)           | Overfits if run too long                |
+| SVM (`SVC`)                 | Classification           | **Yes**                          | `C`, `kernel`, `gamma`                             | Low                         | Slow on very large data                 |
+| k-means                     | Clustering               | **Yes**                          | `n_clusters`, `n_init`                             | Medium (centroids)          | Round, similar-sized clusters only      |
+| DBSCAN / HDBSCAN            | Clustering               | **Yes**                          | `eps`, `min_samples` / `min_cluster_size`          | Medium                      | Sensitive to eps; varying density       |
+| Agglomerative               | Clustering               | **Yes**                          | `n_clusters`, `linkage`                            | Medium (dendrogram)         | Slow on large data                      |
+| PCA                         | Dimensionality reduction | **Yes**                          | `n_components`                                     | Low (components are blends) | Ignores the target                      |
+| ARIMA / SARIMA              | Forecasting              | —                                | `order`, `seasonal_order`                          | Medium                      | Needs stationarity; chronological split |
+| GARCH                       | Volatility               | Rescale returns                  | `p`, `q`                                           | Medium                      | Needs the `arch` package                |
+| VAR                         | Multivariate forecasting | —                                | `maxlags`, `ic`                                    | Medium                      | Parameters grow fast                    |
+
+See also: [Scaling for distance-based models](#scaling-for-distance-based-models), [Standardize before regularizing](#standardize-before-regularizing)
+
+<a id="stage-6-build-a-pipeline-and-tune"></a>
+
+### Stage 6: Build a pipeline and tune
+
+_Concept, scikit-learn_
+
+Put **all** preprocessing (imputation, scaling, encoding, resampling) and the model into one pipeline, then tune it with `GridSearchCV` (or `RandomizedSearchCV` for big grids) on the training data. Choose `scoring` to match your headline metric. Check whether the best values sit at the edge of your grid, and treat tiny CV differences as ties.
+
+Read: [Pipelines (in tuning)](#pipelines-in-tuning), [Pipeline with ColumnTransformer](#pipeline-with-columntransformer), [Pipeline + GridSearchCV](#pipeline-gridsearchcv), [step\_\_parameter naming](#step-parameter-naming), [Choosing a scoring metric for tuning](#choosing-a-scoring-metric-for-tuning), [Reading grid search results](#reading-grid-search-results), [imbalanced-learn pipeline](#imbalanced-learn-pipeline).
+
+> **Watch out:** Fitting a scaler, imputer, encoder or resampler on all the data before splitting is the most common source of leakage. Inside a pipeline it can't happen.
+
+<a id="stage-7-evaluate-honestly"></a>
+
+### Stage 7: Evaluate honestly
+
+_Concept_
+
+Evaluate the chosen model **once** on the test set, with the metrics you committed to in Stage 1, next to the baselines. For classifiers, show the confusion matrix and consider the threshold; for regressors, show the residual plot and errors in real units; for forecasts, compare with naive baselines and check that residuals look like white noise. Compare models on the **same scale** and the same data.
+
+Read: [Reading train vs test scores](#reading-train-vs-test-scores), [Confusion matrix](#confusion-matrix), [Classification threshold](#classification-threshold), [Precision–recall curve](#precision-recall-curve), [Residual plot](#residual-plot), [Comparing models on the same scale](#comparing-models-on-the-same-scale), [Ljung–Box test](#ljung-box-test), [Resampling is a trade-off](#resampling-is-a-trade-off).
+
+> **Watch out:** A result that looks too good to be true (99% accuracy, R² of 0.98) usually is. Check for leakage, perfect separation, duplicates, or a time-series split that let the future in.
+
+<a id="stage-8-interpret-and-explain"></a>
+
+### Stage 8: Interpret and explain
+
+_Concept_
+
+Explain **what drives the predictions** (global: permutation importance, coefficients, partial dependence) and **why a particular case was predicted as it was** (local: SHAP). Translate effects into stakeholder language with units ("each extra $1,000 of radio spend is associated with about 189 more units sold"), and remember these are associations, not causes.
+
+Read: [Interpreting coefficients](#interpreting-coefficients), [Interpreting logistic regression coefficients](#interpreting-logistic-regression-coefficients), [Permutation importance](#permutation-importance), [Partial dependence plot (PDP)](#partial-dependence-plot-pdp), [SHAP (SHapley Additive exPlanations)](#shap-shapley-additive-explanations), [Global vs local explanations](#global-vs-local-explanations), [Proxy variable](#proxy-variable).
+
+<a id="stage-9-communicate-the-value"></a>
+
+### Stage 9: Communicate the value
+
+_Concept_
+
+Tell the story the stakeholder needs: the question and why it matters → the data and approach (briefly) → results against the baseline **in business terms** → what drives the predictions → limitations and risks → recommendation and next steps. Quantify value where you can (savings, risk-adjusted ROI, with a range), and be explicit about what the model **can't** do.
+
+A presentation outline that works: (1) problem and stakeholder; (2) data and key EDA findings; (3) approach and validation strategy; (4) results vs baseline; (5) interpretation; (6) value and recommendations; (7) limitations, ethics and next steps.
+
+Read: [Return on investment (ROI)](#return-on-investment-roi), [Risk-adjusted ROI](#risk-adjusted-roi), [Sensitivity analysis](#sensitivity-analysis), [Why explainability matters](#why-explainability-matters).
+
+<a id="stage-10-deploy-monitor-and-next-steps"></a>
+
+### Stage 10: Deploy, monitor and next steps
+
+_Concept, Python_
+
+After choosing a model, **refit it on all the training data** (or all data, for forecasts), save the whole pipeline, and describe how it would be used and monitored: what triggers retraining, which metrics to track, what happens when the data drift.
+
+```python
+import joblib
+joblib.dump(best.best_estimator_, "capstone_model.joblib")     # saves preprocessing + model
+model = joblib.load("capstone_model.joblib")
+model.predict(new_data)                                          # same columns as training X
+```
+
+Read: [Refitting for production](#refitting-for-production), [Data science lifecycle](#data-science-lifecycle), [Pipeline memory and debugging](#pipeline-memory-and-debugging).
+
+> **Watch out:** A saved model should be reloaded with the same library versions it was trained with; record them (see [Reproducibility habits](#reproducibility-habits)).
+
+<a id="capstone-template-classification"></a>
+
+### Capstone template: classification
+
+_scikit-learn_
+
+A leak-free starting point for tabular classification (tested on the Titanic data: baseline F1 0.0; tuned random forest CV F1 0.741, test F1 0.71, ROC AUC 0.83). Replace the file name and target, and make sure `y` is 0/1 with 1 as the class you care about.
+
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.dummy import DummyClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, roc_auc_score, f1_score, ConfusionMatrixDisplay
+from sklearn.inspection import permutation_importance
+
+df = pd.read_csv("data/your_data.csv")
+target = "your_target"                               # 0/1, where 1 = the class you care about
+X, y = df.drop(columns=[target]), df[target]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+
+baseline = DummyClassifier(strategy="most_frequent").fit(X_train, y_train)
+print("baseline F1:", f1_score(y_test, baseline.predict(X_test)))
+
+num_cols = X.select_dtypes(include=["number", "bool"]).columns   # booleans count as numeric
+cat_cols = X.columns.difference(num_cols)
+prep = ColumnTransformer([
+    ("num", Pipeline([("impute", SimpleImputer(strategy="median")),
+                      ("scale", StandardScaler())]), num_cols),
+    ("cat", Pipeline([("impute", SimpleImputer(strategy="most_frequent")),
+                      ("onehot", OneHotEncoder(handle_unknown="ignore"))]), cat_cols),
+])
+candidates = {
+    "logistic regression": (LogisticRegression(max_iter=1000),
+                            {"model__C": np.logspace(-3, 2, 6)}),
+    "random forest": (RandomForestClassifier(random_state=42, n_jobs=-1),
+                      {"model__max_depth": [None, 5, 10], "model__min_samples_leaf": [1, 5]}),
+}
+searches = {}
+for name, (model, grid) in candidates.items():
+    pipe = Pipeline([("prep", prep), ("model", model)])
+    searches[name] = GridSearchCV(pipe, grid, cv=5, scoring="f1", n_jobs=-1).fit(X_train, y_train)
+    print(f"{name}: CV F1 {searches[name].best_score_:.3f} with {searches[name].best_params_}")
+
+best = max(searches.values(), key=lambda gs: gs.best_score_)      # choose on CV, not test
+y_pred = best.predict(X_test)                                      # the one final test check
+print(classification_report(y_test, y_pred))
+print("ROC AUC:", roc_auc_score(y_test, best.predict_proba(X_test)[:, 1]))
+ConfusionMatrixDisplay.from_estimator(best, X_test, y_test)
+
+imp = permutation_importance(best, X_test, y_test, scoring="f1", n_repeats=10, random_state=42)
+pd.Series(imp.importances_mean, index=X_test.columns).sort_values(ascending=False).head(10)
+```
+
+> **Watch out:** `select_dtypes("number")` excludes boolean columns; if they fall into the text group, the imputer can fail with "could not convert string to float". Including `"bool"` with the numbers avoids it. Change `scoring` (e.g. to `"recall"` or `"roc_auc"`) to match your headline metric, and add an `imblearn` sampler or `class_weight="balanced"` if the positive class is rare.
+
+<a id="capstone-template-regression"></a>
+
+### Capstone template: regression
+
+_scikit-learn_
+
+The same structure for a numeric target (tested on scikit-learn's diabetes data: baseline RMSE 73.2; tuned ridge test RMSE 53.5, MAE 43.0, R² 0.46). It continues from the classification template's imports; for mixed column types, reuse that template's `ColumnTransformer` as the first pipeline step.
+
+```python
+from sklearn.dummy import DummyRegressor
+from sklearn.linear_model import Ridge
+from sklearn.ensemble import RandomForestRegressor
+from sklearn import metrics
+
+X, y = df.drop(columns=[target]), df[target]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+baseline = DummyRegressor(strategy="mean").fit(X_train, y_train)
+print("baseline RMSE:", metrics.root_mean_squared_error(y_test, baseline.predict(X_test)))
+
+candidates = {
+    "ridge": (Pipeline([("scale", StandardScaler()), ("model", Ridge())]),
+              {"model__alpha": np.logspace(-2, 3, 12)}),
+    "random forest": (Pipeline([("model", RandomForestRegressor(random_state=42, n_jobs=-1))]),
+                      {"model__max_depth": [None, 5, 10], "model__min_samples_leaf": [1, 5, 10]}),
+}
+searches = {name: GridSearchCV(pipe, grid, cv=5, scoring="neg_root_mean_squared_error",
+                               n_jobs=-1).fit(X_train, y_train)
+            for name, (pipe, grid) in candidates.items()}
+for name, gs in searches.items():
+    print(f"{name}: CV RMSE {-gs.best_score_:.1f} with {gs.best_params_}")   # flip the sign back
+
+best = max(searches.values(), key=lambda gs: gs.best_score_)
+y_pred = best.predict(X_test)
+print("RMSE", metrics.root_mean_squared_error(y_test, y_pred),
+      "MAE", metrics.mean_absolute_error(y_test, y_pred), "R²", metrics.r2_score(y_test, y_pred))
+plt.scatter(y_pred, y_test - y_pred, s=10); plt.axhline(0, color="orange")   # residual plot
+```
+
+> **Watch out:** If you log-transform the target, back-transform predictions with `np.exp` before computing RMSE or MAE, so every model is compared in the same units.
+
+<a id="capstone-template-time-series-forecasting"></a>
+
+### Capstone template: time series forecasting
+
+_statsmodels_
+
+For a regularly spaced series with a datetime index (tested on monthly CO₂ data: naive MAE 2.42, seasonal naive 1.88, SARIMA 0.33, Ljung–Box p = 0.97). Set `season` to your cycle length (12 for monthly data, 4 for quarterly, 7 for daily data with a weekly pattern). It uses NumPy and pandas from the classification template's imports.
+
+```python
+import itertools
+from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.stats.diagnostic import acorr_ljungbox
+
+y = df.set_index(pd.to_datetime(df["date"]))["value"].resample("MS").mean()   # monthly, regular
+season, h = 12, 24                                       # cycle length; hold out the last 24 periods
+train, test = y.iloc[:-h], y.iloc[-h:]                   # chronological split: never shuffle
+
+mae = lambda forecast: np.mean(np.abs(test.values - np.asarray(forecast)))
+print("naive MAE:", mae(np.repeat(train.iloc[-1], h)))
+print("seasonal naive MAE:", mae(np.tile(train.iloc[-season:].values, h // season)))
+
+results = []
+for p, q in itertools.product(range(3), range(3)):       # choose orders by AIC on training data
+    fit = ARIMA(train, order=(p, 1, q), seasonal_order=(0, 1, 1, season)).fit()
+    results.append(((p, 1, q), fit.aic))
+order = min(results, key=lambda r: r[1])[0]
+fit = ARIMA(train, order=order, seasonal_order=(0, 1, 1, season)).fit()
+print("SARIMA MAE:", mae(fit.forecast(h)))
+print("Ljung–Box p:", acorr_ljungbox(fit.resid[season + 1:], lags=[season])["lb_pvalue"].iloc[0])
+
+final = ARIMA(y, order=order, seasonal_order=(0, 1, 1, season)).fit()   # refit on everything
+final.forecast(12)                                                         # the real forecast
+```
+
+> **Watch out:** Check stationarity and look at the ACF/PACF before trusting any order; take logs first if the swings grow with the level, and back-transform before computing MAE.
+
+<a id="capstone-template-clustering"></a>
+
+### Capstone template: clustering
+
+_scikit-learn_
+
+Segmentation without labels (tested on iris: silhouette prefers k = 2, the elbow suggests 3; three clusters of 53, 50 and 47 give interpretable profiles). The output that matters is the **profile table**, which turns cluster numbers into segments a stakeholder can act on. It reuses `StandardScaler` and pandas from the classification template's imports.
+
+```python
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+
+features = df.select_dtypes("number")
+X_sc = StandardScaler().fit_transform(features)
+
+scores = []
+for k in range(2, 9):
+    km = KMeans(n_clusters=k, n_init=10, random_state=42).fit(X_sc)
+    scores.append({"k": k, "inertia": km.inertia_, "silhouette": silhouette_score(X_sc, km.labels_)})
+pd.DataFrame(scores)                                   # look for an elbow and a good silhouette
+
+km = KMeans(n_clusters=3, n_init=10, random_state=42).fit(X_sc)
+segments = features.assign(cluster=km.labels_)
+segments["cluster"].value_counts()                     # cluster sizes
+segments.groupby("cluster").mean().round(2)            # the profiles: name each segment
+```
+
+> **Watch out:** Scores only guide the choice of k; combine them with plots and domain knowledge, and try DBSCAN or agglomerative clustering if the groups aren't round blobs.
+
+<a id="common-capstone-mistakes-checklist"></a>
+
+### Common capstone mistakes checklist
+
+_Concept_
+
+Before you submit, check each of these; they're the easiest mistakes to make and the first things a reviewer looks for:
+
+1. **Leakage:** a feature that wouldn't be known at prediction time, or preprocessing fitted before the split. ([Data leakage (in model evaluation)](#data-leakage-in-model-evaluation))
+2. **Tuning on the test set:** choosing k, alpha or a model by test score instead of cross-validation. ([Three-way split (validation set)](#three-way-split-validation-set))
+3. **No baseline:** reporting a score without the null model next to it. ([Null accuracy](#null-accuracy), [Null model (baseline) for regression](#null-model-baseline-for-regression))
+4. **Accuracy on imbalanced data:** use recall, precision, F1, balanced accuracy or PR AUC. ([Imbalanced classes](#imbalanced-classes))
+5. **Shuffling time series:** split chronologically and compare with naive forecasts. ([Time series train/test split](#time-series-train-test-split))
+6. **Unscaled distance or penalty models:** kNN, SVM, k-means, PCA, ridge and lasso need scaling. ([Scaling for distance-based models](#scaling-for-distance-based-models))
+7. **Evaluating on the wrong data:** passing unscaled test data to a model trained on scaled data (pipelines prevent it).
+8. **Comparing metrics on different scales:** log-target vs raw-target R², or training vs test scores. ([Comparing models on the same scale](#comparing-models-on-the-same-scale))
+9. **Over-reading coefficients:** comparing unscaled coefficients, ignoring multicollinearity, or saying "times more likely" for odds ratios. ([Coefficients are not importance](#coefficients-are-not-importance), [Interpreting logistic regression coefficients](#interpreting-logistic-regression-coefficients))
+10. **Causal language for associations:** a model shows what predicts, not what causes. ([Correlation does not imply causation (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#correlation-does-not-imply-causation))
+11. **Ignoring the threshold:** 0.5 is a default, not a decision. ([Classification threshold](#classification-threshold))
+12. **Untested AI-generated code:** test it against inputs with known answers. ([Testing AI-generated code](#testing-ai-generated-code))
+13. **Results that can't be reproduced:** no random seeds, no recorded versions. ([Reproducibility habits](#reproducibility-habits))
+
+<a id="library-version-changes-to-know"></a>
+
+### Library version changes to know
+
+_Concept, Python_
+
+Libraries evolve: parameters are renamed, defaults change and old functions are removed, and tutorials online often use older syntax. When code from a tutorial or older notebook fails, check the documentation for the version you have installed. The changes you're most likely to meet in this unit:
+
+| Library      | Older code                                      | Current code                                                                | When it changed                       |
+| ------------ | ----------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------- |
+| scikit-learn | `LogisticRegression(penalty='none')`            | `penalty=None`; from 1.8, `C=np.inf`                                        | 1.2; `penalty` deprecated in 1.8      |
+| scikit-learn | `penalty='l1'` / `'l2'`                         | `l1_ratio=1` / `l1_ratio=0`                                                 | Deprecated 1.8 (removal planned 1.10) |
+| scikit-learn | `LogisticRegression(multi_class=...)`           | Default multinomial, or `OneVsRestClassifier`                               | Deprecated 1.5, since removed         |
+| scikit-learn | `mean_squared_error(..., squared=False)`        | `root_mean_squared_error(...)`                                              | Added 1.4; `squared` since removed    |
+| scikit-learn | `plot_roc_curve`, `plot_confusion_matrix`       | `RocCurveDisplay.from_estimator`, `ConfusionMatrixDisplay.from_estimator`   | Removed 1.2                           |
+| scikit-learn | `base_estimator=` (bagging, AdaBoost)           | `estimator=`                                                                | Renamed 1.2, old name removed 1.4     |
+| scikit-learn | `AdaBoostClassifier(algorithm="SAMME.R")`       | Omit `algorithm` (SAMME is used)                                            | Deprecated 1.4, since removed         |
+| scikit-learn | `KMeans(n_init=10)` was the default             | `n_init="auto"` (one run with k-means++)                                    | 1.4: set `n_init=10` for stability    |
+| scikit-learn | Random forest `n_estimators=10` default         | 100                                                                         | 0.22                                  |
+| scikit-learn | (not available)                                 | `HDBSCAN` in `sklearn.cluster`                                              | Added 1.3                             |
+| pandas       | `resample("M")`, `"Q"`, `"Y"`, `freq="Q-DEC"`   | `"ME"`, `"QE"`, `"YE"`, `"QE-DEC"`                                          | Deprecated 2.2, errors in 3.0         |
+| pandas       | `series[0]` on a labelled index                 | `series.iloc[0]`                                                            | Deprecated 2.1, `KeyError` in 3.0     |
+| pandas       | `get_dummies` gave 0/1 integers                 | Gives `True`/`False`; pass `dtype=int`                                      | 2.0                                   |
+| pandas       | `str.replace(".", "_")` treated "." as a regex  | Literal by default (`regex=False`)                                          | 2.0                                   |
+| pandas       | Text columns stored as `object`                 | Dedicated `str` dtype by default                                            | 3.0                                   |
+| statsmodels  | `from statsmodels.tsa.arima_model import ARIMA` | `from statsmodels.tsa.arima.model import ARIMA`                             | Old class now only raises an error    |
+| statsmodels  | `adfuller(...)` returns a tuple                 | Warns that its return format will change; p-value is still the second value | 0.15                                  |
+| PyMC         | `import pymc3 as pm`                            | `import pymc as pm`                                                         | Renamed at version 4                  |
+| Google GenAI | `google-generativeai` package                   | `google-genai` (`from google import genai`)                                 | 2025                                  |
+
+```python
+import sklearn, pandas, statsmodels
+print(sklearn.__version__, pandas.__version__, statsmodels.__version__)   # what you're running
+```
+
+> **Watch out:** Deprecation warnings are an early warning that code will break in a future version. Read them, and update the code rather than silencing them.
+
+<a id="reproducibility-habits"></a>
+
+### Reproducibility habits
+
+_Python_
+
+Make your capstone rerunnable by someone else (or you, in three months): set `random_state` on splits, models and searches; restart the kernel and run the notebook top to bottom before submitting; keep data loading, cleaning, modelling and evaluation in clear sections; record library versions; and save the fitted pipeline, not just the model.
+
+```python
+# pip freeze > requirements.txt     (in a terminal: records exact versions)
+import sklearn, pandas, numpy
+print({"sklearn": sklearn.__version__, "pandas": pandas.__version__, "numpy": numpy.__version__})
+```
+
+See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#random-seed), [Library version changes to know](#library-version-changes-to-know)
+
+---
+
 <a id="a-z-index"></a>
 
 ## A–Z index
@@ -6525,6 +8158,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Adam, RMSProp and IRLS](#adam-rmsprop-and-irls)
 - [ADASYN](#adasyn)
 - [Addition rule (unions)](#addition-rule-unions)
+- [Adjusted Rand index (ARI)](#adjusted-rand-index-ari)
 - [Adjusted R²](#adjusted-r2)
 - [Agent-based modelling (ABM)](#agent-based-modelling-abm)
 - [Agglomerative clustering](#agglomerative-clustering)
@@ -6549,7 +8183,12 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Balanced accuracy](#balanced-accuracy)
 - [Balanced model](#balanced-model)
 - [Base rate and false alarms](#base-rate-and-false-alarms)
+- [Base rate fallacy](#base-rate-fallacy)
 - [Baseline costs and projected savings](#baseline-costs-and-projected-savings)
+- [Bayes' theorem](#bayes-theorem)
+- [Bayesian A/B testing](#bayesian-a-b-testing)
+- [Bayesian election forecasting](#bayesian-election-forecasting)
+- [Bayesian statistics](#bayesian-statistics)
 - [Benefits of simulation](#benefits-of-simulation)
 - [best*params*, best*score* and best*estimator*](#best-params-best-score-and-best-estimator)
 - [Bias](#bias)
@@ -6557,6 +8196,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Bias–variance trade-off](#bias-variance-trade-off)
 - [Big data considerations](#big-data-considerations)
 - [Binary and multiclass classification](#binary-and-multiclass-classification)
+- [Birch and Affinity Propagation](#birch-and-affinity-propagation)
 - [Black-box model](#black-box-model)
 - [Boosting](#boosting)
 - [Boosting pros and cons](#boosting-pros-and-cons)
@@ -6570,6 +8210,11 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [C (inverse regularization strength)](#c-inverse-regularization-strength)
 - [C (SVM)](#c-svm)
 - [Calibration](#calibration)
+- [Calling an LLM from Python](#calling-an-llm-from-python)
+- [Capstone template: classification](#capstone-template-classification)
+- [Capstone template: clustering](#capstone-template-clustering)
+- [Capstone template: regression](#capstone-template-regression)
+- [Capstone template: time series forecasting](#capstone-template-time-series-forecasting)
 - [CART algorithm](#cart-algorithm)
 - [CatBoost](#catboost)
 - [Categorical features in kNN](#categorical-features-in-knn)
@@ -6577,10 +8222,12 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Centroid](#centroid)
 - [Centroid initialization](#centroid-initialization)
 - [Changing the threshold for imbalanced data](#changing-the-threshold-for-imbalanced-data)
+- [Chat interface vs API](#chat-interface-vs-api)
 - [Choosing a classification metric](#choosing-a-classification-metric)
 - [Choosing a regression metric](#choosing-a-regression-metric)
 - [Choosing a scoring metric for tuning](#choosing-a-scoring-metric-for-tuning)
 - [Choosing a simulation approach](#choosing-a-simulation-approach)
+- [Choosing an approach by question type](#choosing-an-approach-by-question-type)
 - [Choosing k](#choosing-k)
 - [Choosing n_components with grid search](#choosing-n-components-with-grid-search)
 - [Choosing p, d and q](#choosing-p-d-and-q)
@@ -6592,12 +8239,14 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Classification threshold](#classification-threshold)
 - [classification_report()](#classification-report)
 - [Closed-form solution](#closed-form-solution)
+- [Cluster labels are arbitrary](#cluster-labels-are-arbitrary)
 - [Clustering](#clustering)
 - [Clustering algorithms](#clustering-algorithms)
 - [.coef* and .intercept*](#coef-and-intercept)
 - [Coefficients are not importance](#coefficients-are-not-importance)
 - [Coffee shop queue simulation](#coffee-shop-queue-simulation)
 - [Collaborative filtering](#collaborative-filtering)
+- [Common capstone mistakes checklist](#common-capstone-mistakes-checklist)
 - [Comparing AdaBoost, gradient boosting and XGBoost](#comparing-adaboost-gradient-boosting-and-xgboost)
 - [Comparing clustering algorithms](#comparing-clustering-algorithms)
 - [Comparing models on the same scale](#comparing-models-on-the-same-scale)
@@ -6607,13 +8256,16 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Conditional probability](#conditional-probability)
 - [Confusion matrix](#confusion-matrix)
 - [ConfusionMatrixDisplay](#confusionmatrixdisplay)
+- [Conjugate prior (Beta–binomial)](#conjugate-prior-beta-binomial)
 - [Content-based, knowledge-based and hybrid recommenders](#content-based-knowledge-based-and-hybrid-recommenders)
+- [Context window](#context-window)
 - [Convergence and tolerance](#convergence-and-tolerance)
 - [Convex function](#convex-function)
 - [Core, border and noise points](#core-border-and-noise-points)
 - [Cosine similarity](#cosine-similarity)
 - [Counterfactual explanation](#counterfactual-explanation)
 - [Covariance matrix, eigenvectors and eigenvalues](#covariance-matrix-eigenvectors-and-eigenvalues)
+- [Credible interval](#credible-interval)
 - [Cross-validation pros and cons](#cross-validation-pros-and-cons)
 - [cross_val_score()](#cross-val-score)
 - [cv*results*](#cv-results)
@@ -6622,6 +8274,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 
 - [Data leakage (in model evaluation)](#data-leakage-in-model-evaluation)
 - [Data minimization and anonymization](#data-minimization-and-anonymization)
+- [Data privacy with GenAI tools](#data-privacy-with-genai-tools)
 - [Data science lifecycle](#data-science-lifecycle)
 - [Date-based slicing](#date-based-slicing)
 - [Datetime index](#datetime-index)
@@ -6652,12 +8305,14 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 
 - [ElasticNet](#elasticnet)
 - [Elbow method](#elbow-method)
+- [Embedding](#embedding)
 - [Emergence](#emergence)
 - [Ensemble model](#ensemble-model)
 - [Entropy and cross-entropy](#entropy-and-cross-entropy)
 - [eps and min_samples](#eps-and-min-samples)
 - [Equal variance / homoscedasticity (E)](#equal-variance-homoscedasticity-e)
 - [Error term (ε)](#error-term)
+- [Ethical concerns with GenAI](#ethical-concerns-with-genai)
 - [Ethical, legal and strategic implications](#ethical-legal-and-strategic-implications)
 - [Euclidean distance](#euclidean-distance)
 - [Evaluating a split with Gini](#evaluating-a-split-with-gini)
@@ -6678,6 +8333,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Feature importance](#feature-importance)
 - [Feature importance in ensembles](#feature-importance-in-ensembles)
 - [Feature scale in linear regression](#feature-scale-in-linear-regression)
+- [Feature scaling and gradient descent](#feature-scaling-and-gradient-descent)
 - [Feedback loop](#feedback-loop)
 - [fit_regularized() in statsmodels](#fit-regularized-in-statsmodels)
 - [fit_resample()](#fit-resample)
@@ -6688,6 +8344,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Four pillars of simulation](#four-pillars-of-simulation)
 - [Framing checklist](#framing-checklist)
 - [Framing the problem type early](#framing-the-problem-type-early)
+- [Frequentist vs Bayesian](#frequentist-vs-bayesian)
 - [From coefficients to probability](#from-coefficients-to-probability)
 
 **G**
@@ -6695,8 +8352,11 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Gambler's fallacy](#gambler-s-fallacy)
 - [gamma](#gamma)
 - [GARCH(p, q)](#garch-p-q)
+- [GenAI tools for data scientists](#genai-tools-for-data-scientists)
 - [Generalization](#generalization)
 - [Generalized least squares (GLS)](#generalized-least-squares-gls)
+- [Generation mode vs analysis mode](#generation-mode-vs-analysis-mode)
+- [Generative AI (GenAI)](#generative-ai-genai)
 - [Gini impurity](#gini-impurity)
 - [Global vs local explanations](#global-vs-local-explanations)
 - [Gradient boosting](#gradient-boosting)
@@ -6704,14 +8364,19 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Gradient descent for OLS](#gradient-descent-for-ols)
 - [GradientBoostingClassifier](#gradientboostingclassifier)
 - [Greedy algorithm](#greedy-algorithm)
+- [Grid approximation](#grid-approximation)
 - [Grid search](#grid-search)
 - [GridSearchCV](#gridsearchcv)
 
 **H**
 
+- [Hallucination](#hallucination)
 - [Hat notation (ŷ, β̂)](#hat-notation)
+- [HDBSCAN](#hdbscan)
 - [Hierarchical clustering](#hierarchical-clustering)
 - [Holdout method](#holdout-method)
+- [How GenAI output goes wrong](#how-genai-output-goes-wrong)
+- [How LLMs are trained](#how-llms-are-trained)
 - [Hyperparameter](#hyperparameter)
 - [Hyperparameter tuning](#hyperparameter-tuning)
 - [Hyperparameter vs parameter](#hyperparameter-vs-parameter)
@@ -6736,8 +8401,13 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Irreducible error](#irreducible-error)
 - [itertools.product()](#itertools-product)
 
+**J**
+
+- [Johnson & Johnson earnings (running example)](#johnson-and-johnson-earnings-running-example)
+
 **K**
 
+- [k-distance plot](#k-distance-plot)
 - [k-fold cross-validation](#k-fold-cross-validation)
 - [k-means](#k-means)
 - [k-means assumptions](#k-means-assumptions)
@@ -6758,12 +8428,14 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 
 - [labels* and cluster_centers*](#labels-and-cluster-centers)
 - [Lag (backshift) and .shift()](#lag-backshift-and-shift)
+- [Large language model (LLM)](#large-language-model-llm)
 - [Lasso regression (L1)](#lasso-regression-l1)
 - [Law of Large Numbers (LLN)](#law-of-large-numbers-lln)
 - [Lazy learner](#lazy-learner)
 - [Learning rate (step size, α)](#learning-rate-step-size)
 - [learning_rate and n_estimators](#learning-rate-and-n-estimators)
 - [Leave-one-out cross-validation (LOOCV)](#leave-one-out-cross-validation-loocv)
+- [Library version changes to know](#library-version-changes-to-know)
 - [Limitations of simulation](#limitations-of-simulation)
 - [Line of best fit](#line-of-best-fit)
 - [Linear probability model](#linear-probability-model)
@@ -6774,6 +8446,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [LINEM assumptions](#linem-assumptions)
 - [Link function and the logit](#link-function-and-the-logit)
 - [Linkage](#linkage)
+- [Ljung–Box test](#ljung-box-test)
 - [Loadings (components\_)](#loadings-components)
 - [Local vs global minimum](#local-vs-global-minimum)
 - [Log loss (binary cross-entropy)](#log-loss-binary-cross-entropy)
@@ -6800,6 +8473,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [make_moons()](#make-moons)
 - [make_pipeline()](#make-pipeline)
 - [Margin](#margin)
+- [Markov Chain Monte Carlo (MCMC)](#markov-chain-monte-carlo-mcmc)
 - [Matrix form of OLS](#matrix-form-of-ols)
 - [max_features](#max-features)
 - [Maximal margin classifier](#maximal-margin-classifier)
@@ -6811,11 +8485,14 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [MNIST digits (load_digits)](#mnist-digits-load-digits)
 - [Model complexity](#model-complexity)
 - [Model explainability](#model-explainability)
+- [Model selection cheat sheet](#model-selection-cheat-sheet)
 - [Model-specific vs model-agnostic methods](#model-specific-vs-model-agnostic-methods)
 - [Modeling workflow (end to end)](#modeling-workflow-end-to-end)
+- [Modelling with GenAI: what to check](#modelling-with-genai-what-to-check)
 - [Monte Carlo simulation](#monte-carlo-simulation)
 - [Moving average model (MA)](#moving-average-model-ma)
 - [Multi-year ROI](#multi-year-roi)
+- [Multimodal LLM](#multimodal-llm)
 - [Multinomial logistic regression](#multinomial-logistic-regression)
 - [Multiple linear regression](#multiple-linear-regression)
 - [Multiplication rule (intersections)](#multiplication-rule-intersections)
@@ -6823,6 +8500,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 **N**
 
 - [n_jobs and verbose](#n-jobs-and-verbose)
+- [Naive and seasonal naive forecasts](#naive-and-seasonal-naive-forecasts)
 - [Newton's method](#newton-s-method)
 - [No multicollinearity (M)](#no-multicollinearity-m)
 - [Noise label (−1)](#noise-label-1)
@@ -6848,6 +8526,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Optimization problem: objective and constraints](#optimization-problem-objective-and-constraints)
 - [Ordinary least squares (OLS)](#ordinary-least-squares-ols)
 - [Other cross-validation schemes](#other-cross-validation-schemes)
+- [Other forecasting models](#other-forecasting-models)
 - [Out-of-bag (OOB) observations and error](#out-of-bag-oob-observations-and-error)
 - [Out-of-sample data](#out-of-sample-data)
 - [Outcome](#outcome)
@@ -6860,6 +8539,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [pairwise_distances()](#pairwise-distances)
 - [Parallelizable](#parallelizable)
 - [param_grid](#param-grid)
+- [Parsing unstructured data with GenAI](#parsing-unstructured-data-with-genai)
 - [Partial dependence plot (PDP)](#partial-dependence-plot-pdp)
 - [Partitioning the feature space](#partitioning-the-feature-space)
 - [Payback period and NPV](#payback-period-and-npv)
@@ -6886,15 +8566,20 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Predictor and response (and their many names)](#predictor-and-response-and-their-many-names)
 - [Principal component](#principal-component)
 - [Principal component analysis (PCA)](#principal-component-analysis-pca)
+- [Prior, likelihood and posterior](#prior-likelihood-and-posterior)
 - [Probability](#probability)
+- [Probability mass and density functions](#probability-mass-and-density-functions)
 - [Probability notation P(A)](#probability-notation-p-a)
 - [Problem framing](#problem-framing)
 - [Problem statement](#problem-statement)
 - [Project sponsor and KPI](#project-sponsor-and-kpi)
+- [Prompting for code](#prompting-for-code)
 - [Proxy variable](#proxy-variable)
+- [PyMC](#pymc)
 
 **Q**
 
+- [Quasi-Newton methods (BFGS, L-BFGS)](#quasi-newton-methods-bfgs-l-bfgs)
 - [Q–Q plot](#q-q-plot)
 
 **R**
@@ -6906,6 +8591,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [RandomOverSampler](#randomoversampler)
 - [Rank deficiency](#rank-deficiency)
 - [Reading a statsmodels results object](#reading-a-statsmodels-results-object)
+- [Reading ACF and PACF to choose p and q](#reading-acf-and-pacf-to-choose-p-and-q)
 - [Reading grid search results](#reading-grid-search-results)
 - [Reading train vs test scores](#reading-train-vs-test-scores)
 - [Recall (sensitivity, true positive rate)](#recall-sensitivity-true-positive-rate)
@@ -6916,6 +8602,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Regularization is on by default](#regularization-is-on-by-default)
 - [Regularizing categorical variables](#regularizing-categorical-variables)
 - [Reinforcement learning](#reinforcement-learning)
+- [Reproducibility habits](#reproducibility-habits)
 - [.resample() for time series](#resample-for-time-series)
 - [Resampling is a trade-off](#resampling-is-a-trade-off)
 - [Residual plot](#residual-plot)
@@ -6935,12 +8622,14 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Sample space](#sample-space)
 - [Sampling bias](#sampling-bias)
 - [Sampling with and without replacement](#sampling-with-and-without-replacement)
+- [SARIMA](#sarima)
 - [Scaling before clustering](#scaling-before-clustering)
 - [Scaling for distance-based models](#scaling-for-distance-based-models)
 - [.score()](#score)
 - [scoring parameter](#scoring-parameter)
 - [Scree plot](#scree-plot)
 - [Season-based train/test split](#season-based-train-test-split)
+- [Seasonal differencing](#seasonal-differencing)
 - [Seasonal-mean forecast](#seasonal-mean-forecast)
 - [seasonal_decompose()](#seasonal-decompose)
 - [Seasonality](#seasonality)
@@ -6972,6 +8661,16 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Specificity (true negative rate)](#specificity-true-negative-rate)
 - [Splitting criterion](#splitting-criterion)
 - [Stacking](#stacking)
+- [Stage 10: Deploy, monitor and next steps](#stage-10-deploy-monitor-and-next-steps)
+- [Stage 1: Frame the question](#stage-1-frame-the-question)
+- [Stage 2: Get and understand the data](#stage-2-get-and-understand-the-data)
+- [Stage 3: Choose the split and validation strategy](#stage-3-choose-the-split-and-validation-strategy)
+- [Stage 4: Build baselines](#stage-4-build-baselines)
+- [Stage 5: Choose candidate models](#stage-5-choose-candidate-models)
+- [Stage 6: Build a pipeline and tune](#stage-6-build-a-pipeline-and-tune)
+- [Stage 7: Evaluate honestly](#stage-7-evaluate-honestly)
+- [Stage 8: Interpret and explain](#stage-8-interpret-and-explain)
+- [Stage 9: Communicate the value](#stage-9-communicate-the-value)
 - [Stakeholder](#stakeholder)
 - [Standardize before regularizing](#standardize-before-regularizing)
 - [Stationarity](#stationarity)
@@ -6998,18 +8697,22 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 **T**
 
 - [Technical debt](#technical-debt)
+- [Temperature and sampling](#temperature-and-sampling)
 - [test_size, stratify and shuffle](#test-size-stratify-and-shuffle)
+- [Testing AI-generated code](#testing-ai-generated-code)
 - [The cost of grid searching](#the-cost-of-grid-searching)
 - [The modeling workflow in scikit-learn](#the-modeling-workflow-in-scikit-learn)
 - [Three-way split (validation set)](#three-way-split-validation-set)
 - [Time handling in simulations](#time-handling-in-simulations)
 - [Time series](#time-series)
 - [Time series train/test split](#time-series-train-test-split)
+- [Token](#token)
 - [Total sum of squares (SST)](#total-sum-of-squares-sst)
 - [Train-test ratio rule of thumb](#train-test-ratio-rule-of-thumb)
 - [Train-test split](#train-test-split)
 - [Training vs test error curve](#training-vs-test-error-curve)
 - [Transfer learning](#transfer-learning)
+- [Transformer and attention](#transformer-and-attention)
 - [Transparency](#transparency)
 - [Trend](#trend)
 - [True/false positives and negatives](#true-false-positives-and-negatives)
@@ -7026,11 +8729,13 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Unlabeled data](#unlabeled-data)
 - [Unsupervised learning](#unsupervised-learning)
 - [Uses of clustering](#uses-of-clustering)
+- [Using this glossary for your capstone](#using-this-glossary-for-your-capstone)
 - [Utility (ratings) matrix](#utility-ratings-matrix)
 - [Utilization](#utilization)
 
 **V**
 
+- [Validating GenAI classifications](#validating-genai-classifications)
 - [Variance (model variance)](#variance-model-variance)
 - [Variance inflation factor (VIF)](#variance-inflation-factor-vif)
 - [Vector autoregression (VAR)](#vector-autoregression-var)
@@ -7046,6 +8751,7 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 - [Weak learner](#weak-learner)
 - [When imbalance matters](#when-imbalance-matters)
 - [When to use PCA (and when not)](#when-to-use-pca-and-when-not)
+- [Where GenAI helps in the data science lifecycle](#where-genai-helps-in-the-data-science-lifecycle)
 - [Which model is best?](#which-model-is-best)
 - [while loop](#while-loop)
 - [White noise](#white-noise)
